@@ -1,18 +1,18 @@
-class CurrencyCard {
+class Currency {
   final String icon;
   final String code;
   final String title;
   final String symbol;
   num rate;
-  num type;
+  bool isEnable;
 
-  CurrencyCard({
+  Currency({
     required this.icon,
     required this.code,
     required this.title,
     required this.symbol,
     this.rate = 0,
-    this.type = 0,
+    required this.isEnable,
   });
 
   num currencyRatio(num? currency) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../domain/currencies_all.dart';
+import '../../../domain/currenciesList.dart';
 import 'currencies_widget_model.dart';
 
 class CurrenciesListWidget extends StatefulWidget {
@@ -70,12 +70,7 @@ class CurrencyCard extends StatefulWidget {
 class _CurrencyCardState extends State<CurrencyCard> {
   final _controller = TextEditingController();
 
-  final FocusNode _focusNode = FocusNode();
-
-  String calculateCurrencies() => (widget.model.currencies[widget.index]
-              .currencyRatio(CurrenciesAll.currenciesAll[widget.model.currentCurrencyCode]?.rate) *
-          (widget.model.type == "" ? 0 : double.parse(widget.model.type)))
-      .toStringAsFixed(2);
+  final _focusNode = FocusNode();
 
   TextSelection position() =>
       TextSelection.fromPosition(TextPosition(offset: (_controller.value.text).toString().length));
@@ -87,7 +82,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
     return TextFormField(
       focusNode: _focusNode,
       controller: _controller
-        ..text = hasFocus ? widget.model.type : calculateCurrencies()
+        ..text = hasFocus ? widget.model.type : widget.model.calculateCurrencies(index: widget.index)
         ..selection = position(),
       onTap: () {
         widget.model.type = '';
@@ -97,11 +92,10 @@ class _CurrencyCardState extends State<CurrencyCard> {
         if (value.length == 1 && value == '.') {
           value = "0.";
         }
-        if (value.length == 2 && value.startsWith("0")&& !value.contains(".")) {
-          List<String> a = value.split('');
-          a.insert(1, '.');
-         var b = a.join('');
-          value = b;
+        if (value.length == 2 && value.startsWith("0") && !value.contains(".")) {
+          List<String> charList = value.split('');
+          charList.insert(1, '.');
+          value = charList.join('');
         }
 
         widget.model.type = value;

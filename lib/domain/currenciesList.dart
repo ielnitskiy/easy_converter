@@ -1,7 +1,7 @@
-import 'currency_card.dart';
+import 'currency.dart';
 
-class CurrenciesAll {
-  static final currenciesAll = <String, CurrencyCard>{
+class CurrenciesList {
+  static final currenciesList = <String, Currency>{
     // "AED": CurrencyCard(code: "AED", symbol: '', icon: '', title: ''),
     // "AFN": CurrencyCard(code: "AFN", symbol: '', icon: '', title: ''),
     // "ALL": CurrencyCard(code: "ALL", symbol: '', icon: '', title: ''),
@@ -35,7 +35,14 @@ class CurrenciesAll {
     // "CLF": CurrencyCard(code: "CLF", symbol: '', icon: '', title: ''),
     // "CLP": CurrencyCard(code: "CLP", symbol: '', icon: '', title: ''),
     // "CNH": CurrencyCard(code: "CNH", symbol: '', icon: '', title: ''),
-    "CNY": CurrencyCard(code: "CNY", symbol: '¥', icon: '🇨🇳', title: '',rate: 6.3651),
+    "CNY": Currency(
+      code: "CNY",
+      symbol: '¥',
+      icon: '🇨🇳',
+      title: 'Китайский йен',
+      rate: 6.3651,
+      isEnable: false,
+    ),
     // "COP": CurrencyCard(code: "COP", symbol: '', icon: '', title: ''),
     // "CRC": CurrencyCard(code: "CRC", symbol: '', icon: '', title: ''),
     // "CUC": CurrencyCard(code: "CUC", symbol: '', icon: '', title: ''),
@@ -52,12 +59,13 @@ class CurrenciesAll {
     // "ERN": CurrencyCard(code: "ERN", symbol: '', icon: '', title: ''),
     // "ETB": CurrencyCard(code: "ETB", symbol: '', icon: '', title: ''),
     // "ETH": CurrencyCard(code: "ETH", symbol: '', icon: '', title: ''),
-    "EUR": CurrencyCard(
+    "EUR": Currency(
       code: "EUR",
       symbol: '€',
       icon: '🇪🇺',
       title: 'Евро',
       rate: 0.919413,
+      isEnable: false,
     ),
     // "FJD": CurrencyCard(code: "FJD", symbol: '', icon: '', title: ''),
     // "FKP": CurrencyCard(code: "FKP", symbol: '', icon: '', title: ''),
@@ -136,12 +144,13 @@ class CurrenciesAll {
     // "QAR": CurrencyCard(code: "QAR", symbol: '', icon: '', title: ''),
     // "RON": CurrencyCard(code: "RON", symbol: '', icon: '', title: ''),
     // "RSD": CurrencyCard(code: "RSD", symbol: '', icon: '', title: ''),
-    "RUB": CurrencyCard(
+    "RUB": Currency(
       code: "RUB",
       symbol: '₽',
       icon: '🇷🇺',
       title: 'Российский рубль',
       rate: 80.850086,
+      isEnable: false,
     ),
     // "RWF": CurrencyCard(code: "RWF", symbol: '', icon: '', title: ''),
     // "SAR": CurrencyCard(code: "SAR", symbol: '', icon: '', title: ''),
@@ -172,12 +181,13 @@ class CurrenciesAll {
     // "TZS": CurrencyCard(code: "TZS", symbol: '', icon: '', title: ''),
     // "UAH": CurrencyCard(code: "UAH", symbol: '', icon: '', title: ''),
     // "UGX": CurrencyCard(code: "UGX", symbol: '', icon: '', title: ''),
-    "USD": CurrencyCard(
+    "USD": Currency(
       code: "USD",
       symbol: '\$',
       icon: '🇺🇸',
       title: 'Доллар',
       rate: 1,
+      isEnable: false,
     ),
     // "UYU": CurrencyCard(code: "UYU", symbol: '', icon: '', title: ''),
     // "UZS": CurrencyCard(code: "UZS", symbol: '', icon: '', title: ''),
