@@ -18,6 +18,7 @@ class ApiClient {
         .toList()
         .then((value) => value.join())
         .then((v) => jsonDecode(v));
+    print(json);
     return RatesList.fromJson(json);
 
   }
