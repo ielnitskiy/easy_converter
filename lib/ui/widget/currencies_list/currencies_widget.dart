@@ -28,7 +28,9 @@ class _CurrenciesWidgetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: _CurrencyList());
+    return const Scaffold(
+      body: _CurrencyList(),
+    );
   }
 }
 
@@ -38,21 +40,26 @@ class _CurrencyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = CurrenciesWidgetModelProvider.of(context).model;
-    return ListView.builder(
-      itemCount: CurrenciesWidgetModelProvider.of(context).model.currencies.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          leading: Text(model.currencies[index].icon),
-          title: Text(model.currencies[index].code),
-          subtitle: Text(model.currencies[index].title),
-          trailing: SizedBox(
-              width: MediaQuery.of(context).size.width / 4,
-              child: CurrencyCard(
-                model: model,
-                index: index,
-              )),
-        );
-      },
+    return RefreshIndicator(
+      triggerMode: RefreshIndicatorTriggerMode.anywhere,
+      edgeOffset: 0,
+      onRefresh: () => model.updateCurrencies(),
+      child: ListView.builder(
+        itemCount: CurrenciesWidgetModelProvider.of(context).model.currencies.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            leading: Text(model.currencies[index].icon),
+            title: Text(model.currencies[index].code),
+            subtitle: Text(model.currencies[index].title),
+            trailing: SizedBox(
+                width: MediaQuery.of(context).size.width / 4,
+                child: CurrencyCard(
+                  model: model,
+                  index: index,
+                )),
+          );
+        },
+      ),
     );
   }
 }
@@ -74,6 +81,12 @@ class _CurrencyCardState extends State<CurrencyCard> {
 
   TextSelection position() =>
       TextSelection.fromPosition(TextPosition(offset: (_controller.value.text).toString().length));
+
+  @override
+  void initState() {
+    widget.model.updateCurrencies();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

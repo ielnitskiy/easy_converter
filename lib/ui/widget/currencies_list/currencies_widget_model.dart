@@ -24,6 +24,15 @@ class CurrenciesWidgetModel extends ChangeNotifier {
       (currencies[index].currencyRatio(CurrenciesList.currenciesList[currentCurrencyCode]?.rate) *
               (type == "" ? 0 : double.parse(type)))
           .toStringAsFixed(2);
+
+  updateCurrencies() async {
+    var rates = await CurrenciesList().getRateList();
+    rates.forEach((key, value) {
+      CurrenciesList.currenciesList[key]?.rate = value;
+    });
+    print(CurrenciesList.currenciesList.values);
+    notifyListeners();
+  }
 }
 
 class CurrenciesWidgetModelProvider extends InheritedNotifier {

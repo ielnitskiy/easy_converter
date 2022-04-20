@@ -1,15 +1,15 @@
-import 'package:cur_val/domain/rates.dart';
 import 'dart:convert';
 import 'dart:io';
 
-void main() {
-ApiClient().getRates();
+void main() async {
+  Map<String, dynamic> json = await ApiClient().get();
+print(json);
 }
 
 class ApiClient {
   final client = HttpClient();
 
-  Future<RatesList> getRates() async {
+  Future<Map<String, dynamic>> get() async {
     final url = Uri.parse('https://cdn.cur.su/api/latest.json');
     final request = await client.getUrl(url);
     final response = await request.close();
@@ -18,8 +18,6 @@ class ApiClient {
         .toList()
         .then((value) => value.join())
         .then((v) => jsonDecode(v));
-    print(json);
-    return RatesList.fromJson(json);
-
+    return json;
   }
 }
