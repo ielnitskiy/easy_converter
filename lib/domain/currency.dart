@@ -1,6 +1,7 @@
 class Currency {
   String icon;
   final String code;
+  final String country;
   final String title;
   final String? symbol;
   num? rate;
@@ -9,6 +10,7 @@ class Currency {
   Currency({
     this.icon = '🏳',
     required this.code,
+    required this.country,
     required this.title,
     this.symbol,
     this.rate,

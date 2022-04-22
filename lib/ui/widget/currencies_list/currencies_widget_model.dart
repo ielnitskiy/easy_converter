@@ -30,7 +30,6 @@ class CurrenciesWidgetModel extends ChangeNotifier {
     rates.forEach((key, value) {
       CurrenciesList.currenciesList[key]?.rate = value;
     });
-    print(CurrenciesList.currenciesList.values);
     notifyListeners();
   }
 }

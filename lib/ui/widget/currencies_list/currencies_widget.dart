@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../../domain/currenciesList.dart';
 import 'currencies_widget_model.dart';
 
 class CurrenciesListWidget extends StatefulWidget {
@@ -45,7 +43,8 @@ class _CurrencyList extends StatelessWidget {
       edgeOffset: 0,
       onRefresh: () => model.updateCurrencies(),
       child: ListView.builder(
-        itemCount: CurrenciesWidgetModelProvider.of(context).model.currencies.length,
+        itemCount:
+            CurrenciesWidgetModelProvider.of(context).model.currencies.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             leading: Text(model.currencies[index].icon),
@@ -68,7 +67,8 @@ class CurrencyCard extends StatefulWidget {
   final CurrenciesWidgetModel model;
   final int index;
 
-  const CurrencyCard({Key? key, required this.model, required this.index}) : super(key: key);
+  const CurrencyCard({Key? key, required this.model, required this.index})
+      : super(key: key);
 
   @override
   State<CurrencyCard> createState() => _CurrencyCardState();
@@ -79,8 +79,8 @@ class _CurrencyCardState extends State<CurrencyCard> {
 
   final _focusNode = FocusNode();
 
-  TextSelection position() =>
-      TextSelection.fromPosition(TextPosition(offset: (_controller.value.text).toString().length));
+  TextSelection position() => TextSelection.fromPosition(
+      TextPosition(offset: (_controller.value.text).toString().length));
 
   @override
   void initState() {
@@ -95,17 +95,22 @@ class _CurrencyCardState extends State<CurrencyCard> {
     return TextFormField(
       focusNode: _focusNode,
       controller: _controller
-        ..text = hasFocus ? widget.model.type : widget.model.calculateCurrencies(index: widget.index)
+        ..text = hasFocus
+            ? widget.model.type
+            : widget.model.calculateCurrencies(index: widget.index)
         ..selection = position(),
       onTap: () {
         widget.model.type = '';
-        widget.model.currentCurrencyCode = widget.model.currencies[widget.index].code;
+        widget.model.currentCurrencyCode =
+            widget.model.currencies[widget.index].code;
       },
       onChanged: (value) {
         if (value.length == 1 && value == '.') {
           value = "0.";
         }
-        if (value.length == 2 && value.startsWith("0") && !value.contains(".")) {
+        if (value.length == 2 &&
+            value.startsWith("0") &&
+            !value.contains(".")) {
           List<String> charList = value.split('');
           charList.insert(1, '.');
           value = charList.join('');
@@ -114,7 +119,9 @@ class _CurrencyCardState extends State<CurrencyCard> {
         widget.model.type = value;
       },
       keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[,.]?[0-9]*'))],
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp('^[0-9]*[,.]?[0-9]*'))
+      ],
     );
   }
 }

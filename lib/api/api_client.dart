@@ -1,11 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-void main() async {
-  Map<String, dynamic> json = await ApiClient().get();
-print(json);
-}
-
 class ApiClient {
   final client = HttpClient();
 
