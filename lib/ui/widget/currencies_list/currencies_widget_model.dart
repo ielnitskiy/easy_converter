@@ -1,8 +1,8 @@
-import 'package:cur_val/domain/currenciesList.dart';
+import 'package:cur_val/domain/all_currencies_list.dart';
 import 'package:flutter/material.dart';
 
 class CurrenciesWidgetModel extends ChangeNotifier {
-  final currencies = CurrenciesList.currenciesList.values.toList();
+  final currencies = AllCurrenciesList.allCurrenciesList.values.toList();
   static String _currentCurrency = "USD";
   static String _type = "";
 
@@ -21,9 +21,17 @@ class CurrenciesWidgetModel extends ChangeNotifier {
   String get type => _type;
 
   String calculateCurrencies({required int index}) =>
-      (currencies[index].currencyRatio(CurrenciesList.currenciesList[currentCurrencyCode]?.rate) *
+      (currencies[index].currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
               (type == "" ? 0 : double.parse(type)))
           .toStringAsFixed(2);
+
+  updateCurrencies() async {
+    var rates = await AllCurrenciesList().getRateList();
+    rates.forEach((key, value) {
+      AllCurrenciesList.allCurrenciesList[key]?.rate = value;
+    });
+    notifyListeners();
+  }
 }
 
 class CurrenciesWidgetModelProvider extends InheritedNotifier {

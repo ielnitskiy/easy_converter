@@ -1,23 +1,28 @@
 class Currency {
-  final String icon;
+  String icon;
   final String code;
+  final String country;
   final String title;
-  final String symbol;
-  num rate;
+  final String? symbol;
+  num? rate;
   bool isEnable;
 
   Currency({
-    required this.icon,
+    this.icon = '🏳',
     required this.code,
+    required this.country,
     required this.title,
-    required this.symbol,
-    this.rate = 0,
-    required this.isEnable,
+    this.symbol,
+    this.rate,
+    this.isEnable = false,
   });
 
   num currencyRatio(num? currency) {
-    num a = rate / (currency ?? 0);
-    if (a == a.toInt()) {
+    //TODO remove division by zero
+    num a = (rate ?? 0) / (currency ?? 0);
+    if (a.isNaN) {
+      return 0;
+    } else if (a == a.toInt()) {
       return a.toInt();
     }
     return a;
