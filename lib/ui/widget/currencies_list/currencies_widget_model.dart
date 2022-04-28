@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 class CurrenciesWidgetModel extends ChangeNotifier {
   final currencies = AllCurrenciesList.allCurrenciesList.values.toList();
+  static List<String> selectedCurrencies = [];
+
   static String _currentCurrency = "USD";
   static String _type = "";
 

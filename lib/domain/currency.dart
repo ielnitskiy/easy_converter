@@ -8,7 +8,7 @@ class Currency {
   bool isEnable;
 
   Currency({
-    this.icon = '🏳',
+    this.icon = '🏴',
     required this.code,
     required this.country,
     required this.title,
