@@ -22,10 +22,11 @@ class CurrenciesWidgetModel extends ChangeNotifier {
 
   String get type => _type;
 
-  String calculateCurrencies({required int index}) =>
-      (currencies[index].currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
-              (type == "" ? 0 : double.parse(type)))
-          .toStringAsFixed(2);
+  String calculateCurrencies({required int index}) => ((currencies
+              .firstWhere((element) => element.code == selectedCurrencies[index])
+              .currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
+          (type == "" ? 0 : double.parse(type))))
+      .toStringAsFixed(2);
 
   updateCurrencies() async {
     var rates = await AllCurrenciesList().getRateList();
@@ -33,6 +34,10 @@ class CurrenciesWidgetModel extends ChangeNotifier {
       AllCurrenciesList.allCurrenciesList[key]?.rate = value;
     });
     notifyListeners();
+  }
+
+  List getSelectedCurrencies() {
+    return CurrenciesWidgetModel.selectedCurrencies;
   }
 }
 
