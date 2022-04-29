@@ -78,8 +78,6 @@ class _CurrencyList extends StatefulWidget {
 }
 
 class _CurrencyListState extends State<_CurrencyList> {
-
-
   @override
   Widget build(BuildContext context) {
     final model = CurrenciesWidgetModelProvider.of(context).model;
@@ -166,7 +164,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
         ..selection = position(),
       onTap: () {
         widget.model.type = '';
-        widget.model.currentCurrencyCode = widget.model.currencies[widget.index].code;
+        widget.model.currentCurrencyCode = widget.model.getSelectedCurrencies()[widget.index];
       },
       onChanged: (value) {
         if (value.length == 1 && value == '.') {
