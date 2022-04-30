@@ -1,9 +1,11 @@
 import 'package:cur_val/domain/all_currencies_list.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/selected_currencies.dart';
+
 class CurrenciesWidgetModel extends ChangeNotifier {
   final currencies = AllCurrenciesList.allCurrenciesList.values.toList();
-  static List<String> selectedCurrencies = [];
+
 
   static String _currentCurrency = "USD";
   static String _type = "";
@@ -23,7 +25,7 @@ class CurrenciesWidgetModel extends ChangeNotifier {
   String get type => _type;
 
   String calculateCurrencies({required int index}) => ((currencies
-              .firstWhere((element) => element.code == selectedCurrencies[index])
+              .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
               .currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
           (type == "" ? 0 : double.parse(type))))
       .toStringAsFixed(2);
@@ -37,7 +39,7 @@ class CurrenciesWidgetModel extends ChangeNotifier {
   }
 
   List getSelectedCurrencies() {
-    return CurrenciesWidgetModel.selectedCurrencies;
+    return SelectedCurrencies.selectedCurrencies;
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../domain/selected_currencies.dart';
 import '../common/currencies_list_tile.dart';
 import 'currencies_widget_model.dart';
 
@@ -81,7 +82,7 @@ class _CurrencyListState extends State<_CurrencyList> {
   @override
   Widget build(BuildContext context) {
     final model = CurrenciesWidgetModelProvider.of(context).model;
-    final selectedCurrencies = CurrenciesWidgetModel.selectedCurrencies;
+    final selectedCurrencies = SelectedCurrencies.selectedCurrencies;
     return RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,

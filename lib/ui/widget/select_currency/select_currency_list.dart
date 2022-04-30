@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../domain/selected_currencies.dart';
 import '../currencies_list/currencies_widget_model.dart';
 
 class SelectCurrenciesListWidget extends StatefulWidget {
@@ -41,7 +42,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
 }
 
 class _CurrencyList extends StatefulWidget {
-  var selectedCurrencies = CurrenciesWidgetModel.selectedCurrencies;
+  var selectedCurrencies = SelectedCurrencies.selectedCurrencies;
 
   _CurrencyList({Key? key}) : super(key: key);
 
@@ -77,7 +78,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                   }
                 } else {
                   setState(() {
-                    CurrenciesWidgetModel.selectedCurrencies.add(model.currencies[index].code);
+                    SelectedCurrencies.selectedCurrencies.add(model.currencies[index].code);
                   });
                 }
               },
