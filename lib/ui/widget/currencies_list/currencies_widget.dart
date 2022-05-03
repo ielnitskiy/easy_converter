@@ -42,6 +42,9 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
               onPressed: () {
                 setState(() {
                   isReorderLIst = !isReorderLIst;
+                  if(isReorderLIst){
+                  //  TODO обновить лист selectedCurrencies в hive
+                  }
                 });
               },
               icon: isReorderLIst
@@ -82,14 +85,13 @@ class _CurrencyListState extends State<_CurrencyList> {
   @override
   Widget build(BuildContext context) {
     final model = CurrenciesWidgetModelProvider.of(context).model;
-    final selectedCurrencies = SelectedCurrencies.selectedCurrencies;
     return RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
         onRefresh: () => model.updateCurrencies(),
         child: widget.isReorderList
             ? ReorderableListView.builder(
-                itemCount: selectedCurrencies.length,
+                itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CurrenciesListTile(
                     index: index,
@@ -102,22 +104,23 @@ class _CurrencyListState extends State<_CurrencyList> {
                     if (oldIndex < newIndex) {
                       newIndex -= 1;
                     }
-                    final String item = selectedCurrencies.removeAt(oldIndex);
-                    selectedCurrencies.insert(newIndex, item);
+                    final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
+                    SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
                   });
                 },
               )
             : ListView.builder(
-                itemCount: selectedCurrencies.length,
+                itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    // TODO что-то с обновлениями ппц какой-то.
                     key: Key(index.toString()),
                     leading:
-                        Text(model.currencies.firstWhere((element) => element.code == selectedCurrencies[index]).icon),
+                        Text(model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).icon),
                     title:
-                        Text(model.currencies.firstWhere((element) => element.code == selectedCurrencies[index]).code),
+                        Text(model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).code),
                     subtitle:
-                        Text(model.currencies.firstWhere((element) => element.code == selectedCurrencies[index]).title),
+                        Text(model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).title),
                     trailing: SizedBox(
                         width: MediaQuery.of(context).size.width / 4,
                         child: CurrencyTextField(
