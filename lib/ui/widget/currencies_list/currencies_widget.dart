@@ -42,8 +42,8 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
               onPressed: () {
                 setState(() {
                   isReorderLIst = !isReorderLIst;
-                  if(isReorderLIst){
-                  //  TODO обновить лист selectedCurrencies в hive
+                  if (isReorderLIst) {
+                    //  TODO обновить лист selectedCurrencies в hive
                   }
                 });
               },
@@ -115,12 +115,15 @@ class _CurrencyListState extends State<_CurrencyList> {
                   return ListTile(
                     // TODO что-то с обновлениями ппц какой-то.
                     key: Key(index.toString()),
-                    leading:
-                        Text(model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).icon),
-                    title:
-                        Text(model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).code),
-                    subtitle:
-                        Text(model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).title),
+                    leading: Text(model.currencies
+                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                        .icon),
+                    title: Text(model.currencies
+                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                        .code),
+                    subtitle: Text(model.currencies
+                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                        .title),
                     trailing: SizedBox(
                         width: MediaQuery.of(context).size.width / 4,
                         child: CurrencyTextField(
