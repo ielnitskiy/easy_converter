@@ -1,8 +1,12 @@
+import 'package:cur_val/ui/util/size_config.dart';
+import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../domain/selected_currencies.dart';
-import '../common/currencies_list_tile.dart';
+import '../../../resources/resources.dart';
+import '../common/currency_card.dart';
 import 'currencies_widget_model.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CurrenciesListWidget extends StatefulWidget {
   const CurrenciesListWidget({Key? key}) : super(key: key);
@@ -36,6 +40,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xFFF5F8FE),
         appBar: AppBar(
           actions: [
             IconButton(
@@ -93,10 +98,19 @@ class _CurrencyListState extends State<_CurrencyList> {
             ? ReorderableListView.builder(
                 itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return CurrenciesListTile(
-                    index: index,
-                    model: model,
+                  return CurrencyCard(
+                    flag: model.currencies
+                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                        .flag,
+                    /*model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).,*/
+                    code: model.currencies
+                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                        .code,
+                    country: model.currencies
+                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                        .country,
                     key: ValueKey(index),
+                    trailing: Icon(Icons.reorder_rounded),
                   );
                 },
                 onReorder: (int oldIndex, int newIndex) {
@@ -112,81 +126,23 @@ class _CurrencyListState extends State<_CurrencyList> {
             : ListView.builder(
                 itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    // TODO что-то с обновлениями ппц какой-то.
-                    key: Key(index.toString()),
-                    leading: Text(model.currencies
+                  return CurrencyCard(
+                    flag:  model.currencies
                         .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .icon),
-                    title: Text(model.currencies
+                        .flag,
+                    code: model.currencies
                         .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .code),
-                    subtitle: Text(model.currencies
+                        .code,
+                    country: model.currencies
                         .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .title),
-                    trailing: SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: CurrencyTextField(
-                          model: model,
-                          index: index,
-                        )),
+                        .country,
+                    key: ValueKey(index),
+                    trailing: CurrencyTextField(
+                      model: model,
+                      index: index,
+                    ),
                   );
                 },
               ));
-  }
-}
-
-class CurrencyTextField extends StatefulWidget {
-  final CurrenciesWidgetModel model;
-  final int index;
-
-  const CurrencyTextField({Key? key, required this.model, required this.index}) : super(key: key);
-
-  @override
-  State<CurrencyTextField> createState() => _CurrencyTextField();
-}
-
-class _CurrencyTextField extends State<CurrencyTextField> {
-  final _controller = TextEditingController();
-
-  final _focusNode = FocusNode();
-
-  TextSelection position() =>
-      TextSelection.fromPosition(TextPosition(offset: (_controller.value.text).toString().length));
-
-  @override
-  void initState() {
-    widget.model.updateCurrencies();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    bool hasFocus = _focusNode.hasFocus;
-
-    return TextFormField(
-      focusNode: _focusNode,
-      controller: _controller
-        ..text = hasFocus ? widget.model.type : widget.model.calculateCurrencies(index: widget.index)
-        ..selection = position(),
-      onTap: () {
-        widget.model.type = '';
-        widget.model.currentCurrencyCode = widget.model.getSelectedCurrencies()[widget.index];
-      },
-      onChanged: (value) {
-        if (value.length == 1 && value == '.') {
-          value = "0.";
-        }
-        if (value.length == 2 && value.startsWith("0") && !value.contains(".")) {
-          List<String> charList = value.split('');
-          charList.insert(1, '.');
-          value = charList.join('');
-        }
-
-        widget.model.type = value;
-      },
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[,.]?[0-9]*'))],
-    );
   }
 }

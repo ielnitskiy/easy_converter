@@ -1,5 +1,7 @@
+import 'package:cur_val/resources/resources.dart';
+
 class Currency {
-  String icon;
+  String flag;
   final String code;
   final String country;
   final String title;
@@ -8,7 +10,7 @@ class Currency {
   bool isEnable;
 
   Currency({
-    this.icon = '🏴',
+    this.flag = Svgs.none,
     required this.code,
     required this.country,
     required this.title,
