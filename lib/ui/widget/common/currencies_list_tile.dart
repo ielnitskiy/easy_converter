@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../domain/selected_currencies.dart';
 import '../currencies_list/currencies_widget_model.dart';
 
 class CurrenciesListTile extends StatelessWidget {
@@ -17,7 +18,7 @@ class CurrenciesListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedCurrencies = CurrenciesWidgetModel.selectedCurrencies;
+    final selectedCurrencies = SelectedCurrencies.selectedCurrencies;
 
     return ListTile(
       leading: Text(model.currencies.firstWhere((element) => element.code == selectedCurrencies[index]).icon),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../../../domain/selected_currencies.dart';
 import '../currencies_list/currencies_widget_model.dart';
 
 class SelectCurrenciesListWidget extends StatefulWidget {
@@ -35,56 +37,67 @@ class _CurrenciesWidgetBody extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: _CurrencyList(),
+      body: const _CurrencyList(),
     );
   }
 }
 
 class _CurrencyList extends StatefulWidget {
-  var selectedCurrencies = CurrenciesWidgetModel.selectedCurrencies;
 
-  _CurrencyList({Key? key}) : super(key: key);
+  const _CurrencyList({Key? key}) : super(key: key);
 
   @override
   State<_CurrencyList> createState() => _CurrencyListState();
 }
 
 class _CurrencyListState extends State<_CurrencyList> {
+  late Box<List<String>> selectedCurrenciesBox;
+
+  @override
+  void initState() {
+    selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
+    if (selectedCurrenciesBox.get("selectedList") == null) {
+      (selectedCurrenciesBox.put("selectedList", SelectedCurrencies.selectedCurrencies));
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final model = CurrenciesWidgetModelProvider.of(context).model;
+
+    selectCurrency({required int index}) {
+      if (selectedCurrenciesBox.get("selectedList")!.remove(model.currencies[index].code)) {
+      } else {
+        selectedCurrenciesBox.get("selectedList")!.add(model.currencies[index].code);
+      }
+      SelectedCurrencies.selectedCurrencies = selectedCurrenciesBox.get("selectedList")!;
+      selectedCurrenciesBox.put("selectedList", SelectedCurrencies.selectedCurrencies);
+      setState(() {});
+    }
 
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       edgeOffset: 0,
       onRefresh: () => model.updateCurrencies(),
-      child: ListView.builder(
-        itemCount: CurrenciesWidgetModelProvider.of(context).model.currencies.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: Text(model.currencies[index].icon),
-            title: Text(model.currencies[index].code),
-            subtitle: Text(model.currencies[index].title),
-            trailing: Checkbox(
-              checkColor: Colors.white,
-              value: widget.selectedCurrencies.contains(model.currencies[index].code),
-              onChanged: (bool? value) {
-                if (widget.selectedCurrencies.contains(model.currencies[index].code)) {
-                  {
-                    setState(() {
-                      widget.selectedCurrencies.remove(model.currencies[index].code);
-                    });
-                  }
-                } else {
-                  setState(() {
-                    CurrenciesWidgetModel.selectedCurrencies.add(model.currencies[index].code);
-                  });
-                }
+      child: ValueListenableBuilder(
+          valueListenable: selectedCurrenciesBox.listenable(),
+          builder: (context, Box<List<String>> box, _) {
+            return ListView.builder(
+              itemCount: CurrenciesWidgetModelProvider.of(context).model.currencies.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: Text(model.currencies[index].icon),
+                  title: Text(model.currencies[index].code),
+                  subtitle: Text(model.currencies[index].title),
+                  trailing: Checkbox(
+                      checkColor: Colors.white,
+                      value: selectedCurrenciesBox.get("selectedList")!.contains(model.currencies[index].code),
+                      onChanged: (_) => selectCurrency(index: index)),
+                );
               },
-            ),
-          );
-        },
-      ),
+            );
+          }),
     );
   }
 }
