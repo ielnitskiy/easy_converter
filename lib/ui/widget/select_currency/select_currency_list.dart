@@ -1,3 +1,5 @@
+import 'package:cur_val/ui/util/const.dart';
+import 'package:cur_val/ui/widget/common/currency_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -43,7 +45,6 @@ class _CurrenciesWidgetBody extends StatelessWidget {
 }
 
 class _CurrencyList extends StatefulWidget {
-
   const _CurrencyList({Key? key}) : super(key: key);
 
   @override
@@ -86,14 +87,22 @@ class _CurrencyListState extends State<_CurrencyList> {
             return ListView.builder(
               itemCount: CurrenciesWidgetModelProvider.of(context).model.currencies.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: Text(model.currencies[index].icon),
-                  title: Text(model.currencies[index].code),
-                  subtitle: Text(model.currencies[index].title),
-                  trailing: Checkbox(
-                      checkColor: Colors.white,
-                      value: selectedCurrenciesBox.get("selectedList")!.contains(model.currencies[index].code),
-                      onChanged: (_) => selectCurrency(index: index)),
+                return CurrencyCard(
+                  flag: model.currencies[index].flag,
+                  code: model.currencies[index].code,
+                  country: model.currencies[index].country,
+                  trailing: IconButton(
+                    icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.currencies[index].code))
+                        ? const Icon(
+                            Icons.check_circle_outline,
+                            color: AppColors.black,
+                          )
+                        : const Icon(
+                            Icons.brightness_1_outlined,
+                            color: AppColors.gray,
+                          ),
+                    onPressed: () => selectCurrency(index: index),
+                  ),
                 );
               },
             );
