@@ -36,15 +36,18 @@ class _CurrencyTextField extends State<CurrencyTextField> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width / 2.5,
+          width: MediaQuery.of(context).size.width / 3,
           child: TextFormField(
             style: AppFontStyle.boldTextStyle.copyWith(fontSize: AppFontStyle.size18),
             decoration: InputDecoration(
               isCollapsed: true,
               filled: true,
-              suffixText: widget.model.currencies
-                  .firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index])
-                  .symbol,
+              suffixStyle: TextStyle(fontSize: 12),
+              suffixText: ' ${
+                widget.model.currencies
+                    .firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index])
+                    .symbol
+              }',
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
@@ -79,10 +82,12 @@ class _CurrencyTextField extends State<CurrencyTextField> {
           ),
         ),
         Text(
-            widget.model.currencies
-                .firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index])
-                .title,
-            style: AppFontStyle.lightTextStyle.copyWith(fontSize: AppFontStyle.size12)),
+          widget.model.currencies
+              .firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index])
+              .title,
+          style: AppFontStyle.lightTextStyle.copyWith(fontSize: AppFontStyle.size12),
+          overflow: TextOverflow.ellipsis,
+        ),
       ],
     );
   }

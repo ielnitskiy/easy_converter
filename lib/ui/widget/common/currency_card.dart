@@ -50,37 +50,45 @@ class CurrencyCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(18)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          code,
-                          style: AppFontStyle.boldTextStyle.copyWith(
-                            fontSize: AppFontStyle.size16,
+                  Expanded(
+                    // flex: 5,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(18)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            code,
+                            style: AppFontStyle.boldTextStyle.copyWith(
+                              fontSize: AppFontStyle.size16,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                        Text(
-                          country,
-                          style: AppFontStyle.lightTextStyle.copyWith(
-                            fontSize: AppFontStyle.size14,
+                          Text(
+                            country,
+                            style: AppFontStyle.lightTextStyle.copyWith(
+                              fontSize: AppFontStyle.size14,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5)),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            child: trailing,
-                          ),
-                        ]),
+                  Expanded(
+                    // flex: 8,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5)),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              child: trailing,
+                            ),
+                          ]),
+                    ),
                   ),
                 ],
               ),
@@ -91,9 +99,3 @@ class CurrencyCard extends StatelessWidget {
     );
   }
 }
-// return ListTile(
-// leading: Text(model.currencies.firstWhere((element) => element.code == selectedCurrencies[index]).icon),
-// title: Text(model.currencies.firstWhere((element) => element.code == selectedCurrencies[index]).code),
-// subtitle: Text(model.currencies.firstWhere((element) => element.code == selectedCurrencies[index]).title),
-// trailing: trailing,
-// );
