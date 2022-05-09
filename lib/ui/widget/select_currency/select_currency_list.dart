@@ -89,9 +89,11 @@ class _CurrencyListState extends State<_CurrencyList> {
               itemBuilder: (BuildContext context, int index) {
                 return CurrencyCard(
                   flag: model.currencies[index].flag,
-                  code: model.currencies[index].code,
-                  country: model.currencies[index].country,
+                  code:'${model.currencies[index].code} - ${model.currencies[index].country}',
+                  country: model.currencies[index].title,
                   trailing: IconButton(
+                      padding: EdgeInsets.all(0),
+                      alignment: Alignment.centerRight,
                     icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.currencies[index].code))
                         ? const Icon(
                             Icons.check_circle_outline,

@@ -1,3 +1,4 @@
+import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/util/size_config.dart';
 import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
               },
               icon: isReorderLIst
                   ? const Icon(
-                      Icons.done,
+                      Icons.done_outlined,
                       color: Colors.black,
                     )
                   : const Icon(
@@ -71,7 +72,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
             ? FloatingActionButton(
                 child: Icon(Icons.add),
                 onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
-                backgroundColor: Colors.black87,
+                backgroundColor: AppColors.black,
               )
             : null);
   }
