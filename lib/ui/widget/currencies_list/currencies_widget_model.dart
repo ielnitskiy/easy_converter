@@ -1,4 +1,5 @@
 import 'package:cur_val/domain/all_currencies_list.dart';
+import 'package:cur_val/domain/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -18,11 +19,20 @@ class CurrenciesWidgetModel extends ChangeNotifier {
   String get currentCurrencyCode => _currentCurrency;
 
   set type(String number) {
-    _type = number.toString();
+    _type = number;
     notifyListeners();
   }
 
   String get type => _type;
+
+  String _searchRequest = '';
+
+  String get searchRequest => _searchRequest;
+
+  set searchRequest(String searchRequest) {
+    _searchRequest = searchRequest;
+    notifyListeners();
+  }
 
   String calculateCurrencies({required int index}) => ((currencies
               .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
@@ -48,6 +58,17 @@ class CurrenciesWidgetModel extends ChangeNotifier {
 
   List getSelectedCurrencies() {
     return SelectedCurrencies.selectedCurrencies;
+  }
+
+  List resultSearch<T>() {
+    List resultSearch;
+    if (searchRequest.isEmpty) {
+      //TODO лист обновлется кучу раз
+      return currencies;
+    } else {
+      resultSearch = currencies.where((element) => element.country.toLowerCase().contains(searchRequest.toLowerCase())).toList();
+      return resultSearch;
+    }
   }
 }
 
