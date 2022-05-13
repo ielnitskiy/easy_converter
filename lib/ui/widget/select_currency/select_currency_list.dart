@@ -54,11 +54,15 @@ class _SearchInBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = CurrenciesWidgetModelProvider.of(context).model;
-    return Expanded(child: TextFormField(
+    return TextFormField(
+      decoration: const InputDecoration(
+        suffixIcon: Icon(Icons.search, color: AppColors.gray),
+        hintText: 'Search',
+      ),
       onChanged: (value) {
         model.searchRequest = value;
       },
-    ));
+    );
   }
 }
 
