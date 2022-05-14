@@ -99,6 +99,8 @@ class _CurrencyListState extends State<_CurrencyList> {
       setState(() {});
     }
 
+
+
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       edgeOffset: 0,

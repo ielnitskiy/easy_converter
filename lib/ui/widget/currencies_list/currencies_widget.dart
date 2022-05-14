@@ -1,6 +1,7 @@
 import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../domain/selected_currencies.dart';
 import '../common/currency_card.dart';
@@ -118,6 +119,8 @@ class _CurrencyListState extends State<_CurrencyList> {
                     }
                     final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
                     SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
+
+                    Hive.box<List<String>>('selected_currency').put("selectedList", SelectedCurrencies.selectedCurrencies);
                   });
                 },
               )
