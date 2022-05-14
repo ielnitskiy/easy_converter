@@ -1,13 +1,11 @@
 import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/util/size_config.dart';
 import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import '../../../domain/selected_currencies.dart';
-import '../../../resources/resources.dart';
 import '../common/currency_card.dart';
 import 'currencies_widget_model.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CurrenciesListWidget extends StatefulWidget {
   const CurrenciesListWidget({Key? key}) : super(key: key);
@@ -121,6 +119,8 @@ class _CurrencyListState extends State<_CurrencyList> {
                     }
                     final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
                     SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
+
+                    Hive.box<List<String>>('selected_currency').put("selectedList", SelectedCurrencies.selectedCurrencies);
                   });
                 },
               )

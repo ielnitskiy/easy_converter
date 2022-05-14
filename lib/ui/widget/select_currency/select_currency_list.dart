@@ -1,3 +1,4 @@
+import 'package:cur_val/domain/currency.dart';
 import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/common/currency_card.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,29 @@ class _CurrenciesWidgetBody extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        title: _SearchInBar(),
       ),
       body: const _CurrencyList(),
+    );
+  }
+}
+
+class _SearchInBar extends StatelessWidget {
+  const _SearchInBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = CurrenciesWidgetModelProvider.of(context).model;
+    return TextFormField(
+      decoration: const InputDecoration(
+        suffixIcon: Icon(Icons.search, color: AppColors.gray),
+        hintText: 'Search',
+      ),
+      onChanged: (value) {
+        model.searchRequest = value;
+      },
     );
   }
 }
@@ -77,38 +99,36 @@ class _CurrencyListState extends State<_CurrencyList> {
       setState(() {});
     }
 
+
+
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       edgeOffset: 0,
       onRefresh: () => model.updateCurrencies(),
-      child: ValueListenableBuilder(
-          valueListenable: selectedCurrenciesBox.listenable(),
-          builder: (context, Box<List<String>> box, _) {
-            return ListView.builder(
-              itemCount: CurrenciesWidgetModelProvider.of(context).model.currencies.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CurrencyCard(
-                  flag: model.currencies[index].flag,
-                  code:'${model.currencies[index].code} - ${model.currencies[index].country}',
-                  country: model.currencies[index].title,
-                  trailing: IconButton(
-                      padding: EdgeInsets.all(0),
-                      alignment: Alignment.centerRight,
-                    icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.currencies[index].code))
-                        ? const Icon(
-                            Icons.check_circle_outline,
-                            color: AppColors.black,
-                          )
-                        : const Icon(
-                            Icons.brightness_1_outlined,
-                            color: AppColors.gray,
-                          ),
-                    onPressed: () => selectCurrency(index: index),
-                  ),
-                );
-              },
-            );
-          }),
+      child: ListView.builder(
+        itemCount: CurrenciesWidgetModelProvider.of(context).model.resultSearch().length,
+        itemBuilder: (BuildContext context, int index) {
+          return CurrencyCard(
+            flag: model.resultSearch()[index].flag,
+            code: '${model.resultSearch()[index].code} - ${model.resultSearch()[index].country}',
+            country: model.resultSearch()[index].title,
+            trailing: IconButton(
+              padding: EdgeInsets.all(0),
+              alignment: Alignment.centerRight,
+              icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.resultSearch()[index].code))
+                  ? const Icon(
+                      Icons.check_circle_outline,
+                      color: AppColors.black,
+                    )
+                  : const Icon(
+                      Icons.brightness_1_outlined,
+                      color: AppColors.gray,
+                    ),
+              onPressed: () => selectCurrency(index: model.currencies.indexOf(model.resultSearch()[index])),
+            ),
+          );
+        },
+      ),
     );
   }
 }
