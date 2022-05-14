@@ -63,12 +63,24 @@ class CurrenciesWidgetModel extends ChangeNotifier {
   List resultSearch<T>() {
     List resultSearch;
     if (searchRequest.isEmpty) {
-      //TODO лист обновлется кучу раз
+      //FIXME лист обновлется кучу раз
       return currencies;
     } else {
-      resultSearch = currencies.where((element) => element.country.toLowerCase().contains(searchRequest.toLowerCase())).toList();
+      resultSearch = currencies.where((element) => _searchForElement(element, searchRequest)).toList();
       return resultSearch;
     }
+  }
+}
+
+bool _searchForElement(Currency element, String searchRequest) {
+  if (element.title.toLowerCase().contains(searchRequest.toLowerCase())) {
+    return true;
+  } else if (element.country.toLowerCase().contains(searchRequest.toLowerCase())) {
+    return true;
+  } else if (element.code.toLowerCase().contains(searchRequest.toLowerCase())) {
+    return true;
+  } else {
+    return false;
   }
 }
 

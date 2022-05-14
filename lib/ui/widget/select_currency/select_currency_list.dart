@@ -113,7 +113,7 @@ class _CurrencyListState extends State<_CurrencyList> {
             trailing: IconButton(
               padding: EdgeInsets.all(0),
               alignment: Alignment.centerRight,
-              icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.currencies[index].code))
+              icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.resultSearch()[index].code))
                   ? const Icon(
                       Icons.check_circle_outline,
                       color: AppColors.black,
@@ -122,7 +122,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                       Icons.brightness_1_outlined,
                       color: AppColors.gray,
                     ),
-              onPressed: () => selectCurrency(index: index),
+              onPressed: () => selectCurrency(index: model.currencies.indexOf(model.resultSearch()[index])),
             ),
           );
         },
