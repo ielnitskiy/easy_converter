@@ -32,6 +32,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF5F8FE),
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
@@ -39,7 +40,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        title: _SearchInBar(),
+        title: const _SearchInBar(),
       ),
       body: const _CurrencyList(),
     );
@@ -56,6 +57,9 @@ class _SearchInBar extends StatelessWidget {
     final model = CurrenciesWidgetModelProvider.of(context).model;
     return TextFormField(
       decoration: const InputDecoration(
+        border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+        ),
         suffixIcon: Icon(Icons.search, color: AppColors.gray),
         hintText: 'Search',
       ),

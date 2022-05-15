@@ -2,6 +2,7 @@ import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/currencies_list/currencies_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class CurrencyTextField extends StatefulWidget {
   final CurrenciesWidgetModel model;
@@ -36,25 +37,22 @@ class _CurrencyTextField extends State<CurrencyTextField> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width / 3,
+          width: MediaQuery.of(context).size.width / 2.5,
           child: TextFormField(
             style: AppFontStyle.boldTextStyle.copyWith(fontSize: AppFontStyle.size18),
             decoration: InputDecoration(
               isCollapsed: true,
               filled: true,
               suffixStyle: TextStyle(fontSize: 12),
-              suffixText: ' ${
-                widget.model.currencies
-                    .firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index])
-                    .symbol
-              }',
+              suffixText:
+                  ' ${widget.model.currencies.firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index]).symbol}',
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   )),
-              contentPadding: EdgeInsets.all(6),
-              fillColor: Color(0xFFF9F9FB),
+              contentPadding: const EdgeInsets.all(6),
+              fillColor: AppColors.backgroundLightGray,
             ),
             textAlign: TextAlign.end,
             focusNode: _focusNode,

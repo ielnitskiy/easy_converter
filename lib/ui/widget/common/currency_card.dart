@@ -12,7 +12,7 @@ class CurrencyCard extends StatelessWidget {
   final Widget? trailing;
   final Key? key;
 
-  CurrencyCard({
+  const CurrencyCard({
     this.trailing,
     required this.flag,
     required this.code,
@@ -22,16 +22,14 @@ class CurrencyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedCurrencies = SelectedCurrencies.selectedCurrencies;
     SizeConfig().init(context);
     return Container(
-      // color: Colors.black,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Color(0xFFFFFFFF),
+        color: AppColors.white,
         // color: Colors.black,
       ),
-      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+      margin: EdgeInsets.symmetric(vertical: 4),
       width: getProportionateScreenWidth(300),
       height: getProportionateScreenHeight(82),
       child: Padding(
@@ -51,7 +49,6 @@ class CurrencyCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    // flex: 5,
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(18)),
                       child: Column(
@@ -62,32 +59,28 @@ class CurrencyCard extends StatelessWidget {
                             code,
                             style: AppFontStyle.boldTextStyle.copyWith(
                               fontSize: AppFontStyle.size16,
-                              overflow: TextOverflow.ellipsis,
                             ),
+                            maxLines: 1,
                           ),
                           Text(
                             country,
                             style: AppFontStyle.lightTextStyle.copyWith(
                               fontSize: AppFontStyle.size14,
-                              overflow: TextOverflow.ellipsis,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
                           ),
                         ],
                       ),
                     ),
                   ),
-                  Expanded(
-                    // flex: 8,
+                  FittedBox(
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5)),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              child: trailing,
-                            ),
-                          ]),
+                      child: SizedBox(
+                        child: trailing,
+                      ),
                     ),
                   ),
                 ],

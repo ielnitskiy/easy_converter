@@ -34,39 +34,40 @@ class _CurrenciesWidgetBody extends StatefulWidget {
 }
 
 class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
-  bool isReorderLIst = false;
+  bool isReorderList = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFF5F8FE),
         appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  isReorderLIst = !isReorderLIst;
-                  if (isReorderLIst) {
-                    //  TODO обновить лист selectedCurrencies в hive
-                  }
-                });
-              },
-              icon: isReorderLIst
-                  ? const Icon(
-                      Icons.done_outlined,
-                      color: Colors.black,
-                    )
-                  : const Icon(
-                      Icons.settings,
-                      color: Colors.black,
-                    ),
-            ),
-          ],
           backgroundColor: Colors.transparent,
           elevation: 0.0,
+          actions:[ IconButton(
+            splashRadius: 25,
+            onPressed: () {
+              setState(() {
+                isReorderList = !isReorderList;
+                if (!isReorderList) {
+                  Hive.box<List<String>>('selected_currency')
+                      .put("selectedList", SelectedCurrencies.selectedCurrencies);
+                }
+              });
+            },
+            icon: isReorderList
+                ? const Icon(
+                    Icons.done_outlined,
+                    color: Colors.black,
+                  )
+                : const Icon(
+                    Icons.settings,
+                    color: Colors.black,
+                  ),
+          ),
+      ]
         ),
-        body: _CurrencyList(isReorderList: isReorderLIst),
-        floatingActionButton: isReorderLIst
+        body: _CurrencyList(isReorderList: isReorderList),
+        floatingActionButton: isReorderList
             ? FloatingActionButton(
                 child: Icon(Icons.add),
                 onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
@@ -93,57 +94,63 @@ class _CurrencyListState extends State<_CurrencyList> {
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
         onRefresh: () => model.updateCurrencies(),
-        child: widget.isReorderList
-            ? ReorderableListView.builder(
-                itemCount: SelectedCurrencies.selectedCurrencies.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CurrencyCard(
-                    flag: model.currencies
-                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .flag,
-                    /*model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).,*/
-                    code: model.currencies
-                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .code,
-                    country: model.currencies
-                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .country,
-                    key: ValueKey(index),
-                    trailing: Icon(Icons.reorder_rounded),
-                  );
-                },
-                onReorder: (int oldIndex, int newIndex) {
-                  setState(() {
-                    if (oldIndex < newIndex) {
-                      newIndex -= 1;
-                    }
-                    final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
-                    SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
-
-                    Hive.box<List<String>>('selected_currency').put("selectedList", SelectedCurrencies.selectedCurrencies);
-                  });
-                },
-              )
-            : ListView.builder(
-                itemCount: SelectedCurrencies.selectedCurrencies.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CurrencyCard(
-                    flag:  model.currencies
-                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .flag,
-                    code: model.currencies
-                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .code,
-                    country: model.currencies
-                        .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                        .country,
-                    key: ValueKey(index),
-                    trailing: CurrencyTextField(
-                      model: model,
-                      index: index,
-                    ),
-                  );
-                },
-              ));
+        child: Theme(
+          data: ThemeData(
+            canvasColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+          ),
+          child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: widget.isReorderList
+                  ? ReorderableListView.builder(
+                      itemCount: SelectedCurrencies.selectedCurrencies.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CurrencyCard(
+                          flag: model.currencies
+                              .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                              .flag,
+                          /*model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).,*/
+                          code: model.currencies
+                              .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                              .code,
+                          country: model.currencies
+                              .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                              .country,
+                          key: ValueKey(index),
+                          trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
+                        );
+                      },
+                      onReorder: (int oldIndex, int newIndex) {
+                        setState(() {
+                          if (oldIndex < newIndex) {
+                            newIndex -= 1;
+                          }
+                          final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
+                          SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
+                        });
+                      },
+                    )
+                  : ListView.builder(
+                      itemCount: SelectedCurrencies.selectedCurrencies.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CurrencyCard(
+                          flag: model.currencies
+                              .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                              .flag,
+                          code: model.currencies
+                              .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                              .code,
+                          country: model.currencies
+                              .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
+                              .country,
+                          key: ValueKey(index),
+                          trailing: CurrencyTextField(
+                            model: model,
+                            index: index,
+                          ),
+                        );
+                      },
+                    )),
+        ));
   }
 }
