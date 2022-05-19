@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../domain/selected_currencies.dart';
 
-class CurrenciesWidgetModel extends ChangeNotifier {
+class ViewCurrenciesListWidgetModel extends ChangeNotifier {
   final currencies = AllCurrenciesList.allCurrenciesList.values.toList();
 
   static String _currentCurrency = "USD";
@@ -40,7 +40,7 @@ class CurrenciesWidgetModel extends ChangeNotifier {
           (type == "" ? 0 : double.parse(type))))
       .toStringAsFixed(2);
 
-  updateCurrencies() async {
+  updateRateCurrencies() async {
     Map<dynamic, dynamic> rates = {};
     var ratesBox = Hive.box('rate');
     try {
@@ -70,6 +70,29 @@ class CurrenciesWidgetModel extends ChangeNotifier {
       return resultSearch;
     }
   }
+
+
+   selectCurrency({required int index}) {
+     Box<List<String>> selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
+
+     if (selectedCurrenciesBox.get("selectedList")!.remove(currencies[index].code)) {
+    } else {
+     return;
+    }
+    notifyListeners();
+  }
+
+
+  deleteCurrency({required int index}){
+    Box<List<String>> selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
+
+    if (selectedCurrenciesBox.get("selectedList")!.remove(getSelectedCurrencies()[index]));
+    else {
+      return;
+    }
+    notifyListeners();
+  }
+
 }
 
 bool _searchForElement(Currency element, String searchRequest) {
@@ -84,24 +107,24 @@ bool _searchForElement(Currency element, String searchRequest) {
   }
 }
 
-class CurrenciesWidgetModelProvider extends InheritedNotifier {
-  final CurrenciesWidgetModel model;
+class ViewCurrenciesListWidgetModelProvider extends InheritedNotifier {
+  final ViewCurrenciesListWidgetModel model;
 
-  const CurrenciesWidgetModelProvider({
+  const ViewCurrenciesListWidgetModelProvider({
     required this.model,
     Key? key,
     required Widget child,
   }) : super(key: key, notifier: model, child: child);
 
-  static CurrenciesWidgetModelProvider of(BuildContext context) {
-    final CurrenciesWidgetModelProvider? result =
-        context.dependOnInheritedWidgetOfExactType<CurrenciesWidgetModelProvider>();
+  static ViewCurrenciesListWidgetModelProvider of(BuildContext context) {
+    final ViewCurrenciesListWidgetModelProvider? result =
+        context.dependOnInheritedWidgetOfExactType<ViewCurrenciesListWidgetModelProvider>();
     assert(result != null, 'No CurrenciesListWidgetModelProvider found in context');
     return result!;
   }
 
   @override
-  bool updateShouldNotify(CurrenciesWidgetModelProvider old) {
+  bool updateShouldNotify(ViewCurrenciesListWidgetModelProvider old) {
     return true;
   }
 }

@@ -1,11 +1,10 @@
 import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/currencies_list/currencies_widget_model.dart';
+import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 class CurrencyTextField extends StatefulWidget {
-  final CurrenciesWidgetModel model;
+  final ViewCurrenciesListWidgetModel model;
   final int index;
 
   const CurrencyTextField({Key? key, required this.model, required this.index}) : super(key: key);
@@ -24,7 +23,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
 
   @override
   void initState() {
-    widget.model.updateCurrencies();
+    widget.model.updateRateCurrencies();
     super.initState();
   }
 

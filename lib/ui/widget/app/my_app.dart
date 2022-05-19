@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../currencies_list/currencies_widget.dart';
-import '../select_currency/select_currency_list.dart';
+import '../select_curriencies_list/select_curriencies_list.dart';
+import '../view_currency_list/view_currencies_list.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       routes: {
-        '/': (context) => const CurrenciesListWidget(),
+        '/': (context) => const ViewCurrenciesListWidget(),
         '/select_currency': (context) => const SelectCurrenciesListWidget(),
       },
       initialRoute: '/',

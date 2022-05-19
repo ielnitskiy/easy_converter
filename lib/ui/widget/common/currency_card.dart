@@ -1,9 +1,10 @@
 import 'package:cur_val/ui/util/const.dart';
+import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../domain/selected_currencies.dart';
 import '../../../utils/size_config.dart';
 
 class CurrencyCard extends StatelessWidget {
@@ -12,20 +13,22 @@ class CurrencyCard extends StatelessWidget {
   final String country;
   final Widget? trailing;
   final Key? key;
-   bool isSlidable;
+  bool isSlidable;
+  final int? index;
 
-   CurrencyCard({
+  CurrencyCard({
     this.trailing,
     required this.flag,
     required this.code,
     required this.country,
     this.key,
-    this.isSlidable = false,
+    this.isSlidable = false, this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -38,20 +41,33 @@ class CurrencyCard extends StatelessWidget {
       child: Slidable(
         enabled: isSlidable,
         endActionPane: ActionPane(
-          motion:  DrawerMotion(),
+          motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {
-              },
-              backgroundColor: Color(0xFFFE4A49),
+              flex: 13,
+              onPressed: (context) => model.deleteCurrency(index: index!),
+              backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,
               label: 'Delete',
             ),
+            Expanded(
+              child: Container(
+// height: 20,
+                width: 20,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFE4A49),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 21),
+          padding: const EdgeInsets.symmetric(horizontal: 21),
           child: Row(
             children: [
               SvgPicture.asset(
