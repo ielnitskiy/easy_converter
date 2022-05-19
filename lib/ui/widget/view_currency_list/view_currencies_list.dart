@@ -108,7 +108,6 @@ class _CurrencyListState extends State<_CurrencyList> {
                           flag: model.currencies
                               .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
                               .flag,
-                          /*model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).,*/
                           code: model.currencies
                               .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
                               .code,
@@ -118,6 +117,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                           key: ValueKey(index),
                           trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
                           index: index,
+                          model: model,
                         );
                       },
                       onReorder: (int oldIndex, int newIndex) {

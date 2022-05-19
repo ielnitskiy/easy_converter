@@ -15,6 +15,7 @@ class CurrencyCard extends StatelessWidget {
   final Key? key;
   bool isSlidable;
   final int? index;
+  final ViewCurrenciesListWidgetModel? model;
 
   CurrencyCard({
     this.trailing,
@@ -22,13 +23,12 @@ class CurrencyCard extends StatelessWidget {
     required this.code,
     required this.country,
     this.key,
-    this.isSlidable = false, this.index,
+    this.isSlidable = false, this.index, this.model,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -45,7 +45,7 @@ class CurrencyCard extends StatelessWidget {
           children: [
             SlidableAction(
               flex: 13,
-              onPressed: (context) => model.deleteCurrency(index: index!),
+              onPressed: (context) => model!.deleteCurrency(index: index!),
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,
