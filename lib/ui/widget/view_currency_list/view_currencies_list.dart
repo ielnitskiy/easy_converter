@@ -1,25 +1,26 @@
 import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../domain/selected_currencies.dart';
 import '../common/currency_card.dart';
-import 'currencies_widget_model.dart';
+import 'view_currencies_list_model.dart';
 
-class CurrenciesListWidget extends StatefulWidget {
-  const CurrenciesListWidget({Key? key}) : super(key: key);
+class ViewCurrenciesListWidget extends StatefulWidget {
+  const ViewCurrenciesListWidget({Key? key}) : super(key: key);
 
   @override
-  State<CurrenciesListWidget> createState() => _CurrenciesListWidgetState();
+  State<ViewCurrenciesListWidget> createState() => _ViewCurrenciesListWidgetState();
 }
 
-class _CurrenciesListWidgetState extends State<CurrenciesListWidget> {
-  final _model = CurrenciesWidgetModel();
+class _ViewCurrenciesListWidgetState extends State<ViewCurrenciesListWidget> {
+  final _model = ViewCurrenciesListWidgetModel();
 
   @override
   Widget build(BuildContext context) {
-    return CurrenciesWidgetModelProvider(
+    return ViewCurrenciesListWidgetModelProvider(
       model: _model,
       child: const _CurrenciesWidgetBody(),
     );
@@ -39,11 +40,9 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFF5F8FE),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          actions:[ IconButton(
+        backgroundColor: const Color(0xFFF5F8FE),
+        appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0.0, actions: [
+          IconButton(
             splashRadius: 25,
             onPressed: () {
               setState(() {
@@ -64,12 +63,11 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
                     color: Colors.black,
                   ),
           ),
-      ]
-        ),
+        ]),
         body: _CurrencyList(isReorderList: isReorderList),
         floatingActionButton: isReorderList
             ? FloatingActionButton(
-                child: Icon(Icons.add),
+                child: const Icon(Icons.add),
                 onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
                 backgroundColor: AppColors.black,
               )
@@ -89,27 +87,27 @@ class _CurrencyList extends StatefulWidget {
 class _CurrencyListState extends State<_CurrencyList> {
   @override
   Widget build(BuildContext context) {
-    final model = CurrenciesWidgetModelProvider.of(context).model;
+    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
     return RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
-        onRefresh: () => model.updateCurrencies(),
+        onRefresh: () => model.updateRateCurrencies(),
         child: Theme(
           data: ThemeData(
             canvasColor: Colors.transparent,
             shadowColor: Colors.transparent,
           ),
           child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: widget.isReorderList
                   ? ReorderableListView.builder(
                       itemCount: SelectedCurrencies.selectedCurrencies.length,
                       itemBuilder: (BuildContext context, int index) {
                         return CurrencyCard(
+                          isSlidable: true,
                           flag: model.currencies
                               .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
                               .flag,
-                          /*model.currencies.firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index]).,*/
                           code: model.currencies
                               .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
                               .code,
@@ -118,6 +116,8 @@ class _CurrencyListState extends State<_CurrencyList> {
                               .country,
                           key: ValueKey(index),
                           trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
+                          index: index,
+                          model: model,
                         );
                       },
                       onReorder: (int oldIndex, int newIndex) {

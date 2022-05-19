@@ -1,11 +1,10 @@
-import 'package:cur_val/domain/currency.dart';
 import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/common/currency_card.dart';
+import 'package:cur_val/ui/widget/select_curriencies_list/select_curriencies_list_model.dart';
+import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../../domain/selected_currencies.dart';
-import '../currencies_list/currencies_widget_model.dart';
 
 class SelectCurrenciesListWidget extends StatefulWidget {
   const SelectCurrenciesListWidget({Key? key}) : super(key: key);
@@ -15,11 +14,11 @@ class SelectCurrenciesListWidget extends StatefulWidget {
 }
 
 class _SelectCurrenciesListWidgetState extends State<SelectCurrenciesListWidget> {
-  final _model = CurrenciesWidgetModel();
+  final _model = ViewCurrenciesListWidgetModel();
 
   @override
   Widget build(BuildContext context) {
-    return CurrenciesWidgetModelProvider(
+    return ViewCurrenciesListWidgetModelProvider(
       model: _model,
       child: const _CurrenciesWidgetBody(),
     );
@@ -54,11 +53,11 @@ class _SearchInBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = CurrenciesWidgetModelProvider.of(context).model;
+    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
     return TextFormField(
       decoration: const InputDecoration(
         border: OutlineInputBorder(
-            borderSide: BorderSide.none,
+          borderSide: BorderSide.none,
         ),
         suffixIcon: Icon(Icons.search, color: AppColors.gray),
         hintText: 'Search',
@@ -91,7 +90,7 @@ class _CurrencyListState extends State<_CurrencyList> {
 
   @override
   Widget build(BuildContext context) {
-    final model = CurrenciesWidgetModelProvider.of(context).model;
+    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
 
     selectCurrency({required int index}) {
       if (selectedCurrenciesBox.get("selectedList")!.remove(model.currencies[index].code)) {
@@ -103,14 +102,12 @@ class _CurrencyListState extends State<_CurrencyList> {
       setState(() {});
     }
 
-
-
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       edgeOffset: 0,
-      onRefresh: () => model.updateCurrencies(),
+      onRefresh: () => model.updateRateCurrencies(),
       child: ListView.builder(
-        itemCount: CurrenciesWidgetModelProvider.of(context).model.resultSearch().length,
+        itemCount: ViewCurrenciesListWidgetModelProvider.of(context).model.resultSearch().length,
         itemBuilder: (BuildContext context, int index) {
           return CurrencyCard(
             flag: model.resultSearch()[index].flag,
