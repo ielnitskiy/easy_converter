@@ -74,7 +74,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
 
               widget.model.type = value;
             },
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[.]?[0-9]*'))],
           ),
         ),
