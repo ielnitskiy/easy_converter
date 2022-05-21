@@ -106,29 +106,32 @@ class _CurrencyListState extends State<_CurrencyList> {
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       edgeOffset: 0,
       onRefresh: () => model.updateRateCurrencies(),
-      child: ListView.builder(
-        itemCount: ViewCurrenciesListWidgetModelProvider.of(context).model.resultSearch().length,
-        itemBuilder: (BuildContext context, int index) {
-          return CurrencyCard(
-            flag: model.resultSearch()[index].flag,
-            code: '${model.resultSearch()[index].code} - ${model.resultSearch()[index].country}',
-            country: model.resultSearch()[index].title,
-            trailing: IconButton(
-              padding: EdgeInsets.all(0),
-              alignment: Alignment.centerRight,
-              icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.resultSearch()[index].code))
-                  ? const Icon(
-                      Icons.check_circle_outline,
-                      color: AppColors.black,
-                    )
-                  : const Icon(
-                      Icons.brightness_1_outlined,
-                      color: AppColors.gray,
-                    ),
-              onPressed: () => selectCurrency(index: model.currencies.indexOf(model.resultSearch()[index])),
-            ),
-          );
-        },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: ListView.builder(
+          itemCount: ViewCurrenciesListWidgetModelProvider.of(context).model.resultSearch().length,
+          itemBuilder: (BuildContext context, int index) {
+            return CurrencyCard(
+              flag: model.resultSearch()[index].flag,
+              code: '${model.resultSearch()[index].code} - ${model.resultSearch()[index].country}',
+              country: model.resultSearch()[index].title,
+              trailing: IconButton(
+                padding: EdgeInsets.all(0),
+                alignment: Alignment.centerRight,
+                icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.resultSearch()[index].code))
+                    ? const Icon(
+                        Icons.check_circle_outline,
+                        color: AppColors.black,
+                      )
+                    : const Icon(
+                        Icons.brightness_1_outlined,
+                        color: AppColors.gray,
+                      ),
+                onPressed: () => selectCurrency(index: model.currencies.indexOf(model.resultSearch()[index])),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
