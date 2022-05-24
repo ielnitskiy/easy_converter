@@ -30,9 +30,9 @@ class AllCurrenciesList {
     "BOB": Currency(code: "BOB",flag: Svgs.bolivia, symbol: 'Bs', title: 'Боливиано', country: 'Боливия'),
     "BRL": Currency(code: "BRL",flag: Svgs.brazil, symbol: 'R\$', title: 'Бразильский реал', country: 'Бразилия'),
     "BSD": Currency(code: "BSD",flag: Svgs.bahamas, symbol: '\$', title: 'Багамский доллар', country: 'Багамские Острова'),
-    "BTC": Currency(code: "BTC", symbol: '₿', title: 'Биткойн', country: 'Bitcion'), //todo get flag/icon
+    "BTC": Currency(code: "BTC", flag: Svgs.bitcoin, symbol: '₿', title: 'Биткойн', country: 'Bitcion'),
     "BTN": Currency(code: "BTN",flag: Svgs.bhutan, symbol: 'Nu', title: 'Нгултрум', country: 'Бутан'),
-    "BTS": Currency(code: "BTS", symbol: 'BTS', title: 'BitShares', country: 'BitShares'),//todo get flag/icon
+    "BTS": Currency(code: "BTS",flag: Svgs.bitshares, symbol: 'BTS', title: 'BitShares', country: 'BitShares'),
     "BWP": Currency(code: "BWP",flag: Svgs.botswana, symbol: 'P', title: 'Пула', country: 'Ботсвана'),
     "BYN": Currency(code: "BYN",flag: Svgs.belarus, symbol: 'Br', title: 'Белорусский рубль', country: 'Белоруссия'),
     "BZD": Currency(code: "BZD",flag: Svgs.belize, symbol: 'Bz', title: 'Белизский доллар', country: 'Белиз'),
@@ -46,18 +46,18 @@ class AllCurrenciesList {
     "CUP": Currency(code: "CUP",flag: Svgs.cuba , symbol: 'Mn', title: 'Кубинское песо', country: 'Куба'),
     "CVE": Currency(code: "CVE",flag: Svgs.capeVerde , symbol: '\$', title: 'Эскудо Кабо-Верде', country: 'Кабо-Верде'),
     "CZK": Currency(code: "CZK",flag: Svgs.czechRepublic , symbol: 'Kč', title: 'Чешская крона', country: 'Чехия'),
-    "DASH": Currency(code: "DASH", symbol: '',  title: 'Dash', country: 'Даш'), //todo get flag/icon
+    "DASH": Currency(code: "DASH", flag: Svgs.dash, symbol: 'Đ',  title: 'Dash', country: 'Даш'),
     "DJF": Currency(code: "DJF",flag: Svgs.djibouti  , symbol: '₣', title: 'Франк Джибути', country: 'Джибути'),
     "DKK": Currency(code: "DKK",flag: Svgs.denmark, symbol: 'Kr', title: 'Датская крона', country: 'Дания'),
-    "DOGE": Currency(code: "DOGE", symbol: '',  title: 'Dogecoin', country: 'Dogecoin'), //todo get flag/icon
+    "DOGE": Currency(code: "DOGE", flag: Svgs.dogecoin, symbol: 'Ð',  title: 'Dogecoin', country: 'Dogecoin'),
     "DOP": Currency(code: "DOP",flag: Svgs.dominicanRepublic  , symbol: 'Rd', title: 'Доминиканское песо', country: 'Доминиканская Республика'),
     "DZD": Currency(code: "DZD",flag: Svgs.algeria  , symbol: 'Da', title: 'Алжирский динар', country: 'Алжир'),
-    "EGP": Currency(code: "EGP",flag: Svgs.egypt  , symbol: 'Le', title: 'Египетский фунт', country: 'Египет'),
+    "EGP": Currency(code: "EGP",flag: Svgs.egypt, symbol: 'Le', title: 'Египетский фунт', country: 'Египет'),
     "ERN": Currency(code: "ERN",flag: Svgs.eritrea  , symbol: '	Nf', title: 'Накфа', country: 'Эритрея'),
-    "ETB": Currency(code: "ETB" , symbol: 'Br', title: 'Эфиопский быр', country: 'Эфиопия'),//todo get flag/icon
-    "ETH": Currency(code: "ETH", symbol: '',  title: 'Эфириум', country: 'Ethereum'), //todo get flag/icon
+    "ETB": Currency(code: "ETB" ,flag: Svgs.ethiopia , symbol: 'Br', title: 'Эфиопский быр', country: 'Эфиопия'),
+    "ETH": Currency(code: "ETH",flag: Svgs.ethereum, symbol: 'Ξ',  title: 'Эфириум', country: 'Ethereum'),
     "EUR": Currency(code: "EUR",flag: Svgs.europeanUnion  , symbol: '€', title: 'Евро', country: 'Европейский союз'),
-    "FJD": Currency(code: "FJD",flag: Svgs.fiji  , symbol: '\$', title: 'Доллар Фиджи', country: 'Фиджи'),
+    "FJD": Currency(code: "FJD",flag: Svgs.fiji, symbol: '\$', title: 'Доллар Фиджи', country: 'Фиджи'),
     "FKP": Currency(code: "FKP",flag: Svgs.falklandIslands  , symbol: '£', title: 'ФунтФолклендских островов', country: 'Фолклендские острова'),
     "GBP": Currency(code: "GBP",flag: Svgs.unitedKingdom, symbol: '£', title: 'Фунт стерлингов', country: 'Великобритания'),
     "GEL": Currency(code: "GEL",flag: Svgs.georgia  , symbol: '₾', title: 'Лари', country: 'Грузия'),
@@ -86,7 +86,7 @@ class AllCurrenciesList {
     "JPY": Currency(code: "JPY",flag: Svgs.japan , symbol: '¥', title: 'Иена', country: 'Япония'),
     "KES": Currency(code: "KES",flag: Svgs.kenya , symbol: '',  title: 'Кенийский шиллинг', country: 'Республика Кения'),
     "KGS": Currency(code: "KGS",flag: Svgs.kyrgyzstan , symbol: 'C', title: 'Сом', country: 'Киргизия'),
-    "KHR": Currency(code: "KHR", symbol: '៛', title: 'Риель', country: 'Камбоджа'),//todo get flag/icon
+    "KHR": Currency(code: "KHR",flag: Svgs.cambodia, symbol: '៛', title: 'Риель', country: 'Камбоджа'),
     "KMF": Currency(code: "KMF",flag: Svgs.comoros , symbol: '₣', title: 'Франк Комор', country: 'Коморы'),
     "KPW": Currency(code: "KPW",flag: Svgs.northKorea , symbol: '₩', title: 'Северокорейская вона', country: 'КНДР'),
     "KRW": Currency(code: "KRW",flag: Svgs.southKorea , symbol: '₩', title: 'Южнокорейская вона', country: 'Республика Корея'),
@@ -95,7 +95,7 @@ class AllCurrenciesList {
     "KZT": Currency(code: "KZT",flag: Svgs.kazakhstan , symbol: '₸', title: 'Тенге', country: 'Казахстан'),
     "LAK": Currency(code: "LAK",flag: Svgs.laos , symbol: '₭', title: 'Кип', country: 'Лаос'),
     "LBP": Currency(code: "LBP",flag: Svgs.lebanon , symbol: 'Lf', title: 'Ливанский фунт', country: 'Ливан'),
-    // "LD": Currency(code: "LD",flag: Svgs , symbol: '',  title: '', country: ''), //TODO Search cur
+    "LD": Currency(code: "LD",flag: Svgs.libya , symbol: '',  title: 'Ливийский динар', country: 'Ливия'), //TODO Search cur
     "LKR": Currency(code: "LKR",flag: Svgs.sriLanka , symbol: 'Rs', title: 'Шри-ланкийская рупия', country: 'Шри-Ланка'),
     "LRD": Currency(code: "LRD",flag: Svgs.liberia , symbol: 'L\$', title: 'Либерийский доллар', country: 'Либерия'),
     "LSL": Currency(code: "LSL",flag: Svgs.lesotho , symbol: 'L', title: 'Лоти', country: 'Лесото'),
@@ -111,7 +111,6 @@ class AllCurrenciesList {
     // "MRO": Currency(code: "MRO",flag: Svgs , symbol: '',  title: '', country: ''), //TODO Search cur
     "MRU": Currency(code: "MRU",flag: Svgs.mauritania, symbol: 'Um', title: 'Угия', country: 'Мавритания'),
     "MUR": Currency(code: "MUR",flag: Svgs.mauritius, symbol: '	₨', title: 'Маврикийская рупия', country: 'Маврикий'),
-
     "MVR": Currency(code: "MVR",flag: Svgs.maldives, symbol: 'Rf', title: 'Руфия', country: 'Мальдивы'),
     "MWK": Currency(code: "MWK",flag: Svgs.malawi, symbol: 'Mk', title: 'Квача', country: 'Малави'),
     "MXN": Currency(code: "MXN",flag: Svgs.mexico, symbol: '\$', title: 'Мексиканское песо', country: 'Мексика'),
@@ -132,7 +131,7 @@ class AllCurrenciesList {
     "PKR": Currency(code: "PKR",flag: Svgs.pakistan , symbol: 'Re', title: 'Пакистанская рупия', country: 'Пакистан'),
     "PLN": Currency(code: "PLN",flag: Svgs.poland , symbol: 'Zł', title: 'Злотый', country: 'Польша'),
     "PYG": Currency(code: "PYG",flag: Svgs.paraguay , symbol: '₲', title: 'Гуарани', country: 'Парагвай'),
-    "QAR": Currency(code: "QAR",flag: Svgs.qatar , symbol: '﷼', title: 'Катарский риал', country: 'Катар'),//todo get flag/icon
+    "QAR": Currency(code: "QAR",flag: Svgs.qatar , symbol: '﷼', title: 'Катарский риал', country: 'Катар'),
     "RON": Currency(code: "RON",flag: Svgs.romania , symbol: 'L', title: 'Румынский лей', country: 'Румыния'),
     "RSD": Currency(code: "RSD",flag: Svgs.serbia , symbol: 'Di', title: 'Сербский динар', country: 'Сербия'),
     "RUB": Currency(code: "RUB", flag: Svgs.russia, symbol: '₽',  title: 'Российский рубль', country: 'Россия'),
@@ -148,12 +147,10 @@ class AllCurrenciesList {
     "SOS": Currency(code: "SOS",flag: Svgs.somalia , symbol: 'S', title: 'Сомалийский шиллинг', country: 'Сомали'),
     "SRD": Currency(code: "SRD",flag: Svgs.suriname , symbol: '\$', title: 'Суринамский доллар', country: 'Суринам'),
     "SSP": Currency(code: "SSP",flag: Svgs.southSudan , symbol: 'Db', title: 'Южносуданский фунт', country: 'Южный Судан'),
-    // "STD": Currency(code: "STD", symbol: '',  title: '', country: ''), //TODO Search cur
     "STN": Currency(code: "STN",flag: Svgs.saoTomeAndPrince , symbol: 'Db', title: 'Добра', country: 'Сан-Томе и Принсипи'),
-    // "STR": Currency(code: "STR", symbol: '',  title: '', country: ''), //TODO Search cur
     "SVC": Currency(code: "SVC",flag: Svgs.elSalvador , symbol: '₡', title: 'Сальвадорский колон', country: 'Сальвадор'),
     "SYP": Currency(code: "SYP",flag: Svgs.syria , symbol: 'Ls', title: 'Сирийский фунт', country: 'Сирия'),
-    "SZL": Currency(code: "SZL",flag: Svgs.swaziland , symbol: 'L', title: 'Мн. Эмалангени', country: 'Эсватини'), //TODO repaint flag
+    "SZL": Currency(code: "SZL",flag: Svgs.swaziland , symbol: 'L', title: 'Мн. Эмалангени', country: 'Эсватини'),
     "THB": Currency(code: "THB",flag: Svgs.thailand , symbol: '฿', title: 'Бат', country: 'Таиланд'),
     "TJS": Currency(code: "TJS",flag: Svgs.tajikistan , symbol: 'Sm', title: 'Сомони', country: 'Таджикистан'),
     "TMT": Currency(code: "TMT",flag: Svgs.turkmenistan , symbol: 'T', title: 'Новый туркменский манат', country: 'Туркмения'),

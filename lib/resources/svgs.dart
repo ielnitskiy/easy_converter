@@ -35,6 +35,8 @@ class Svgs {
   static const String benin = 'assets/vectors/benin.svg';
   static const String bermuda = 'assets/vectors/bermuda.svg';
   static const String bhutan = 'assets/vectors/bhutan.svg';
+  static const String bitcoin = 'assets/vectors/bitcoin.svg';
+  static const String bitshares = 'assets/vectors/bitshares.svg';
   static const String bolivia = 'assets/vectors/bolivia.svg';
   static const String bonaire = 'assets/vectors/bonaire.svg';
   static const String bosniaAndHerzegovina =
@@ -73,10 +75,12 @@ class Svgs {
   static const String curacao = 'assets/vectors/curacao.svg';
   static const String cyprus = 'assets/vectors/cyprus.svg';
   static const String czechRepublic = 'assets/vectors/czech republic.svg';
+  static const String dash = 'assets/vectors/dash.svg';
   static const String democraticRepublicOfCongo =
       'assets/vectors/democratic republic of congo.svg';
   static const String denmark = 'assets/vectors/denmark.svg';
   static const String djibouti = 'assets/vectors/djibouti.svg';
+  static const String dogecoin = 'assets/vectors/dogecoin.svg';
   static const String dominica = 'assets/vectors/dominica.svg';
   static const String dominicanRepublic =
       'assets/vectors/dominican republic.svg';
@@ -87,6 +91,7 @@ class Svgs {
   static const String equatorialGuinea = 'assets/vectors/equatorial guinea.svg';
   static const String eritrea = 'assets/vectors/eritrea.svg';
   static const String estonia = 'assets/vectors/estonia.svg';
+  static const String ethereum = 'assets/vectors/ethereum.svg';
   static const String ethiopia = 'assets/vectors/ethiopia.svg';
   static const String europeanUnion = 'assets/vectors/european union.svg';
   static const String falklandIslands = 'assets/vectors/falkland islands.svg';
