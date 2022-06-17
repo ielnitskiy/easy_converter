@@ -1,13 +1,7 @@
 import 'package:cur_val/resources/resources.dart';
-import '../api/api_client.dart';
 import 'currency.dart';
 
 class AllCurrenciesList {
-  Future<Map<String, dynamic>> getRateList() async {
-    Map<String, dynamic> rates = await ApiClient().get();
-    return rates['rates'];
-  }
-
   static final allCurrenciesList = <String, Currency>{
     "AED": Currency(code: "AED", flag: Svgs.unitedArabEmirates, symbol: 'Dh', title: 'Дирхам ОАЭ', country: 'ОАЭ'),
     "AFN": Currency(code: "AFN", flag: Svgs.afghanistan, symbol: '؋',title: 'Афгани', country: 'Афганистан'),

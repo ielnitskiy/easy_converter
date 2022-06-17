@@ -1,7 +1,7 @@
+import 'package:cur_val/library/hive/box_manager.dart';
 import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../domain/selected_currencies.dart';
@@ -51,8 +51,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
                 setState(() {
                   isReorderList = !isReorderList;
                   if (!isReorderList) {
-                    Hive.box<List<String>>('selected_currency')
-                        .put("selectedList", SelectedCurrencies.selectedCurrencies);
+                   BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
                   }
                 });
               },
@@ -68,7 +67,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
             ),
           ],
         ),
-        body: _CurrencyList(isReorderList: isReorderList),
+        body: CurrencyList(isReorderList: isReorderList),
         floatingActionButton: isReorderList
             ? FloatingActionButton(
                 child: const Icon(Icons.add),
@@ -79,16 +78,11 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
   }
 }
 
-class _CurrencyList extends StatefulWidget {
+class CurrencyList extends StatelessWidget {
   final isReorderList;
 
-  _CurrencyList({Key? key, required this.isReorderList}) : super(key: key);
+  CurrencyList({Key? key, required this.isReorderList}) : super(key: key);
 
-  @override
-  State<_CurrencyList> createState() => _CurrencyListState();
-}
-
-class _CurrencyListState extends State<_CurrencyList> {
   @override
   Widget build(BuildContext context) {
     final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
@@ -98,7 +92,7 @@ class _CurrencyListState extends State<_CurrencyList> {
         onRefresh: () => model.updateRateCurrencies(),
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: widget.isReorderList
+            child: isReorderList
                 ? ReorderableListView.builder(
                     itemCount: SelectedCurrencies.selectedCurrencies.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -119,15 +113,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                         model: model,
                       );
                     },
-                    onReorder: (int oldIndex, int newIndex) {
-                      setState(() {
-                        if (oldIndex < newIndex) {
-                          newIndex -= 1;
-                        }
-                        final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
-                        SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
-                      });
-                    },
+                    onReorder: model.reorder,
                   )
                 : ListView.builder(
                     itemCount: SelectedCurrencies.selectedCurrencies.length,

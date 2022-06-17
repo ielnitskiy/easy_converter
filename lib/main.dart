@@ -13,10 +13,6 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox(rate);
   ViewCurrenciesListWidgetModel().updateRateCurrencies();
-  await Hive.openBox<List<String>>(selectedCurrency);
-  if (Hive.box<List<String>>(selectedCurrency).get("selectedList") != null) {
-    SelectedCurrencies.selectedCurrencies = Hive.box<List<String>>(selectedCurrency).get("selectedList")!;
-  }
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   const app = MyApp();
   runApp(app);

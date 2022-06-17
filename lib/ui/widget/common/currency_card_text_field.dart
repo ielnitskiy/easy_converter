@@ -15,17 +15,11 @@ class CurrencyTextField extends StatefulWidget {
 
 class _CurrencyTextField extends State<CurrencyTextField> {
   final _controller = TextEditingController();
-
   final _focusNode = FocusNode();
 
   TextSelection position() =>
       TextSelection.fromPosition(TextPosition(offset: (_controller.value.text).toString().length));
 
-  @override
-  void initState() {
-    widget.model.updateRateCurrencies();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

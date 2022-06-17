@@ -13,7 +13,7 @@ class CurrencyCard extends StatelessWidget {
   final String country;
   final Widget? trailing;
   final Key? key;
-  bool isSlidable;
+  final bool isSlidable;
   final int? index;
   final ViewCurrenciesListWidgetModel? model;
 

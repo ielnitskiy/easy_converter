@@ -1,9 +1,10 @@
+import 'package:cur_val/library/hive/box_manager.dart';
 import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/common/currency_card.dart';
-import 'package:cur_val/ui/widget/select_curriencies_list/select_curriencies_list_model.dart';
 import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import '../../../domain/selected_currencies.dart';
 
 class SelectCurrenciesListWidget extends StatefulWidget {
@@ -77,14 +78,10 @@ class _CurrencyList extends StatefulWidget {
 }
 
 class _CurrencyListState extends State<_CurrencyList> {
-  late Box<List<String>> selectedCurrenciesBox;
 
   @override
   void initState() {
-    selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
-    if (selectedCurrenciesBox.get("selectedList") == null) {
-      (selectedCurrenciesBox.put("selectedList", SelectedCurrencies.selectedCurrencies));
-    }
+
     super.initState();
   }
 
@@ -93,12 +90,11 @@ class _CurrencyListState extends State<_CurrencyList> {
     final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
 
     selectCurrency({required int index}) {
-      if (selectedCurrenciesBox.get("selectedList")!.remove(model.currencies[index].code)) {
+      if (SelectedCurrencies.selectedCurrencies.remove(model.currencies[index].code)) {
       } else {
-        selectedCurrenciesBox.get("selectedList")!.add(model.currencies[index].code);
+        SelectedCurrencies.selectedCurrencies.add(model.currencies[index].code);
       }
-      SelectedCurrencies.selectedCurrencies = selectedCurrenciesBox.get("selectedList")!;
-      selectedCurrenciesBox.put("selectedList", SelectedCurrencies.selectedCurrencies);
+      BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
       setState(() {});
     }
 
@@ -109,7 +105,7 @@ class _CurrencyListState extends State<_CurrencyList> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView.builder(
-          itemCount: ViewCurrenciesListWidgetModelProvider.of(context).model.resultSearch().length,
+          itemCount: model.resultSearch().length,
           itemBuilder: (BuildContext context, int index) {
             return CurrencyCard(
               flag: model.resultSearch()[index].flag,
@@ -118,7 +114,7 @@ class _CurrencyListState extends State<_CurrencyList> {
               trailing: IconButton(
                 padding: EdgeInsets.all(0),
                 alignment: Alignment.centerRight,
-                icon: (selectedCurrenciesBox.get("selectedList")!.contains(model.resultSearch()[index].code))
+                icon: (SelectedCurrencies.selectedCurrencies.contains(model.resultSearch()[index].code))
                     ? const Icon(
                         Icons.check_circle_outline,
                         color: AppColors.black,
