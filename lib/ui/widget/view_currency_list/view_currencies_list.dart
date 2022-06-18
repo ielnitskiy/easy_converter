@@ -51,7 +51,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
                 setState(() {
                   isReorderList = !isReorderList;
                   if (!isReorderList) {
-                   BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
+                    BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
                   }
                 });
               },
@@ -98,15 +98,8 @@ class CurrencyList extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return CurrencyCard(
                         isSlidable: true,
-                        flag: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .flag,
-                        code: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .code,
-                        country: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .country,
+                        //FIXME избавиться от опционала
+                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
                         key: ValueKey(index),
                         trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
                         index: index,
@@ -119,15 +112,8 @@ class CurrencyList extends StatelessWidget {
                     itemCount: SelectedCurrencies.selectedCurrencies.length,
                     itemBuilder: (BuildContext context, int index) {
                       return CurrencyCard(
-                        flag: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .flag,
-                        code: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .code,
-                        country: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .country,
+                        //FIXME избавиться от опционала
+                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
                         key: ValueKey(index),
                         trailing: CurrencyTextField(
                           model: model,

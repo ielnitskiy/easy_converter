@@ -37,8 +37,9 @@ class _CurrencyTextField extends State<CurrencyTextField> {
               isCollapsed: true,
               filled: true,
               suffixStyle: TextStyle(fontSize: 12),
+              //FIXME избавиться от опционала
               suffixText:
-                  ' ${widget.model.currencies.firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index]).symbol}',
+                  ' ${widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.symbol}',
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
@@ -73,9 +74,8 @@ class _CurrencyTextField extends State<CurrencyTextField> {
           ),
         ),
         Text(
-          widget.model.currencies
-              .firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index])
-              .title,
+          //FIXME избавиться от опционала
+          widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.title,
           style: AppFontStyle.lightTextStyle.copyWith(fontSize: AppFontStyle.size12),
           overflow: TextOverflow.ellipsis,
         ),

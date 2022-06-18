@@ -1,3 +1,4 @@
+import 'package:cur_val/domain/currency.dart';
 import 'package:cur_val/library/hive/box_manager.dart';
 import 'package:cur_val/ui/util/const.dart';
 import 'package:cur_val/ui/widget/common/currency_card.dart';
@@ -78,10 +79,8 @@ class _CurrencyList extends StatefulWidget {
 }
 
 class _CurrencyListState extends State<_CurrencyList> {
-
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -89,10 +88,11 @@ class _CurrencyListState extends State<_CurrencyList> {
   Widget build(BuildContext context) {
     final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
 
-    selectCurrency({required int index}) {
-      if (SelectedCurrencies.selectedCurrencies.remove(model.currencies[index].code)) {
+    selectCurrency({required String code}) {
+      //FiXME избавиться от опциоанал
+      if (SelectedCurrencies.selectedCurrencies.remove(code)) {
       } else {
-        SelectedCurrencies.selectedCurrencies.add(model.currencies[index].code);
+        SelectedCurrencies.selectedCurrencies.add(code);
       }
       BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
       setState(() {});
@@ -108,9 +108,8 @@ class _CurrencyListState extends State<_CurrencyList> {
           itemCount: model.resultSearch().length,
           itemBuilder: (BuildContext context, int index) {
             return CurrencyCard(
-              flag: model.resultSearch()[index].flag,
-              code: '${model.resultSearch()[index].code} - ${model.resultSearch()[index].country}',
-              country: model.resultSearch()[index].title,
+              //FIXME избавиться от опционала
+              currency: model.resultSearch().elementAt(index),
               trailing: IconButton(
                 padding: EdgeInsets.all(0),
                 alignment: Alignment.centerRight,
@@ -123,7 +122,9 @@ class _CurrencyListState extends State<_CurrencyList> {
                         Icons.brightness_1_outlined,
                         color: AppColors.gray,
                       ),
-                onPressed: () => selectCurrency(index: model.currencies.indexOf(model.resultSearch()[index])),
+                onPressed: () => selectCurrency(
+                  code: model.currencies[model.resultSearch()[index].code]!.code,
+                ),
               ),
             );
           },
