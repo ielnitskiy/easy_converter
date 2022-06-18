@@ -1,12 +1,11 @@
 import 'package:cur_val/library/hive/box_manager.dart';
-import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_list_model.dart';
+import 'package:cur_val/widgets/util/const.dart';
+import 'package:cur_val/widgets/component/currency_card_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../domain/selected_currencies.dart';
-import '../common/currency_card.dart';
-import 'view_currencies_list_model.dart';
+import '../../domain/selected_currencies.dart';
+import '../../widgets/component/currency_card.dart';
 
 class ViewCurrenciesListWidget extends StatefulWidget {
   const ViewCurrenciesListWidget({Key? key}) : super(key: key);

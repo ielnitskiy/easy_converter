@@ -1,5 +1,5 @@
-import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_list_model.dart';
+import 'package:cur_val/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,7 +20,6 @@ class _CurrencyTextField extends State<CurrencyTextField> {
   TextSelection position() =>
       TextSelection.fromPosition(TextPosition(offset: (_controller.value.text).toString().length));
 
-
   @override
   Widget build(BuildContext context) {
     bool hasFocus = _focusNode.hasFocus;
@@ -38,8 +37,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
               filled: true,
               suffixStyle: TextStyle(fontSize: 12),
               //FIXME избавиться от опционала
-              suffixText:
-                  ' ${widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.symbol}',
+              suffixText: ' ${widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.symbol}',
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(

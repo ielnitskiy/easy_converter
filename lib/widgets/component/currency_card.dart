@@ -1,12 +1,11 @@
 import 'package:cur_val/domain/currency.dart';
-import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_list_model.dart';
+import 'package:cur_val/widgets/util/const.dart';
+import 'package:cur_val/widgets/util/size_config.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../utils/size_config.dart';
 
 class CurrencyCard extends StatelessWidget {
   final Currency currency;

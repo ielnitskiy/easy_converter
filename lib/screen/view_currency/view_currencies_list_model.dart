@@ -39,6 +39,7 @@ class ViewCurrenciesListWidgetModel extends ChangeNotifier {
     _searchRequest = searchRequest;
     notifyListeners();
   }
+
 //FIXME избавиться от опционала
   String calculateCurrencies({required int index}) => ((currencies[SelectedCurrencies.selectedCurrencies[index]]!
               .currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
@@ -72,10 +73,12 @@ class ViewCurrenciesListWidgetModel extends ChangeNotifier {
       List<Currency> cur = currencies.values.toList();
       return cur;
     } else {
-      List<Currency> resultSearch = currencies.values.where((element) => _searchForElement(element, searchRequest)).cast<Currency>().toList();
+      List<Currency> resultSearch =
+          currencies.values.where((element) => _searchForElement(element, searchRequest)).cast<Currency>().toList();
       return resultSearch;
     }
   }
+
   //
   // selectCurrency({required int index}) {
   //   Box<List<String>> selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');

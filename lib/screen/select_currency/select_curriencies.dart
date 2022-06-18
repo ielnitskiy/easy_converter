@@ -1,12 +1,10 @@
-import 'package:cur_val/domain/currency.dart';
 import 'package:cur_val/library/hive/box_manager.dart';
-import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/common/currency_card.dart';
-import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_list_model.dart';
+import 'package:cur_val/widgets/util/const.dart';
+import 'package:cur_val/widgets/component/currency_card.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../domain/selected_currencies.dart';
+import '../../domain/selected_currencies.dart';
 
 class SelectCurrenciesListWidget extends StatefulWidget {
   const SelectCurrenciesListWidget({Key? key}) : super(key: key);
@@ -108,7 +106,6 @@ class _CurrencyListState extends State<_CurrencyList> {
           itemCount: model.resultSearch().length,
           itemBuilder: (BuildContext context, int index) {
             return CurrencyCard(
-              //FIXME избавиться от опционала
               currency: model.resultSearch().elementAt(index),
               trailing: IconButton(
                 padding: EdgeInsets.all(0),
@@ -123,6 +120,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                         color: AppColors.gray,
                       ),
                 onPressed: () => selectCurrency(
+                  //FIXME избавиться от опционала
                   code: model.currencies[model.resultSearch()[index].code]!.code,
                 ),
               ),

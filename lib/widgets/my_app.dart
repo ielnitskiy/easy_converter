@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../select_curriencies_list/select_curriencies_list.dart';
-import '../view_currency_list/view_currencies_list.dart';
+import '../screen/select_currency/select_curriencies.dart';
+import '../screen/view_currency/view_currencies_list.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
