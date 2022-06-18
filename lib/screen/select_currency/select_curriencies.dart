@@ -1,25 +1,18 @@
-import 'package:cur_val/library/hive/box_manager.dart';
-import 'package:cur_val/screen/view_currency/view_currencies_list_model.dart';
-import 'package:cur_val/widgets/util/const.dart';
+import 'package:cur_val/screen/select_currency/select_curriencies_model.dart';
 import 'package:cur_val/widgets/component/currency_card.dart';
+import 'package:cur_val/widgets/util/const.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../domain/selected_currencies.dart';
 
-class SelectCurrenciesListWidget extends StatefulWidget {
+class SelectCurrenciesListWidget extends StatelessWidget {
   const SelectCurrenciesListWidget({Key? key}) : super(key: key);
 
   @override
-  State<SelectCurrenciesListWidget> createState() => _SelectCurrenciesListWidgetState();
-}
-
-class _SelectCurrenciesListWidgetState extends State<SelectCurrenciesListWidget> {
-  final _model = ViewCurrenciesListWidgetModel();
-
-  @override
   Widget build(BuildContext context) {
-    return ViewCurrenciesListWidgetModelProvider(
-      model: _model,
+    return ChangeNotifierProvider<SelectCurrenciesModel>(
+      create: (context) => SelectCurrenciesModel(),
       child: const _CurrenciesWidgetBody(),
     );
   }
@@ -53,7 +46,7 @@ class _SearchInBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
+    final model = Provider.of<SelectCurrenciesModel>(context);
     return TextFormField(
       decoration: const InputDecoration(
         border: OutlineInputBorder(
@@ -69,38 +62,14 @@ class _SearchInBar extends StatelessWidget {
   }
 }
 
-class _CurrencyList extends StatefulWidget {
+class _CurrencyList extends StatelessWidget {
   const _CurrencyList({Key? key}) : super(key: key);
 
   @override
-  State<_CurrencyList> createState() => _CurrencyListState();
-}
-
-class _CurrencyListState extends State<_CurrencyList> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
+    final model = Provider.of<SelectCurrenciesModel>(context);
 
-    selectCurrency({required String code}) {
-      //FiXME избавиться от опциоанал
-      if (SelectedCurrencies.selectedCurrencies.remove(code)) {
-      } else {
-        SelectedCurrencies.selectedCurrencies.add(code);
-      }
-      BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
-      setState(() {});
-    }
-
-    return RefreshIndicator(
-      triggerMode: RefreshIndicatorTriggerMode.anywhere,
-      edgeOffset: 0,
-      onRefresh: () => model.updateRateCurrencies(),
-      child: Padding(
+    return  Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView.builder(
           itemCount: model.resultSearch().length,
@@ -119,7 +88,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                         Icons.brightness_1_outlined,
                         color: AppColors.gray,
                       ),
-                onPressed: () => selectCurrency(
+                onPressed: () => model.selectCurrency(
                   //FIXME избавиться от опционала
                   code: model.currencies[model.resultSearch()[index].code]!.code,
                 ),
@@ -127,7 +96,6 @@ class _CurrencyListState extends State<_CurrencyList> {
             );
           },
         ),
-      ),
     );
   }
 }

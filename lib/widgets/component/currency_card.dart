@@ -1,5 +1,5 @@
 import 'package:cur_val/domain/currency.dart';
-import 'package:cur_val/screen/view_currency/view_currencies_list_model.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
 import 'package:cur_val/widgets/util/const.dart';
 import 'package:cur_val/widgets/util/size_config.dart';
 
@@ -13,7 +13,7 @@ class CurrencyCard extends StatelessWidget {
   final Key? key;
   final bool isSlidable;
   final int? index;
-  final ViewCurrenciesListWidgetModel? model;
+  final ViewCurrenciesModel? model;
 
   CurrencyCard({
     required this.currency,

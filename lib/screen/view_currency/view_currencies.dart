@@ -1,26 +1,20 @@
 import 'package:cur_val/library/hive/box_manager.dart';
-import 'package:cur_val/screen/view_currency/view_currencies_list_model.dart';
-import 'package:cur_val/widgets/util/const.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
 import 'package:cur_val/widgets/component/currency_card_text_field.dart';
+import 'package:cur_val/widgets/util/const.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../domain/selected_currencies.dart';
 import '../../widgets/component/currency_card.dart';
 
-class ViewCurrenciesListWidget extends StatefulWidget {
+class ViewCurrenciesListWidget extends StatelessWidget {
   const ViewCurrenciesListWidget({Key? key}) : super(key: key);
 
   @override
-  State<ViewCurrenciesListWidget> createState() => _ViewCurrenciesListWidgetState();
-}
-
-class _ViewCurrenciesListWidgetState extends State<ViewCurrenciesListWidget> {
-  final _model = ViewCurrenciesListWidgetModel();
-
-  @override
   Widget build(BuildContext context) {
-    return ViewCurrenciesListWidgetModelProvider(
-      model: _model,
+    return ChangeNotifierProvider<ViewCurrenciesModel>(
+      create: (context) => ViewCurrenciesModel(),
       child: const _CurrenciesWidgetBody(),
     );
   }
@@ -84,7 +78,7 @@ class CurrencyList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
+    final model = Provider.of<ViewCurrenciesModel>(context);
     return RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
