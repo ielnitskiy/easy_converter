@@ -1,27 +1,20 @@
-import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/common/currency_card_text_field.dart';
+import 'package:cur_val/library/hive/box_manager.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
+import 'package:cur_val/widgets/component/currency_card_text_field.dart';
+import 'package:cur_val/widgets/util/const.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
-import '../../../domain/selected_currencies.dart';
-import '../common/currency_card.dart';
-import 'view_currencies_list_model.dart';
+import '../../domain/selected_currencies.dart';
+import '../../widgets/component/currency_card.dart';
 
-class ViewCurrenciesListWidget extends StatefulWidget {
+class ViewCurrenciesListWidget extends StatelessWidget {
   const ViewCurrenciesListWidget({Key? key}) : super(key: key);
 
   @override
-  State<ViewCurrenciesListWidget> createState() => _ViewCurrenciesListWidgetState();
-}
-
-class _ViewCurrenciesListWidgetState extends State<ViewCurrenciesListWidget> {
-  final _model = ViewCurrenciesListWidgetModel();
-
-  @override
   Widget build(BuildContext context) {
-    return ViewCurrenciesListWidgetModelProvider(
-      model: _model,
+    return ChangeNotifierProvider<ViewCurrenciesModel>(
+      create: (context) => ViewCurrenciesModel(),
       child: const _CurrenciesWidgetBody(),
     );
   }
@@ -51,8 +44,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
                 setState(() {
                   isReorderList = !isReorderList;
                   if (!isReorderList) {
-                    Hive.box<List<String>>('selected_currency')
-                        .put("selectedList", SelectedCurrencies.selectedCurrencies);
+                    BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
                   }
                 });
               },
@@ -68,7 +60,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
             ),
           ],
         ),
-        body: _CurrencyList(isReorderList: isReorderList),
+        body: CurrencyList(isReorderList: isReorderList),
         floatingActionButton: isReorderList
             ? FloatingActionButton(
                 child: const Icon(Icons.add),
@@ -79,69 +71,42 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
   }
 }
 
-class _CurrencyList extends StatefulWidget {
+class CurrencyList extends StatelessWidget {
   final isReorderList;
 
-  _CurrencyList({Key? key, required this.isReorderList}) : super(key: key);
+  CurrencyList({Key? key, required this.isReorderList}) : super(key: key);
 
-  @override
-  State<_CurrencyList> createState() => _CurrencyListState();
-}
-
-class _CurrencyListState extends State<_CurrencyList> {
   @override
   Widget build(BuildContext context) {
-    final model = ViewCurrenciesListWidgetModelProvider.of(context).model;
+    final model = Provider.of<ViewCurrenciesModel>(context);
     return RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
         onRefresh: () => model.updateRateCurrencies(),
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: widget.isReorderList
+            child: isReorderList
                 ? ReorderableListView.builder(
                     itemCount: SelectedCurrencies.selectedCurrencies.length,
                     itemBuilder: (BuildContext context, int index) {
                       return CurrencyCard(
                         isSlidable: true,
-                        flag: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .flag,
-                        code: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .code,
-                        country: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .country,
+                        //FIXME избавиться от опционала
+                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
                         key: ValueKey(index),
                         trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
                         index: index,
                         model: model,
                       );
                     },
-                    onReorder: (int oldIndex, int newIndex) {
-                      setState(() {
-                        if (oldIndex < newIndex) {
-                          newIndex -= 1;
-                        }
-                        final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
-                        SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
-                      });
-                    },
+                    onReorder: model.reorder,
                   )
                 : ListView.builder(
                     itemCount: SelectedCurrencies.selectedCurrencies.length,
                     itemBuilder: (BuildContext context, int index) {
                       return CurrencyCard(
-                        flag: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .flag,
-                        code: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .code,
-                        country: model.currencies
-                            .firstWhere((element) => element.code == SelectedCurrencies.selectedCurrencies[index])
-                            .country,
+                        //FIXME избавиться от опционала
+                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
                         key: ValueKey(index),
                         trailing: CurrencyTextField(
                           model: model,

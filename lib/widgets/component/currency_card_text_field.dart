@@ -1,10 +1,10 @@
-import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
+import 'package:cur_val/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CurrencyTextField extends StatefulWidget {
-  final ViewCurrenciesListWidgetModel model;
+  final ViewCurrenciesModel model;
   final int index;
 
   const CurrencyTextField({Key? key, required this.model, required this.index}) : super(key: key);
@@ -15,17 +15,10 @@ class CurrencyTextField extends StatefulWidget {
 
 class _CurrencyTextField extends State<CurrencyTextField> {
   final _controller = TextEditingController();
-
   final _focusNode = FocusNode();
 
   TextSelection position() =>
       TextSelection.fromPosition(TextPosition(offset: (_controller.value.text).toString().length));
-
-  @override
-  void initState() {
-    widget.model.updateRateCurrencies();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +36,8 @@ class _CurrencyTextField extends State<CurrencyTextField> {
               isCollapsed: true,
               filled: true,
               suffixStyle: TextStyle(fontSize: 12),
-              suffixText:
-                  ' ${widget.model.currencies.firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index]).symbol}',
+              //FIXME избавиться от опционала
+              suffixText: ' ${widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.symbol}',
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
@@ -79,9 +72,8 @@ class _CurrencyTextField extends State<CurrencyTextField> {
           ),
         ),
         Text(
-          widget.model.currencies
-              .firstWhere((element) => element.code == widget.model.getSelectedCurrencies()[widget.index])
-              .title,
+          //FIXME избавиться от опционала
+          widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.title,
           style: AppFontStyle.lightTextStyle.copyWith(fontSize: AppFontStyle.size12),
           overflow: TextOverflow.ellipsis,
         ),

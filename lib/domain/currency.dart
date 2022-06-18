@@ -7,7 +7,6 @@ class Currency {
   final String title;
   final String? symbol;
   num? rate;
-  bool isEnable;
 
   Currency({
     this.flag = Svgs.none,
@@ -16,7 +15,6 @@ class Currency {
     required this.title,
     this.symbol,
     this.rate,
-    this.isEnable = false,
   });
 
   num currencyRatio(num? currency) {

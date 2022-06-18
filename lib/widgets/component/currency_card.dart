@@ -1,29 +1,27 @@
-import 'package:cur_val/ui/util/const.dart';
-import 'package:cur_val/ui/widget/view_currency_list/view_currencies_list_model.dart';
+import 'package:cur_val/domain/currency.dart';
+import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
+import 'package:cur_val/widgets/util/const.dart';
+import 'package:cur_val/widgets/util/size_config.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../utils/size_config.dart';
-
 class CurrencyCard extends StatelessWidget {
-  final String flag;
-  final String code;
-  final String country;
+  final Currency currency;
   final Widget? trailing;
   final Key? key;
-  bool isSlidable;
+  final bool isSlidable;
   final int? index;
-  final ViewCurrenciesListWidgetModel? model;
+  final ViewCurrenciesModel? model;
 
   CurrencyCard({
+    required this.currency,
     this.trailing,
-    required this.flag,
-    required this.code,
-    required this.country,
     this.key,
-    this.isSlidable = false, this.index, this.model,
+    this.isSlidable = false,
+    this.index,
+    this.model,
   }) : super(key: key);
 
   @override
@@ -71,7 +69,7 @@ class CurrencyCard extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(
-                flag,
+                currency.flag,
                 width: 40.0,
                 height: 40.0,
               ),
@@ -90,14 +88,14 @@ class CurrencyCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              code,
+                              currency.code,
                               style: AppFontStyle.boldTextStyle.copyWith(
                                 fontSize: AppFontStyle.size16,
                               ),
                               maxLines: 1,
                             ),
                             Text(
-                              country,
+                              currency.country,
                               style: AppFontStyle.lightTextStyle.copyWith(
                                 fontSize: AppFontStyle.size14,
                               ),

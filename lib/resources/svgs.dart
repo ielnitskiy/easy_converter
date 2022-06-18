@@ -14,8 +14,7 @@ class Svgs {
   static const String andorra = 'assets/vectors/andorra.svg';
   static const String angola = 'assets/vectors/angola.svg';
   static const String anguilla = 'assets/vectors/anguilla.svg';
-  static const String antiguaAndBarbuda =
-      'assets/vectors/antigua and barbuda.svg';
+  static const String antiguaAndBarbuda = 'assets/vectors/antigua and barbuda.svg';
   static const String argentina = 'assets/vectors/argentina.svg';
   static const String armenia = 'assets/vectors/armenia.svg';
   static const String aruba = 'assets/vectors/aruba.svg';
@@ -39,15 +38,12 @@ class Svgs {
   static const String bitshares = 'assets/vectors/bitshares.svg';
   static const String bolivia = 'assets/vectors/bolivia.svg';
   static const String bonaire = 'assets/vectors/bonaire.svg';
-  static const String bosniaAndHerzegovina =
-      'assets/vectors/bosnia and herzegovina.svg';
+  static const String bosniaAndHerzegovina = 'assets/vectors/bosnia and herzegovina.svg';
   static const String botswana = 'assets/vectors/botswana.svg';
   static const String brazil = 'assets/vectors/brazil.svg';
   static const String britishColumbia = 'assets/vectors/british columbia.svg';
-  static const String britishIndianOceanTerritory =
-      'assets/vectors/british indian ocean territory.svg';
-  static const String britishVirginIslands =
-      'assets/vectors/british virgin islands.svg';
+  static const String britishIndianOceanTerritory = 'assets/vectors/british indian ocean territory.svg';
+  static const String britishVirginIslands = 'assets/vectors/british virgin islands.svg';
   static const String brunei = 'assets/vectors/brunei.svg';
   static const String bulgaria = 'assets/vectors/bulgaria.svg';
   static const String burkinaFaso = 'assets/vectors/burkina faso.svg';
@@ -58,8 +54,7 @@ class Svgs {
   static const String canaryIslands = 'assets/vectors/canary islands.svg';
   static const String capeVerde = 'assets/vectors/cape verde.svg';
   static const String caymanIslands = 'assets/vectors/cayman islands.svg';
-  static const String centralAfricanRepublic =
-      'assets/vectors/central african republic.svg';
+  static const String centralAfricanRepublic = 'assets/vectors/central african republic.svg';
   static const String ceuta = 'assets/vectors/ceuta.svg';
   static const String chad = 'assets/vectors/chad.svg';
   static const String chile = 'assets/vectors/chile.svg';
@@ -76,14 +71,12 @@ class Svgs {
   static const String cyprus = 'assets/vectors/cyprus.svg';
   static const String czechRepublic = 'assets/vectors/czech republic.svg';
   static const String dash = 'assets/vectors/dash.svg';
-  static const String democraticRepublicOfCongo =
-      'assets/vectors/democratic republic of congo.svg';
+  static const String democraticRepublicOfCongo = 'assets/vectors/democratic republic of congo.svg';
   static const String denmark = 'assets/vectors/denmark.svg';
   static const String djibouti = 'assets/vectors/djibouti.svg';
   static const String dogecoin = 'assets/vectors/dogecoin.svg';
   static const String dominica = 'assets/vectors/dominica.svg';
-  static const String dominicanRepublic =
-      'assets/vectors/dominican republic.svg';
+  static const String dominicanRepublic = 'assets/vectors/dominican republic.svg';
   static const String ecuador = 'assets/vectors/ecuador.svg';
   static const String egypt = 'assets/vectors/egypt.svg';
   static const String elSalvador = 'assets/vectors/el salvador.svg';
@@ -187,8 +180,7 @@ class Svgs {
   static const String norfolkIsland = 'assets/vectors/norfolk island.svg';
   static const String northKorea = 'assets/vectors/north korea.svg';
   static const String northernCyprus = 'assets/vectors/northern cyprus.svg';
-  static const String northernMarianasIslands =
-      'assets/vectors/northern marianas islands.svg';
+  static const String northernMarianasIslands = 'assets/vectors/northern marianas islands.svg';
   static const String norway = 'assets/vectors/norway.svg';
   static const String oman = 'assets/vectors/oman.svg';
   static const String orkneyIslands = 'assets/vectors/orkney islands.svg';
@@ -206,20 +198,16 @@ class Svgs {
   static const String portugal = 'assets/vectors/portugal.svg';
   static const String puertoRico = 'assets/vectors/puerto rico.svg';
   static const String qatar = 'assets/vectors/qatar.svg';
-  static const String republicOfMacedonia =
-      'assets/vectors/republic of macedonia.svg';
-  static const String republicOfTheCongo =
-      'assets/vectors/republic of the congo.svg';
+  static const String republicOfMacedonia = 'assets/vectors/republic of macedonia.svg';
+  static const String republicOfTheCongo = 'assets/vectors/republic of the congo.svg';
   static const String romania = 'assets/vectors/romania.svg';
   static const String russia = 'assets/vectors/russia.svg';
   static const String rwanda = 'assets/vectors/rwanda.svg';
   static const String sabaIsland = 'assets/vectors/saba island.svg';
-  static const String sahrawiArabDemocraticRepublic =
-      'assets/vectors/sahrawi arab democratic republic.svg';
+  static const String sahrawiArabDemocraticRepublic = 'assets/vectors/sahrawi arab democratic republic.svg';
   static const String samoa = 'assets/vectors/samoa.svg';
   static const String sanMarino = 'assets/vectors/san marino.svg';
-  static const String saoTomeAndPrince =
-      'assets/vectors/sao tome and prince.svg';
+  static const String saoTomeAndPrince = 'assets/vectors/sao tome and prince.svg';
   static const String sardinia = 'assets/vectors/sardinia.svg';
   static const String saudiArabia = 'assets/vectors/saudi arabia.svg';
   static const String scotland = 'assets/vectors/scotland.svg';
@@ -242,8 +230,7 @@ class Svgs {
   static const String sriLanka = 'assets/vectors/sri lanka.svg';
   static const String stBarts = 'assets/vectors/st barts.svg';
   static const String stLucia = 'assets/vectors/st lucia.svg';
-  static const String stVincentAndTheGrenadines =
-      'assets/vectors/st vincent and the grenadines.svg';
+  static const String stVincentAndTheGrenadines = 'assets/vectors/st vincent and the grenadines.svg';
   static const String sudan = 'assets/vectors/sudan.svg';
   static const String suriname = 'assets/vectors/suriname.svg';
   static const String swaziland = 'assets/vectors/swaziland.svg';
@@ -259,8 +246,7 @@ class Svgs {
   static const String tokelau = 'assets/vectors/tokelau.svg';
   static const String tonga = 'assets/vectors/tonga.svg';
   static const String transnistria = 'assets/vectors/transnistria.svg';
-  static const String trinidadAndTobago =
-      'assets/vectors/trinidad and tobago.svg';
+  static const String trinidadAndTobago = 'assets/vectors/trinidad and tobago.svg';
   static const String tunisia = 'assets/vectors/tunisia.svg';
   static const String turkey = 'assets/vectors/turkey.svg';
   static const String turkmenistan = 'assets/vectors/turkmenistan.svg';
@@ -268,8 +254,7 @@ class Svgs {
   static const String tuvalu = 'assets/vectors/tuvalu.svg';
   static const String uganda = 'assets/vectors/uganda.svg';
   static const String ukraine = 'assets/vectors/ukraine.svg';
-  static const String unitedArabEmirates =
-      'assets/vectors/united arab emirates.svg';
+  static const String unitedArabEmirates = 'assets/vectors/united arab emirates.svg';
   static const String unitedKingdom = 'assets/vectors/united kingdom.svg';
   static const String unitedNations = 'assets/vectors/united nations.svg';
   static const String unitedStates = 'assets/vectors/united states.svg';
