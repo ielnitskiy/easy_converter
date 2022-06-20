@@ -17,7 +17,7 @@ class SelectCurrenciesModel with ChangeNotifier {
   }
 
   selectCurrency({required String code}) {
-    //FiXME избавиться от опциоанал
+
     if (SelectedCurrencies.selectedCurrencies.remove(code)) {
     } else {
       SelectedCurrencies.selectedCurrencies.add(code);

@@ -23,18 +23,30 @@ class _CurrenciesWidgetBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFF5F8FE),
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.of(context).maybePop(),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => Navigator.of(context).pop(),
+      child: GestureDetector(
+        onTap: () {},
+        child: DraggableScrollableSheet(
+          initialChildSize: 0.9,
+          minChildSize: 0.5,
+          maxChildSize: 0.9,
+          builder: (BuildContext context, ScrollController scrollController) => Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
+              child: Column(
+                children: [
+                  const _SearchInBar(),
+                  const _CurrencyList(),
+                ],
+              )),
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: const _SearchInBar(),
       ),
-      body: const _CurrencyList(),
     );
   }
 }
@@ -69,33 +81,34 @@ class _CurrencyList extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = Provider.of<SelectCurrenciesModel>(context);
 
-    return  Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ListView.builder(
-          itemCount: model.resultSearch().length,
-          itemBuilder: (BuildContext context, int index) {
-            return CurrencyCard(
-              currency: model.resultSearch().elementAt(index),
-              trailing: IconButton(
-                padding: EdgeInsets.all(0),
-                alignment: Alignment.centerRight,
-                icon: (SelectedCurrencies.selectedCurrencies.contains(model.resultSearch()[index].code))
-                    ? const Icon(
-                        Icons.check_circle_outline,
-                        color: AppColors.black,
-                      )
-                    : const Icon(
-                        Icons.brightness_1_outlined,
-                        color: AppColors.gray,
-                      ),
-                onPressed: () => model.selectCurrency(
-                  //FIXME избавиться от опционала
-                  code: model.currencies[model.resultSearch()[index].code]!.code,
-                ),
+    return Expanded(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: model.resultSearch().length,
+        itemBuilder: (BuildContext context, int index) {
+          return CurrencyCard(
+            currency: model.resultSearch().elementAt(index),
+            trailing: IconButton(
+              padding: EdgeInsets.all(0),
+              alignment: Alignment.centerRight,
+              icon: (SelectedCurrencies.selectedCurrencies.contains(model.resultSearch()[index].code))
+                  ? const Icon(
+                      Icons.check_circle_outline,
+                      color: AppColors.black,
+                    )
+                  : const Icon(
+                      Icons.brightness_1_outlined,
+                      color: AppColors.gray,
+                    ),
+              onPressed: () => model.selectCurrency(
+                //FIXME избавиться от опционала
+                code: model.currencies[model.resultSearch()[index].code]!.code,
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

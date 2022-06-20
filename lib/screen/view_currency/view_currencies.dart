@@ -1,4 +1,5 @@
 import 'package:cur_val/library/hive/box_manager.dart';
+import 'package:cur_val/screen/select_currency/select_curriencies.dart';
 import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
 import 'package:cur_val/widgets/component/currency_card_text_field.dart';
 import 'package:cur_val/widgets/util/const.dart';
@@ -61,13 +62,24 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           ],
         ),
         body: CurrencyList(isReorderList: isReorderList),
-        floatingActionButton: isReorderList
-            ? FloatingActionButton(
-                child: const Icon(Icons.add),
-                onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
-                backgroundColor: AppColors.black,
-              )
-            : null);
+        floatingActionButton: //or an empty container
+            FloatingActionButton(
+          child: const Icon(Icons.add),
+          // onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
+          onPressed: () => showModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            isScrollControlled: true,
+            isDismissible: true,
+            context: context,
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.vertical(
+            //     top: Radius.circular(20),
+            //   ),
+            // ),
+            builder: (context) => SelectCurrenciesListWidget(),
+          ).then((value) => setState(() {})),
+          backgroundColor: AppColors.flutterActionButton,
+        ));
   }
 }
 
