@@ -61,13 +61,24 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           ],
         ),
         body: CurrencyList(isReorderList: isReorderList),
-        floatingActionButton: isReorderList
-            ? FloatingActionButton(
-                child: const Icon(Icons.add),
-                onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
-                backgroundColor: AppColors.black,
-              )
-            : null);
+        floatingActionButton: //or an empty container
+            FloatingActionButton(
+          child: const Icon(Icons.add),
+          // onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
+          onPressed: () => showModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            isScrollControlled: true,
+            isDismissible: true,
+            context: context,
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.vertical(
+            //     top: Radius.circular(20),
+            //   ),
+            // ),
+            builder: (context) => SelectCurrenciesListWidget(),
+          ).then((value) => setState(() {})),
+          backgroundColor: AppColors.flutterActionButton,
+        ));
   }
 }
 
