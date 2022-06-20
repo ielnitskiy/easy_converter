@@ -1,4 +1,5 @@
 import 'package:cur_val/library/hive/box_manager.dart';
+import 'package:cur_val/screen/select_currency/select_curriencies.dart';
 import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
 import 'package:cur_val/widgets/component/currency_card_text_field.dart';
 import 'package:cur_val/widgets/util/const.dart';
