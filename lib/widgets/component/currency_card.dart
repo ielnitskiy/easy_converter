@@ -1,7 +1,7 @@
-import 'package:cur_val/domain/currency.dart';
-import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
-import 'package:cur_val/widgets/util/const.dart';
-import 'package:cur_val/widgets/util/size_config.dart';
+import 'package:easy_converter/domain/currency.dart';
+import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
+import 'package:easy_converter/widgets/util/const.dart';
+import 'package:easy_converter/widgets/util/size_config.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';

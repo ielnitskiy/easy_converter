@@ -1,6 +1,6 @@
-import 'package:cur_val/screen/select_currency/select_curriencies_model.dart';
-import 'package:cur_val/widgets/component/currency_card.dart';
-import 'package:cur_val/widgets/util/const.dart';
+import 'package:easy_converter/screen/select_currency/select_curriencies_model.dart';
+import 'package:easy_converter/widgets/component/currency_card.dart';
+import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

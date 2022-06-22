@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      title: 'Flutter Demo',
       routes: {
         '/': (context) => const ViewCurrenciesListWidget(),
         '/select_currency': (context) => const SelectCurrenciesListWidget(),

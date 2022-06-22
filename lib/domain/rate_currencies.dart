@@ -1,4 +1,4 @@
-import 'package:cur_val/api/api_client.dart';
+import 'package:easy_converter/api/api_client.dart';
 
 class RateCurrencies {
   Future<Map<String, dynamic>> getRateList() async {

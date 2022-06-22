@@ -1,4 +1,4 @@
-import 'package:cur_val/domain/selected_currencies.dart';
+import 'package:easy_converter/domain/selected_currencies.dart';
 import 'package:hive/hive.dart';
 
 class BoxManager {

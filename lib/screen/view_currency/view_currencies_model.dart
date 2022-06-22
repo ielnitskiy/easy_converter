@@ -1,6 +1,6 @@
-import 'package:cur_val/domain/all_currencies_list.dart';
-import 'package:cur_val/domain/rate_currencies.dart';
-import 'package:cur_val/library/hive/box_manager.dart';
+import 'package:easy_converter/domain/all_currencies_list.dart';
+import 'package:easy_converter/domain/rate_currencies.dart';
+import 'package:easy_converter/library/hive/box_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

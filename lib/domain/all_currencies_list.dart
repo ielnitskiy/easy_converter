@@ -1,4 +1,6 @@
-import 'package:cur_val/resources/resources.dart';
+
+import 'package:easy_converter/resources/resources.dart';
+
 import 'currency.dart';
 
 class AllCurrenciesList {

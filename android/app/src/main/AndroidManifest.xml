@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cur_val">
+    package="com.example.easy_converter">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="cur_val"
+        android:label="EasyСonverter"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

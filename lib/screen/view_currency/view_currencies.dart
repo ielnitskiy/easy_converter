@@ -1,8 +1,8 @@
-import 'package:cur_val/library/hive/box_manager.dart';
-import 'package:cur_val/screen/select_currency/select_curriencies.dart';
-import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
-import 'package:cur_val/widgets/component/currency_card_text_field.dart';
-import 'package:cur_val/widgets/util/const.dart';
+import 'package:easy_converter/library/hive/box_manager.dart';
+import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
+import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
+import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
+import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
