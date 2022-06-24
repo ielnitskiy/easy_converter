@@ -6,9 +6,13 @@ abstract class AppFontStyle {
   static const double size16 = 16;
   static const double size18 = 18;
 
+  static const String regularText = 'Roboto-Regular';
   static const String boldText = 'Roboto-Bold';
   static const String lightText = 'Roboto-Light';
 
+  static const TextStyle regularTextStyle = TextStyle(
+    color: AppColors.gray1,
+  );
   static const TextStyle boldTextStyle = TextStyle(
     fontFamily: boldText,
     color: AppColors.gray1,
