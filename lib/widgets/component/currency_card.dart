@@ -11,7 +11,7 @@ class CurrencyCard extends StatelessWidget {
   final Currency currency;
   final Widget? trailing;
   final Key? key;
-  final bool isSlidable;
+  final bool isSelecteble;
   final int? index;
   final ViewCurrenciesModel? model;
 
@@ -19,7 +19,7 @@ class CurrencyCard extends StatelessWidget {
     required this.currency,
     this.trailing,
     this.key,
-    this.isSlidable = false,
+    this.isSelecteble = false,
     this.index,
     this.model,
   }) : super(key: key);
@@ -28,7 +28,7 @@ class CurrencyCard extends StatelessWidget {
     required this.currency,
     this.trailing,
     this.key,
-    this.isSlidable = false,
+    this.isSelecteble = false,
     this.index,
     this.model,
   }) : super(key: key);
@@ -39,12 +39,12 @@ class CurrencyCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: AppColors.white,
+        color: AppColors.gray5,
         // color: Colors.black,
       ),
       height: getProportionateScreenHeight(82),
       child: Slidable(
-        enabled: isSlidable,
+        enabled: isSelecteble,
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
@@ -72,7 +72,7 @@ class CurrencyCard extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 21),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
               SvgPicture.asset(
@@ -81,7 +81,7 @@ class CurrencyCard extends StatelessWidget {
                 height: 40.0,
               ),
               SizedBox(
-                width: getProportionateScreenWidth(12),
+                width: getProportionateScreenWidth(8),
               ),
               Expanded(
                 child: Row(
@@ -92,7 +92,7 @@ class CurrencyCard extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(18)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               currency.code,
@@ -101,7 +101,7 @@ class CurrencyCard extends StatelessWidget {
                               ),
                               maxLines: 1,
                             ),
-                            Text(
+                            isSelecteble ? Text(
                               currency.country,
                               style: AppFontStyle.lightTextStyle.copyWith(
                                 fontSize: AppFontStyle.size14,
@@ -109,7 +109,7 @@ class CurrencyCard extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               softWrap: true,
-                            ),
+                            ): SizedBox.shrink()
                           ],
                         ),
                       ),

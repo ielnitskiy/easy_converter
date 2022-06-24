@@ -44,7 +44,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
                     Radius.circular(5.0),
                   )),
               contentPadding: const EdgeInsets.all(6),
-              fillColor: AppColors.backgroundTextFieldLightGray,
+              fillColor: AppColors.gray4,
             ),
             textAlign: TextAlign.end,
             focusNode: _focusNode,

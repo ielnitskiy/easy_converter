@@ -36,7 +36,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
     return Scaffold(
         backgroundColor: const Color(0xFFF5F8FE),
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.gray5,
           elevation: 0.0,
           actions: [
             IconButton(
@@ -78,7 +78,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
             // ),
             builder: (context) => SelectCurrenciesListWidget(),
           ).then((value) => setState(() {})),
-          backgroundColor: AppColors.flutterActionButton,
+          backgroundColor: AppColors.blue1,
         ));
   }
 }
@@ -100,7 +100,7 @@ class CurrencyList extends StatelessWidget {
                 itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CurrencyCard(
-                    isSlidable: true,
+                    isSelecteble: true,
                     //FIXME избавиться от опционала
                     currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
                     key: ValueKey(index),

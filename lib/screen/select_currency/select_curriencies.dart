@@ -64,7 +64,7 @@ class _SearchInBar extends StatelessWidget {
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
         ),
-        suffixIcon: Icon(Icons.search, color: AppColors.gray),
+        suffixIcon: Icon(Icons.search, color: AppColors.gray2),
         hintText: 'Search',
       ),
       onChanged: (value) {
@@ -95,11 +95,11 @@ class _CurrencyList extends StatelessWidget {
               icon: (SelectedCurrencies.selectedCurrencies.contains(model.resultSearch()[index].code))
                   ? const Icon(
                       Icons.check_circle_outline,
-                      color: AppColors.black,
+                      color: AppColors.blue1,
                     )
                   : const Icon(
                       Icons.brightness_1_outlined,
-                      color: AppColors.gray,
+                      color: AppColors.blue1,
                     ),
               onPressed: () => model.selectCurrency(
                 //FIXME избавиться от опционала
