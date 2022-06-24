@@ -15,6 +15,15 @@ class CurrencyCard extends StatelessWidget {
   final int? index;
   final ViewCurrenciesModel? model;
 
+  CurrencyCard.view({
+    required this.currency,
+    this.trailing,
+    this.key,
+    this.isSlidable = false,
+    this.index,
+    this.model,
+  }) : super(key: key);
+
   CurrencyCard({
     required this.currency,
     this.trailing,
@@ -33,8 +42,6 @@ class CurrencyCard extends StatelessWidget {
         color: AppColors.white,
         // color: Colors.black,
       ),
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      width: getProportionateScreenWidth(300),
       height: getProportionateScreenHeight(82),
       child: Slidable(
         enabled: isSlidable,

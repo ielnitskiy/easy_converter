@@ -95,37 +95,39 @@ class CurrencyList extends StatelessWidget {
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
         onRefresh: () => model.updateRateCurrencies(),
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: isReorderList
-                ? ReorderableListView.builder(
-                    itemCount: SelectedCurrencies.selectedCurrencies.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CurrencyCard(
-                        isSlidable: true,
-                        //FIXME избавиться от опционала
-                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                        key: ValueKey(index),
-                        trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
-                        index: index,
-                        model: model,
-                      );
-                    },
-                    onReorder: model.reorder,
-                  )
-                : ListView.builder(
-                    itemCount: SelectedCurrencies.selectedCurrencies.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CurrencyCard(
-                        //FIXME избавиться от опционала
-                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                        key: ValueKey(index),
-                        trailing: CurrencyTextField(
-                          model: model,
-                          index: index,
-                        ),
-                      );
-                    },
-                  )));
+        child: isReorderList
+            ? ReorderableListView.builder(
+                itemCount: SelectedCurrencies.selectedCurrencies.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CurrencyCard(
+                    isSlidable: true,
+                    //FIXME избавиться от опционала
+                    currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
+                    key: ValueKey(index),
+                    trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
+                    index: index,
+                    model: model,
+                  );
+                },
+                onReorder: model.reorder,
+              )
+            : ListView.separated(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+                itemCount: SelectedCurrencies.selectedCurrencies.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CurrencyCard(
+                    //FIXME избавиться от опционала
+                    currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
+                    key: ValueKey(index),
+                    trailing: CurrencyTextField(
+                      model: model,
+                      index: index,
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(height: 8);
+                },
+              ));
   }
 }

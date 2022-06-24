@@ -9,7 +9,7 @@ class Currency {
   num? rate;
 
   Currency({
-    this.flag = Svgs.none,
+    this.flag = SvgsFlags.none,
     required this.code,
     required this.country,
     required this.title,
