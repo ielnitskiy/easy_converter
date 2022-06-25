@@ -1,3 +1,4 @@
+import 'package:easy_converter/domain/currency.dart';
 import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/select_currency/select_curriencies_model.dart';
 import 'package:easy_converter/widgets/component/currency_card.dart';
@@ -53,7 +54,6 @@ class _CurrenciesWidgetBody extends StatelessWidget {
   }
 }
 
-
 class _Header extends StatelessWidget {
   const _Header({Key? key}) : super(key: key);
 
@@ -64,12 +64,15 @@ class _Header extends StatelessWidget {
         color: AppColors.gray5,
         borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
       ),
-
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 16),
-            child: SvgPicture.asset(SvgsIcons.bottomSheetClose,height: 4,width: 32,),
+            child: SvgPicture.asset(
+              SvgsIcons.bottomSheetClose,
+              height: 4,
+              width: 32,
+            ),
           ),
           _SearchInBar(),
         ],
@@ -77,7 +80,6 @@ class _Header extends StatelessWidget {
     );
   }
 }
-
 
 class _SearchInBar extends StatelessWidget {
   const _SearchInBar({
@@ -92,14 +94,15 @@ class _SearchInBar extends StatelessWidget {
       child: TextFormField(
         decoration: const InputDecoration(
           fillColor: AppColors.gray3,
-
           filled: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide.none,
           ),
           prefixIcon: Icon(Icons.search, color: AppColors.gray2),
-          contentPadding: EdgeInsets.symmetric(vertical: 8.0,),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 8.0,
+          ),
           hintText: 'Search',
           hintStyle: TextStyle(fontSize: 16),
         ),
@@ -126,23 +129,34 @@ class _CurrencyList extends StatelessWidget {
         shrinkWrap: true,
         itemCount: model.resultSearch().length,
         itemBuilder: (BuildContext context, int index) {
-          return CurrencyCard(
-            currency: model.resultSearch().elementAt(index),
-            trailing: IconButton(
-              padding: EdgeInsets.all(0),
-              alignment: Alignment.centerRight,
-              icon: (SelectedCurrencies.selectedCurrencies.contains(model.resultSearch()[index].code))
-                  ? const Icon(
-                      Icons.check_circle_outline,
-                      color: AppColors.blue1,
-                    )
-                  : const Icon(
-                      Icons.brightness_1_outlined,
-                      color: AppColors.blue1,
-                    ),
-              onPressed: () => model.selectCurrency(
-                //FIXME избавиться от опционала
-                code: model.currencies[model.resultSearch()[index].code]!.code,
+          bool selected = (SelectedCurrencies.selectedCurrencies.contains(model.resultSearch()[index].code));
+          //FIXME избавиться от опционала
+          Currency currencies = model.currencies[model.resultSearch()[index].code]!;
+          return InkWell(
+            onTap: () => model.selectCurrency(
+
+              code: currencies.code,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(16),
+                ),
+                border: Border.all(
+                  color: AppColors.blue1,
+                  style: selected ? BorderStyle.solid : BorderStyle.none,
+                ),
+              ),
+              child: CurrencyCard(
+                isSelecteble: true,
+                currency: model.resultSearch().elementAt(index),
+                trailing: Row(
+                  children: [
+                    Text(currencies.title),
+                  selected ? SvgPicture.asset(SvgsIcons.selectedIcon) : SizedBox.shrink(),
+
+                  ],
+                ),
               ),
             ),
           );

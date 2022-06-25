@@ -15,15 +15,6 @@ class CurrencyCard extends StatelessWidget {
   final int? index;
   final ViewCurrenciesModel? model;
 
-  CurrencyCard.view({
-    required this.currency,
-    this.trailing,
-    this.key,
-    this.isSelecteble = false,
-    this.index,
-    this.model,
-  }) : super(key: key);
-
   CurrencyCard({
     required this.currency,
     this.trailing,
@@ -40,7 +31,6 @@ class CurrencyCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: AppColors.gray5,
-        // color: Colors.black,
       ),
       height: getProportionateScreenHeight(82),
       child: Slidable(
@@ -58,7 +48,6 @@ class CurrencyCard extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-// height: 20,
                 width: 20,
                 decoration: const BoxDecoration(
                   color: Color(0xFFFE4A49),
@@ -101,15 +90,17 @@ class CurrencyCard extends StatelessWidget {
                               ),
                               maxLines: 1,
                             ),
-                            isSelecteble ? Text(
-                              currency.country,
-                              style: AppFontStyle.lightTextStyle.copyWith(
-                                fontSize: AppFontStyle.size14,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                            ): SizedBox.shrink()
+                            isSelecteble
+                                ? Text(
+                                    currency.country,
+                                    style: AppFontStyle.lightTextStyle.copyWith(
+                                      fontSize: AppFontStyle.size14,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                  )
+                                : SizedBox.shrink()
                           ],
                         ),
                       ),
