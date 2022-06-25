@@ -1,7 +1,9 @@
+import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/select_currency/select_curriencies_model.dart';
 import 'package:easy_converter/widgets/component/currency_card.dart';
 import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/selected_currencies.dart';
@@ -34,14 +36,14 @@ class _CurrenciesWidgetBody extends StatelessWidget {
           maxChildSize: 0.9,
           builder: (BuildContext context, ScrollController scrollController) => Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.gray3,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(20),
                 ),
               ),
               child: Column(
                 children: [
-                  const _SearchInBar(),
+                  const _Header(),
                   const _CurrencyList(),
                 ],
               )),
@@ -51,6 +53,32 @@ class _CurrenciesWidgetBody extends StatelessWidget {
   }
 }
 
+
+class _Header extends StatelessWidget {
+  const _Header({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.gray5,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+      ),
+
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: SvgPicture.asset(SvgsIcons.bottomSheetClose,height: 4,width: 32,),
+          ),
+          _SearchInBar(),
+        ],
+      ),
+    );
+  }
+}
+
+
 class _SearchInBar extends StatelessWidget {
   const _SearchInBar({
     Key? key,
@@ -59,17 +87,26 @@ class _SearchInBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SelectCurrenciesModel>(context);
-    return TextFormField(
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: TextFormField(
+        decoration: const InputDecoration(
+          fillColor: AppColors.gray3,
+
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide.none,
+          ),
+          prefixIcon: Icon(Icons.search, color: AppColors.gray2),
+          contentPadding: EdgeInsets.symmetric(vertical: 8.0,),
+          hintText: 'Search',
+          hintStyle: TextStyle(fontSize: 16),
         ),
-        suffixIcon: Icon(Icons.search, color: AppColors.gray2),
-        hintText: 'Search',
+        onChanged: (value) {
+          model.searchRequest = value;
+        },
       ),
-      onChanged: (value) {
-        model.searchRequest = value;
-      },
     );
   }
 }
@@ -82,7 +119,9 @@ class _CurrencyList extends StatelessWidget {
     final model = Provider.of<SelectCurrenciesModel>(context);
 
     return Expanded(
-      child: ListView.builder(
+      child: ListView.separated(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: EdgeInsets.all(16),
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemCount: model.resultSearch().length,
@@ -107,6 +146,9 @@ class _CurrencyList extends StatelessWidget {
               ),
             ),
           );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(height: 8);
         },
       ),
     );

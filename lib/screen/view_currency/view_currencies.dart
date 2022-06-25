@@ -37,7 +37,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
   Widget build(BuildContext context) {
     final bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-        backgroundColor: const Color(0xFFF5F8FE),
+        backgroundColor: AppColors.gray3,
         appBar: AppBar(
           title: Row(
             children: [

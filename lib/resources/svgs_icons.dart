@@ -3,6 +3,8 @@ part of 'resources.dart';
 class SvgsIcons {
   SvgsIcons._();
 
+  static const String bottomSheetClose =
+      'assets/vectors/icons/bottom_sheet_close.svg';
   static const String curIcon = 'assets/vectors/icons/cur_icon.svg';
   static const String listIcon = 'assets/vectors/icons/list_icon.svg';
   static const String removeIcon = 'assets/vectors/icons/remove_icon.svg';
