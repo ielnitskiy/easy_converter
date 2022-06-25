@@ -147,6 +147,7 @@ class _CurrencyList extends StatelessWidget {
                 ),
               ),
               child: CurrencyCard(
+                index: index,
                 isSelecteble: true,
                 currency: model.resultSearch().elementAt(index),
                 trailing:

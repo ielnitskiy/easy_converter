@@ -12,7 +12,7 @@ class CurrencyCard extends StatelessWidget {
   final Widget? trailing;
   final Key? key;
   final bool isSelecteble;
-  final int? index;
+  final int index;
   final ViewCurrenciesModel? model;
 
   CurrencyCard({
@@ -20,7 +20,7 @@ class CurrencyCard extends StatelessWidget {
     this.trailing,
     this.key,
     this.isSelecteble = false,
-    this.index,
+    required this.index,
     this.model,
   }) : super(key: key);
 
@@ -40,7 +40,7 @@ class CurrencyCard extends StatelessWidget {
           children: [
             SlidableAction(
               flex: 13,
-              onPressed: (context) => model!.deleteCurrency(index: index!),
+              onPressed: (context) => model!.deleteCurrency(index: index),
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,

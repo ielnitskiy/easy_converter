@@ -4,6 +4,7 @@ import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
 import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
 import 'package:easy_converter/widgets/util/const.dart';
+import 'package:easy_converter/widgets/util/reorderable_list_view_separated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -124,7 +125,8 @@ class CurrencyList extends StatelessWidget {
         edgeOffset: 0,
         onRefresh: () => model.updateRateCurrencies(),
         child: isReorderList
-            ? ReorderableListView.builder(
+            ? CustomReorderableListView.separated(
+                padding: EdgeInsets.all(16),
                 itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CurrencyCard(
@@ -132,12 +134,28 @@ class CurrencyList extends StatelessWidget {
                     //FIXME избавиться от опционала
                     currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
                     key: ValueKey(index),
-                    trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
                     index: index,
                     model: model,
+                    trailing: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(
+                          SvgsIcons.reorderIcon,
+                        ),
+                        IconButton(
+                            onPressed: () => model.deleteCurrency(index: index),
+                            icon: SvgPicture.asset(SvgsIcons.removeIcon),
+                            alignment: Alignment.centerRight,
+                            padding: EdgeInsets.all(0.0),
+                            visualDensity: VisualDensity.compact),
+                      ],
+                    ),
                   );
                 },
                 onReorder: model.reorder,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(height: 8);
+                },
               )
             : ListView.separated(
                 keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -145,9 +163,12 @@ class CurrencyList extends StatelessWidget {
                 itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CurrencyCard(
+                    model: model,
+                    isSelecteble: true,
                     //FIXME избавиться от опционала
                     currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
                     key: ValueKey(index),
+                    index: index,
                     trailing: CurrencyTextField(
                       model: model,
                       index: index,
