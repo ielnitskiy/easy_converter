@@ -1,9 +1,11 @@
 import 'package:easy_converter/library/hive/box_manager.dart';
+import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
 import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
 import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/selected_currencies.dart';
@@ -33,14 +35,26 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
 
   @override
   Widget build(BuildContext context) {
+    final bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
         backgroundColor: const Color(0xFFF5F8FE),
         appBar: AppBar(
+          title: Row(
+            children: [
+              SvgPicture.asset(SvgsIcons.curIcon),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                'Easy.Сonverter',
+                style: AppFontStyle.regularTextStyle,
+              ),
+            ],
+          ),
           backgroundColor: AppColors.gray5,
           elevation: 0.0,
           actions: [
-            IconButton(
-              splashRadius: 25,
+            TextButton(
               onPressed: () {
                 setState(() {
                   isReorderList = !isReorderList;
@@ -49,36 +63,50 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
                   }
                 });
               },
-              icon: isReorderList
-                  ? const Icon(
-                      Icons.done_outlined,
-                      color: Colors.black,
-                    )
-                  : const Icon(
-                      Icons.settings,
-                      color: Colors.black,
-                    ),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    SvgsIcons.settingsIcon,
+                    width: 16,
+                    height: 16,
+                    color: AppColors.gray2,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    'Settings',
+                    style: AppFontStyle.regularTextStyle.copyWith(color: AppColors.gray2),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  )
+                ],
+              ),
             ),
           ],
         ),
         body: CurrencyList(isReorderList: isReorderList),
         floatingActionButton: //or an empty container
-            FloatingActionButton(
-          child: const Icon(Icons.add),
-          // onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
-          onPressed: () => showModalBottomSheet(
-            backgroundColor: Colors.transparent,
-            isScrollControlled: true,
-            isDismissible: true,
-            context: context,
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.vertical(
-            //     top: Radius.circular(20),
-            //   ),
-            // ),
-            builder: (context) => SelectCurrenciesListWidget(),
-          ).then((value) => setState(() {})),
-          backgroundColor: AppColors.blue1,
+            Visibility(
+          visible: !keyboardIsOpen,
+          child: FloatingActionButton(
+            child: const Icon(Icons.add),
+            // onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
+            onPressed: () => showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              isScrollControlled: true,
+              isDismissible: true,
+              context: context,
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.vertical(
+              //     top: Radius.circular(20),
+              //   ),
+              // ),
+              builder: (context) => SelectCurrenciesListWidget(),
+            ).then((value) => setState(() {})),
+            backgroundColor: AppColors.blue1,
+          ),
         ));
   }
 }
@@ -112,7 +140,8 @@ class CurrencyList extends StatelessWidget {
                 onReorder: model.reorder,
               )
             : ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                padding: EdgeInsets.all(16),
                 itemCount: SelectedCurrencies.selectedCurrencies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CurrencyCard(
