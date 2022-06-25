@@ -10,7 +10,7 @@ class AllCurrenciesList {
     "AFN": Currency(code: "AFN", flag: SvgsFlags.afghanistan, symbol: '؋',title: 'Афгани', country: 'Афганистан'),
     "ALL": Currency(code: "ALL", flag: SvgsFlags.albania, symbol: 'L', title: 'Лек', country: 'Албания'),
     "AMD": Currency(code: "AMD", flag: SvgsFlags.armenia, symbol: '֏', title: 'Армянский драм', country: 'Армения'),
-    "ANG": Currency(code: "ANG", flag: SvgsFlags.sintMaarten, symbol: 'ƒ', title: 'Нидерландскийантильский гульден', country: 'Синт-Мартен'),
+    "ANG": Currency(code: "ANG", flag: SvgsFlags.sintMaarten, symbol: 'ƒ', title: 'Нидерландский антильский гульден', country: 'Синт-Мартен'),
     "AOA": Currency(code: "AOA", flag: SvgsFlags.angola, symbol: 'Kz', title: 'Кванза', country: 'Ангола'),
     "ARS": Currency(code: "ARS", flag: SvgsFlags.argentina, symbol: '\$', title: 'Аргентинское песо', country: 'Аргентина'),
     "AUD": Currency(code: "AUD", flag: SvgsFlags.australia, symbol: '\$', title: 'Австралийский доллар', country: 'Австралия'),

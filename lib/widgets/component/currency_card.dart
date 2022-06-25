@@ -32,7 +32,7 @@ class CurrencyCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         color: AppColors.gray5,
       ),
-      height: getProportionateScreenHeight(82),
+      height: 72,
       child: Slidable(
         enabled: isSelecteble,
         endActionPane: ActionPane(
@@ -77,8 +77,6 @@ class CurrencyCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(18)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -104,8 +102,8 @@ class CurrencyCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                    FittedBox(
+                    Expanded(
+                      flex: 2,
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5)),
                         child: SizedBox(

@@ -134,7 +134,6 @@ class _CurrencyList extends StatelessWidget {
           Currency currencies = model.currencies[model.resultSearch()[index].code]!;
           return InkWell(
             onTap: () => model.selectCurrency(
-
               code: currencies.code,
             ),
             child: Container(
@@ -150,15 +149,17 @@ class _CurrencyList extends StatelessWidget {
               child: CurrencyCard(
                 isSelecteble: true,
                 currency: model.resultSearch().elementAt(index),
-                trailing: Row(
-                  children: [
-                    Text(currencies.title),
-                  selected ? SvgPicture.asset(SvgsIcons.selectedIcon) : SizedBox.shrink(),
-
-                  ],
+                trailing:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                   Expanded(child: Container(child: Text(currencies.title, maxLines: 2, textAlign: TextAlign.end,))),
+                      selected ? SvgPicture.asset(SvgsIcons.selectedIcon) : SizedBox.shrink(),
+                    ],
+                  ),
                 ),
               ),
-            ),
+
           );
         },
         separatorBuilder: (BuildContext context, int index) {
