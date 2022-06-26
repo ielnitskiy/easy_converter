@@ -59,9 +59,9 @@ class ViewCurrenciesModel with ChangeNotifier {
   deleteCurrency({required int index}) {
     Box<List<String>> selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
 
-    if (selectedCurrenciesBox.get("selectedList")!.remove(getSelectedCurrencies()[index]))
-      ;
-    else {
+    if (selectedCurrenciesBox.get("selectedList")!.remove(getSelectedCurrencies()[index])) {
+      BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
+    } else {
       return;
     }
     notifyListeners();

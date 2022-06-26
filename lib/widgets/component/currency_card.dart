@@ -1,4 +1,6 @@
 import 'package:easy_converter/domain/currency.dart';
+import 'package:easy_converter/screen/reorderable_currency/reorderable_currency_model.dart';
+import 'package:easy_converter/screen/select_currency/select_curriencies_model.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
 import 'package:easy_converter/widgets/util/const.dart';
 import 'package:easy_converter/widgets/util/size_config.dart';
@@ -7,13 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CurrencyCard extends StatelessWidget {
+class CurrencyCard<T> extends StatelessWidget {
   final Currency currency;
   final Widget? trailing;
   final Key? key;
   final bool isSelecteble;
   final int index;
-  final ViewCurrenciesModel? model;
+  final T? model;
 
   CurrencyCard({
     required this.currency,
@@ -40,7 +42,7 @@ class CurrencyCard extends StatelessWidget {
           children: [
             SlidableAction(
               flex: 13,
-              onPressed: (context) => model!.deleteCurrency(index: index),
+              onPressed: (context) => (model as ViewCurrenciesModel).deleteCurrency(index: index),
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,

@@ -57,12 +57,8 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           actions: [
             TextButton(
               onPressed: () {
-                setState(() {
-                  isReorderList = !isReorderList;
-                  if (!isReorderList) {
-                    BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
-                  }
-                });
+                  Navigator.of(context).pushNamed("/settings").then((value) => setState(() {}));
+
               },
               child: Row(
                 children: [
@@ -87,23 +83,17 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
             ),
           ],
         ),
-        body: CurrencyList(isReorderList: isReorderList),
+        body: CurrencyList(),
         floatingActionButton: //or an empty container
             Visibility(
           visible: !keyboardIsOpen,
           child: FloatingActionButton(
             child: const Icon(Icons.add),
-            // onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
             onPressed: () => showModalBottomSheet(
               backgroundColor: Colors.transparent,
               isScrollControlled: true,
               isDismissible: true,
               context: context,
-              // shape: RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.vertical(
-              //     top: Radius.circular(20),
-              //   ),
-              // ),
               builder: (context) => SelectCurrenciesListWidget(),
             ).then((value) => setState(() {})),
             backgroundColor: AppColors.blue1,
@@ -113,9 +103,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
 }
 
 class CurrencyList extends StatelessWidget {
-  final isReorderList;
-
-  CurrencyList({Key? key, required this.isReorderList}) : super(key: key);
+  CurrencyList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,60 +112,27 @@ class CurrencyList extends StatelessWidget {
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
         onRefresh: () => model.updateRateCurrencies(),
-        child: isReorderList
-            ? CustomReorderableListView.separated(
-                padding: EdgeInsets.all(16),
-                itemCount: SelectedCurrencies.selectedCurrencies.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CurrencyCard(
-                    isSelecteble: true,
-                    //FIXME избавиться от опционала
-                    currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                    key: ValueKey(index),
-                    index: index,
-                    model: model,
-                    trailing: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SvgPicture.asset(
-                          SvgsIcons.reorderIcon,
-                        ),
-                        IconButton(
-                            onPressed: () => model.deleteCurrency(index: index),
-                            icon: SvgPicture.asset(SvgsIcons.removeIcon),
-                            alignment: Alignment.centerRight,
-                            padding: EdgeInsets.all(0.0),
-                            visualDensity: VisualDensity.compact),
-                      ],
-                    ),
-                  );
-                },
-                onReorder: model.reorder,
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(height: 8);
-                },
-              )
-            : ListView.separated(
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                padding: EdgeInsets.all(16),
-                itemCount: SelectedCurrencies.selectedCurrencies.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CurrencyCard(
-                    model: model,
-                    isSelecteble: true,
-                    //FIXME избавиться от опционала
-                    currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                    key: ValueKey(index),
-                    index: index,
-                    trailing: CurrencyTextField(
-                      model: model,
-                      index: index,
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(height: 8);
-                },
-              ));
+        child: ListView.separated(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: EdgeInsets.all(16),
+          itemCount: SelectedCurrencies.selectedCurrencies.length,
+          itemBuilder: (BuildContext context, int index) {
+            return CurrencyCard(
+              model: model,
+              isSelecteble: true,
+              //FIXME избавиться от опционала
+              currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
+              key: ValueKey(index),
+              index: index,
+              trailing: CurrencyTextField(
+                model: model,
+                index: index,
+              ),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(height: 8);
+          },
+        ));
   }
 }
