@@ -1,4 +1,3 @@
-import 'package:cur_val/domain/selected_currencies.dart';
 import 'package:hive/hive.dart';
 
 class BoxManager {
@@ -16,26 +15,8 @@ class BoxManager {
     return _openBox('selected_currency');
   }
 
-  // List<String> getSelectedCurList() {
-  //
-  //   selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
-  //   if (selectedCurrenciesBox.get("selectedList") == null) {
-  //     (selectedCurrenciesBox.put("selectedList", SelectedCurrencies.selectedCurrencies));
-  //   }
-  //
-  //
-  //   var selectedList = Hive.box<List<String>>(BoxManager.selectedCurrency).get(BoxManager.selectedList);
-  //   if (selectedList != null) {
-  //     Hive.box<List<String>>(BoxManager.selectedCurrency)
-  //         .put(BoxManager.selectedList, SelectedCurrencies.selectedCurrencies);
-  //     selectedList = Hive.box<List<String>>(BoxManager.selectedCurrency).get(BoxManager.selectedList);
-  //   }
-  //   return selectedList!;
-  // }
-
   putSelectedCurList(List<String> list) {
-    Hive.box<List<String>>(BoxManager.selectedCurrency)
-        .put(BoxManager.selectedList, list);
+    Hive.box<List<String>>(BoxManager.selectedCurrency).put(BoxManager.selectedList, list);
   }
 
   Future<Box<T>> _openBox<T>(

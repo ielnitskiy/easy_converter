@@ -1,5 +1,5 @@
-name: cur_val
-description: A new Flutter project.
+name: easy_converter
+description: Application for easy currency conversion.
 
 
 publish_to:
@@ -46,10 +46,14 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/vectors/
+    - assets/vectors/flags/
+    - assets/vectors/icons/
 
 
   fonts:
+    - family: Roboto-Regular
+      fonts:
+        - asset: font/Roboto-Regular.ttf
     - family: Roboto-Bold
       fonts:
         - asset: font/Roboto-Bold.ttf

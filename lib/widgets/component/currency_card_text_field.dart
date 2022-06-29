@@ -1,5 +1,5 @@
-import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
-import 'package:cur_val/widgets/util/const.dart';
+import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
+import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,22 +29,27 @@ class _CurrencyTextField extends State<CurrencyTextField> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width / 2.5,
+          width: MediaQuery.of(context).size.width / 2,
           child: TextFormField(
-            style: AppFontStyle.boldTextStyle.copyWith(fontSize: AppFontStyle.size18),
+            style: AppFontStyle.regularTextStyle.copyWith(fontSize: AppFontStyle.size16),
             decoration: InputDecoration(
-              isCollapsed: true,
+              // isCollapsed: true,
               filled: true,
-              suffixStyle: TextStyle(fontSize: 12),
+              suffixStyle: TextStyle(fontSize: AppFontStyle.size16,color: AppColors.gray7),
               //FIXME избавиться от опционала
               suffixText: ' ${widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.symbol}',
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(5.0),
+                    Radius.circular(8.0),
+                  )),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.blue1, width: 1),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
                   )),
               contentPadding: const EdgeInsets.all(6),
-              fillColor: AppColors.backgroundTextFieldLightGray,
+              fillColor: AppColors.gray4,
             ),
             textAlign: TextAlign.end,
             focusNode: _focusNode,
@@ -70,12 +75,6 @@ class _CurrencyTextField extends State<CurrencyTextField> {
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[.]?[0-9]*'))],
           ),
-        ),
-        Text(
-          //FIXME избавиться от опционала
-          widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.title,
-          style: AppFontStyle.lightTextStyle.copyWith(fontSize: AppFontStyle.size12),
-          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

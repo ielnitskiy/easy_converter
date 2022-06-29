@@ -1,26 +1,28 @@
-import 'package:cur_val/domain/currency.dart';
-import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
-import 'package:cur_val/widgets/util/const.dart';
-import 'package:cur_val/widgets/util/size_config.dart';
+import 'package:easy_converter/domain/currency.dart';
+import 'package:easy_converter/screen/reorderable_currency/reorderable_currency_model.dart';
+import 'package:easy_converter/screen/select_currency/select_curriencies_model.dart';
+import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
+import 'package:easy_converter/widgets/util/const.dart';
+import 'package:easy_converter/widgets/util/size_config.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CurrencyCard extends StatelessWidget {
+class CurrencyCard<T> extends StatelessWidget {
   final Currency currency;
   final Widget? trailing;
   final Key? key;
-  final bool isSlidable;
-  final int? index;
-  final ViewCurrenciesModel? model;
+  final bool isSelecteble;
+  final int index;
+  final T? model;
 
   CurrencyCard({
     required this.currency,
     this.trailing,
     this.key,
-    this.isSlidable = false,
-    this.index,
+    this.isSelecteble = false,
+    required this.index,
     this.model,
   }) : super(key: key);
 
@@ -30,20 +32,17 @@ class CurrencyCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: AppColors.white,
-        // color: Colors.black,
+        color: AppColors.gray5,
       ),
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      width: getProportionateScreenWidth(300),
-      height: getProportionateScreenHeight(82),
+      height: 72,
       child: Slidable(
-        enabled: isSlidable,
+        enabled: isSelecteble,
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
               flex: 13,
-              onPressed: (context) => model!.deleteCurrency(index: index!),
+              onPressed: (context) => (model as ViewCurrenciesModel).deleteCurrency(index: index),
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,
@@ -51,7 +50,6 @@ class CurrencyCard extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-// height: 20,
                 width: 20,
                 decoration: const BoxDecoration(
                   color: Color(0xFFFE4A49),
@@ -65,7 +63,7 @@ class CurrencyCard extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 21),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
               SvgPicture.asset(
@@ -74,18 +72,16 @@ class CurrencyCard extends StatelessWidget {
                 height: 40.0,
               ),
               SizedBox(
-                width: getProportionateScreenWidth(12),
+                width: getProportionateScreenWidth(8),
               ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(18)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               currency.code,
@@ -94,20 +90,22 @@ class CurrencyCard extends StatelessWidget {
                               ),
                               maxLines: 1,
                             ),
-                            Text(
-                              currency.country,
-                              style: AppFontStyle.lightTextStyle.copyWith(
-                                fontSize: AppFontStyle.size14,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                            ),
+                            isSelecteble
+                                ? Text(
+                                    currency.country,
+                                    style: AppFontStyle.lightTextStyle.copyWith(
+                                      fontSize: AppFontStyle.size14,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                  )
+                                : SizedBox.shrink()
                           ],
                         ),
                       ),
-                    ),
-                    FittedBox(
+                    Expanded(
+                      flex: 2,
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5)),
                         child: SizedBox(

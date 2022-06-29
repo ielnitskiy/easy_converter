@@ -1,9 +1,12 @@
-import 'package:cur_val/library/hive/box_manager.dart';
-import 'package:cur_val/screen/select_currency/select_curriencies.dart';
-import 'package:cur_val/screen/view_currency/view_currencies_model.dart';
-import 'package:cur_val/widgets/component/currency_card_text_field.dart';
-import 'package:cur_val/widgets/util/const.dart';
+import 'package:easy_converter/library/hive/box_manager.dart';
+import 'package:easy_converter/resources/resources.dart';
+import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
+import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
+import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
+import 'package:easy_converter/widgets/util/const.dart';
+import 'package:easy_converter/widgets/util/reorderable_list_view_separated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/selected_currencies.dart';
@@ -33,60 +36,74 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
 
   @override
   Widget build(BuildContext context) {
+    final bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-        backgroundColor: const Color(0xFFF5F8FE),
+        backgroundColor: AppColors.gray3,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          title: Row(
+            children: [
+              SvgPicture.asset(SvgsIcons.curIcon),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                'Easy.Сonverter',
+                style: AppFontStyle.regularTextStyle,
+              ),
+            ],
+          ),
+          backgroundColor: AppColors.gray5,
           elevation: 0.0,
           actions: [
-            IconButton(
-              splashRadius: 25,
+            TextButton(
               onPressed: () {
-                setState(() {
-                  isReorderList = !isReorderList;
-                  if (!isReorderList) {
-                    BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
-                  }
-                });
+                  Navigator.of(context).pushNamed("/settings").then((value) => setState(() {}));
+
               },
-              icon: isReorderList
-                  ? const Icon(
-                      Icons.done_outlined,
-                      color: Colors.black,
-                    )
-                  : const Icon(
-                      Icons.settings,
-                      color: Colors.black,
-                    ),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    SvgsIcons.settingsIcon,
+                    width: 16,
+                    height: 16,
+                    color: AppColors.gray2,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    'Settings',
+                    style: AppFontStyle.regularTextStyle.copyWith(color: AppColors.gray2),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  )
+                ],
+              ),
             ),
           ],
         ),
-        body: CurrencyList(isReorderList: isReorderList),
+        body: CurrencyList(),
         floatingActionButton: //or an empty container
-            FloatingActionButton(
-          child: const Icon(Icons.add),
-          // onPressed: () => Navigator.of(context).pushNamed('/select_currency').then((_) => setState(() {})),
-          onPressed: () => showModalBottomSheet(
-            backgroundColor: Colors.transparent,
-            isScrollControlled: true,
-            isDismissible: true,
-            context: context,
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.vertical(
-            //     top: Radius.circular(20),
-            //   ),
-            // ),
-            builder: (context) => SelectCurrenciesListWidget(),
-          ).then((value) => setState(() {})),
-          backgroundColor: AppColors.flutterActionButton,
+            Visibility(
+          visible: !keyboardIsOpen,
+          child: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () => showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              isScrollControlled: true,
+              isDismissible: true,
+              context: context,
+              builder: (context) => SelectCurrenciesListWidget(),
+            ).then((value) => setState(() {})),
+            backgroundColor: AppColors.blue1,
+          ),
         ));
   }
 }
 
 class CurrencyList extends StatelessWidget {
-  final isReorderList;
-
-  CurrencyList({Key? key, required this.isReorderList}) : super(key: key);
+  CurrencyList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,37 +112,27 @@ class CurrencyList extends StatelessWidget {
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
         onRefresh: () => model.updateRateCurrencies(),
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: isReorderList
-                ? ReorderableListView.builder(
-                    itemCount: SelectedCurrencies.selectedCurrencies.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CurrencyCard(
-                        isSlidable: true,
-                        //FIXME избавиться от опционала
-                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                        key: ValueKey(index),
-                        trailing: const Align(alignment: Alignment.centerRight, child: Icon(Icons.reorder_rounded)),
-                        index: index,
-                        model: model,
-                      );
-                    },
-                    onReorder: model.reorder,
-                  )
-                : ListView.builder(
-                    itemCount: SelectedCurrencies.selectedCurrencies.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CurrencyCard(
-                        //FIXME избавиться от опционала
-                        currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                        key: ValueKey(index),
-                        trailing: CurrencyTextField(
-                          model: model,
-                          index: index,
-                        ),
-                      );
-                    },
-                  )));
+        child: ListView.separated(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: EdgeInsets.all(16),
+          itemCount: SelectedCurrencies.selectedCurrencies.length,
+          itemBuilder: (BuildContext context, int index) {
+            return CurrencyCard(
+              model: model,
+              isSelecteble: true,
+              //FIXME избавиться от опционала
+              currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
+              key: ValueKey(index),
+              index: index,
+              trailing: CurrencyTextField(
+                model: model,
+                index: index,
+              ),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(height: 8);
+          },
+        ));
   }
 }

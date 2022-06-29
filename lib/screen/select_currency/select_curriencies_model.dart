@@ -1,7 +1,7 @@
-import 'package:cur_val/domain/all_currencies_list.dart';
-import 'package:cur_val/domain/currency.dart';
-import 'package:cur_val/domain/selected_currencies.dart';
-import 'package:cur_val/library/hive/box_manager.dart';
+import 'package:easy_converter/domain/all_currencies_list.dart';
+import 'package:easy_converter/domain/currency.dart';
+import 'package:easy_converter/domain/selected_currencies.dart';
+import 'package:easy_converter/library/hive/box_manager.dart';
 import 'package:flutter/material.dart';
 
 class SelectCurrenciesModel with ChangeNotifier {

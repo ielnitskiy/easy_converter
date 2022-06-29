@@ -1,4 +1,4 @@
-import 'package:cur_val/resources/resources.dart';
+import 'package:easy_converter/resources/resources.dart';
 
 class Currency {
   String flag;
@@ -9,7 +9,7 @@ class Currency {
   num? rate;
 
   Currency({
-    this.flag = Svgs.none,
+    this.flag = SvgsFlags.none,
     required this.code,
     required this.country,
     required this.title,
