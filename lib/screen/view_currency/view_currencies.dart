@@ -1,10 +1,9 @@
-import 'package:easy_converter/library/hive/box_manager.dart';
 import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
+import 'package:easy_converter/widgets/component/addition_description.dart';
 import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
 import 'package:easy_converter/widgets/util/const.dart';
-import 'package:easy_converter/widgets/util/reorderable_list_view_separated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +36,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
   @override
   Widget build(BuildContext context) {
     final bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
+    final model = Provider.of<ViewCurrenciesModel>(context);
     return Scaffold(
         backgroundColor: AppColors.gray3,
         appBar: AppBar(
@@ -57,8 +57,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           actions: [
             TextButton(
               onPressed: () {
-                  Navigator.of(context).pushNamed("/settings").then((value) => setState(() {}));
-
+                Navigator.of(context).pushNamed("/settings").then((value) => setState(() {}));
               },
               child: Row(
                 children: [
@@ -83,7 +82,12 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
             ),
           ],
         ),
-        body: CurrencyList(),
+        body: Column(
+          children: [
+            Expanded(flex: 1, child: CurrencyList()),
+            model.getSelectedCurrencies().length < 2 ? AdditionDescription():SizedBox.shrink(),
+          ],
+        ),
         floatingActionButton: //or an empty container
             Visibility(
           visible: !keyboardIsOpen,

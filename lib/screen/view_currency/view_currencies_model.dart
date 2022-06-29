@@ -71,7 +71,8 @@ class ViewCurrenciesModel with ChangeNotifier {
     await BoxManager.instance.openSelectCurBox();
     List<String>? list = Hive.box<List<String>>('selected_currency').get("selectedList");
     if (list == null) {
-      SelectedCurrencies.selectedCurrencies = [];
+      SelectedCurrencies.selectedCurrencies = ['USD'];
+      BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
     } else
       SelectedCurrencies.selectedCurrencies = list;
     notifyListeners();

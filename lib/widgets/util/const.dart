@@ -5,6 +5,7 @@ abstract class AppFontStyle {
   static const double size14 = 14;
   static const double size16 = 16;
   static const double size18 = 18;
+  static const double size32 = 32;
 
   static const String regularText = 'Roboto-Regular';
   static const String boldText = 'Roboto-Bold';
