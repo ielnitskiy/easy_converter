@@ -1,4 +1,4 @@
-package com.example.easy_converter
+package com.easy_converter.android
 
 import io.flutter.embedding.android.FlutterActivity
 
