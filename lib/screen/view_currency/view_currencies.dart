@@ -121,7 +121,30 @@ class _CurrencyListState extends State<_CurrencyList> {
                 background: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.red,
+                    color: AppColors.red1,
+                  ),
+                  child: Align(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Icon(
+                          Icons.delete,
+                          color: AppColors.gray5,
+                        ),
+                        Text(
+                          " Delete",
+                          style: TextStyle(
+                            color: AppColors.gray5,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                      ],
+                    ),
+                    alignment: Alignment.centerRight,
                   ),
                 ),
                 key: UniqueKey(),
