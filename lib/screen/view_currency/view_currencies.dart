@@ -58,7 +58,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamed("/settings").then((value) => setState(() {}));
+                Navigator.of(context).pushNamed(AppRoutes.settings).then((value) => setState(() {}));
               },
               child: SvgPicture.asset(
                 SvgsIcons.settingsIcon,
@@ -93,9 +93,14 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
   }
 }
 
-class _CurrencyList extends StatelessWidget {
+class _CurrencyList extends StatefulWidget {
   _CurrencyList({Key? key}) : super(key: key);
 
+  @override
+  State<_CurrencyList> createState() => _CurrencyListState();
+}
+
+class _CurrencyListState extends State<_CurrencyList> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<ViewCurrenciesModel>(context);
@@ -108,15 +113,30 @@ class _CurrencyList extends StatelessWidget {
           padding: EdgeInsets.all(16),
           itemCount: SelectedCurrencies.selectedCurrencies.length,
           itemBuilder: (BuildContext context, int index) {
-            return SlidableWidget(
-              child: CurrencyCard(
-                //FIXME избавиться от опционала
-                currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                key: ValueKey(index),
-                index: index,
-                trailing: CurrencyTextField(
-                  model: model,
+            return GestureDetector(
+              //TODO обновлять экране не через setState(() {})
+              onLongPress: () =>
+                  Navigator.of(context).pushNamed(AppRoutes.reorderableCurrency).then((value) => setState(() {})),
+              child: Dismissible(
+                background: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.red,
+                  ),
+                ),
+                key: UniqueKey(),
+                onDismissed: (direction) {
+                  model.deleteCurrency(index: index);
+                },
+                child: CurrencyCard(
+                  //FIXME избавиться от опционала
+                  currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
+                  key: ValueKey(index),
                   index: index,
+                  trailing: CurrencyTextField(
+                    model: model,
+                    index: index,
+                  ),
                 ),
               ),
             );

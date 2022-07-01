@@ -3,8 +3,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SlidableWidget extends StatelessWidget {
   final Widget child;
+   Function()? fun;
 
-  SlidableWidget({Key? key, required this.child}) : super(key: key);
+  SlidableWidget({Key? key, required this.child,this.fun}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class SlidableWidget extends StatelessWidget {
         children: [
           SlidableAction(
             flex: 13,
-            onPressed: (context) => () {},
+            onPressed: (context) => fun,
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,

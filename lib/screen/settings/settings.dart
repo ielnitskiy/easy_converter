@@ -38,7 +38,7 @@ class SettingsScreenWidget extends StatelessWidget {
                 Icons.arrow_forward_ios,
                 color: AppColors.blue1,
               ),
-          onTap: () => Navigator.of(context).pushNamed('/reorderable_currency'),)
+          onTap: () => Navigator.of(context).pushNamed(AppRoutes.reorderableCurrency),)
         ],
       ),
     );
