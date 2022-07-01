@@ -66,7 +66,6 @@ class CurrencyReorderableList extends StatelessWidget {
           currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
           key: ValueKey(index),
           index: index,
-          model: model,
           trailing: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

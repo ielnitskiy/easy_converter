@@ -77,13 +77,4 @@ class ViewCurrenciesModel with ChangeNotifier {
       SelectedCurrencies.selectedCurrencies = list;
     notifyListeners();
   }
-
-  reorder(int oldIndex, int newIndex) {
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
-    final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
-    SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
-    notifyListeners();
-  }
 }

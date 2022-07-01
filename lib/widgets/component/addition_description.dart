@@ -16,10 +16,12 @@ class AdditionDescription extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Add your first currency",
+                "Add your currency",
                 style: AppFontStyle.boldTextStyle.copyWith(fontSize: AppFontStyle.size32),
               ),
-              SizedBox(height: 8,),
+              SizedBox(
+                height: 8,
+              ),
               Text(
                 "Compare unlimited currencies in one place",
                 style: AppFontStyle.regularTextStyle.copyWith(fontSize: AppFontStyle.size16),

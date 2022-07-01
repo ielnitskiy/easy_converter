@@ -41,12 +41,7 @@ abstract class AppColors {
   static const Color bgWhite = Color(0x611D1C26);
 
 
-
-
-
-
-
-
+  //For dark theme
   // static const Color dark1 = Color(0xFFFFFFFF);
   // static const Color dark2 = Color(0xFF737499);
   // static const Color dark3 = Color(0xFF0E141F);
@@ -54,18 +49,13 @@ abstract class AppColors {
   // static const Color dark5 = Color(0xFF1E2330);
   // static const Color dark6 = Color(0xFF253045);
   // static const Color dark7 = Color(0xFF4A4B67);
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  // static const Color blue = Color(0xFFF5F8FE);
-  // static const Color white = Color(0xFFFFFFFF);
-  // static const Color black = Color(0xFF1E1F4B);
-  // static const Color gray = Color(0xFF787A8D);
-  // static const Color backgroundTextFieldLightGray = Color(0xFFF9F9FB);
-  // static const Color flutterActionButton = Color(0xFF445EDC);
+
+}
+
+
+abstract class AppRoutes {
+  static const String viewCurrencies = '/';
+  static const String selectCurrency = '/select_currency';
+  static const String reorderableCurrency = '/reorderable_currency';
+  static const String settings = '/settings';
 }

@@ -15,7 +15,6 @@ class CurrencyCard<T> extends StatelessWidget {
   final Key? key;
   final bool isSelecteble;
   final int index;
-  final T? model;
 
   CurrencyCard({
     required this.currency,
@@ -23,7 +22,6 @@ class CurrencyCard<T> extends StatelessWidget {
     this.key,
     this.isSelecteble = false,
     required this.index,
-    this.model,
   }) : super(key: key);
 
   @override
@@ -35,89 +33,61 @@ class CurrencyCard<T> extends StatelessWidget {
         color: AppColors.gray5,
       ),
       height: 72,
-      child: Slidable(
-        enabled: isSelecteble,
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
           children: [
-            SlidableAction(
-              flex: 13,
-              onPressed: (context) => (model as ViewCurrenciesModel).deleteCurrency(index: index),
-              backgroundColor: const Color(0xFFFE4A49),
-              foregroundColor: Colors.white,
-              icon: Icons.delete,
-              label: 'Delete',
+            SvgPicture.asset(
+              currency.flag,
+              width: 40.0,
+              height: 40.0,
+            ),
+            SizedBox(
+              width: getProportionateScreenWidth(8),
             ),
             Expanded(
-              child: Container(
-                width: 20,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFFE4A49),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          currency.code,
+                          style: AppFontStyle.boldTextStyle.copyWith(
+                            fontSize: AppFontStyle.size16,
+                          ),
+                          maxLines: 1,
+                        ),
+                        isSelecteble
+                            ? Text(
+                                currency.country,
+                                style: AppFontStyle.lightTextStyle.copyWith(
+                                  fontSize: AppFontStyle.size14,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              )
+                            : SizedBox.shrink()
+                      ],
+                    ),
                   ),
-                ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5)),
+                      child: SizedBox(
+                        child: trailing,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              SvgPicture.asset(
-                currency.flag,
-                width: 40.0,
-                height: 40.0,
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(8),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              currency.code,
-                              style: AppFontStyle.boldTextStyle.copyWith(
-                                fontSize: AppFontStyle.size16,
-                              ),
-                              maxLines: 1,
-                            ),
-                            isSelecteble
-                                ? Text(
-                                    currency.country,
-                                    style: AppFontStyle.lightTextStyle.copyWith(
-                                      fontSize: AppFontStyle.size14,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  )
-                                : SizedBox.shrink()
-                          ],
-                        ),
-                      ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5)),
-                        child: SizedBox(
-                          child: trailing,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

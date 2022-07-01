@@ -2,6 +2,7 @@ import 'package:easy_converter/screen/reorderable_currency/reorderable_currency.
 import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/settings/settings.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies.dart';
+import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,12 +22,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const ViewCurrenciesListWidget(),
-        '/select_currency': (context) => const SelectCurrenciesListWidget(),
-        '/reorderable_currency': (context) => const ReorderableCurrencyWidget(),
-        '/settings': (context) => const SettingsScreenWidget(),
+        AppRoutes.viewCurrencies: (context) => const ViewCurrenciesListWidget(),
+        AppRoutes.selectCurrency: (context) => const SelectCurrenciesListWidget(),
+        AppRoutes.reorderableCurrency: (context) => const ReorderableCurrencyWidget(),
+        AppRoutes.settings: (context) => const SettingsScreenWidget(),
       },
-      initialRoute: '/',
+      initialRoute: AppRoutes.viewCurrencies,
     );
   }
 }
