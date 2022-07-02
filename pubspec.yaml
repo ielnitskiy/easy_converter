@@ -37,7 +37,7 @@ flutter_icons:
   ios: true
 
 
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.1
 
 
 flutter:

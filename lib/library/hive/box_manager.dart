@@ -4,6 +4,7 @@ class BoxManager {
   static final BoxManager instance = BoxManager._();
   static final String selectedCurrency = 'selected_currency';
   static final String selectedList = 'selectedList';
+  static final String rate = 'rate';
 
   BoxManager._();
 

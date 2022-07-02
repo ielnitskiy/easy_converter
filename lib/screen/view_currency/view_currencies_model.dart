@@ -56,6 +56,7 @@ class ViewCurrenciesModel with ChangeNotifier {
     return SelectedCurrencies.selectedCurrencies;
   }
 
+  //TODO перенести листы в переменную
   deleteCurrency({required int index}) {
     Box<List<String>> selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
 
@@ -67,22 +68,15 @@ class ViewCurrenciesModel with ChangeNotifier {
     notifyListeners();
   }
 
+  //TODO перенести листы в переменную
   Future<void> _setup() async {
     await BoxManager.instance.openSelectCurBox();
     List<String>? list = Hive.box<List<String>>('selected_currency').get("selectedList");
     if (list == null) {
-      SelectedCurrencies.selectedCurrencies = [];
+      SelectedCurrencies.selectedCurrencies = ['USD'];
+      BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);
     } else
       SelectedCurrencies.selectedCurrencies = list;
-    notifyListeners();
-  }
-
-  reorder(int oldIndex, int newIndex) {
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
-    final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
-    SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
     notifyListeners();
   }
 }
