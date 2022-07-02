@@ -68,7 +68,7 @@ class CustomReorderableListView extends ReorderableListView {
               newIndex = (newIndex) ~/ 2;
             } else if (newIndex == 0) {
               newIndex = (newIndex ~/ 2);
-            } else /*if(oldIndex < newIndex && newIndex % 2 == 1)*/ {
+            } else {
               newIndex = (newIndex ~/ 2) + 1;
             }
             oldIndex = oldIndex ~/ 2;
