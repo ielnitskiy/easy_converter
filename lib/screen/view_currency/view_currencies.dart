@@ -72,7 +72,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
         body: Column(
           children: [
             Expanded(flex: 1, child: _CurrencyList()),
-            model.getSelectedCurrencies().length < 2 ? AdditionDescription() : SizedBox.shrink(),
+            (model.getSelectedCurrencies().length < 2 && !keyboardIsOpen) ? AdditionDescription() : SizedBox.shrink(),
           ],
         ),
         floatingActionButton: //or an empty container
@@ -132,7 +132,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                           color: AppColors.gray5,
                         ),
                         Text(
-                          " Delete",
+                          "Delete",
                           style: TextStyle(
                             color: AppColors.gray5,
                             fontWeight: FontWeight.w700,
@@ -148,7 +148,7 @@ class _CurrencyListState extends State<_CurrencyList> {
                   ),
                 ),
                 //FIXME избавиться от опционала
-            key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
+                key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
                 onDismissed: (direction) {
                   model.deleteCurrency(index: index);
                   setState(() {});

@@ -3,7 +3,7 @@ import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/reorderable_currency/reorderable_currency_model.dart';
 import 'package:easy_converter/widgets/component/currency_card.dart';
 import 'package:easy_converter/widgets/util/const.dart';
-import 'package:easy_converter/widgets/util/reorderable_list_view_separated.dart';
+import 'package:easy_converter/widgets/component/reorderable_list_view_separated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
