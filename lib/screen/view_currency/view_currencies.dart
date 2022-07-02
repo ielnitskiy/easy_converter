@@ -147,9 +147,11 @@ class _CurrencyListState extends State<_CurrencyList> {
                     alignment: Alignment.centerRight,
                   ),
                 ),
-                key: UniqueKey(),
+                //FIXME избавиться от опционала
+            key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
                 onDismissed: (direction) {
                   model.deleteCurrency(index: index);
+                  setState(() {});
                 },
                 child: CurrencyCard(
                   //FIXME избавиться от опционала
