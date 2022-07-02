@@ -29,7 +29,7 @@ class AllCurrenciesList {
     "BSD": Currency(code: "BSD",flag: SvgsFlags.bahamas, symbol: '\$', title: 'Багамский доллар', country: 'Багамские Острова'),
     "BTC": Currency(code: "BTC", flag: SvgsFlags.bitcoin, symbol: '₿', title: 'Биткойн', country: 'Bitcion'),
     "BTN": Currency(code: "BTN",flag: SvgsFlags.bhutan, symbol: 'Nu', title: 'Нгултрум', country: 'Бутан'),
-    "BTS": Currency(code: "BTS",flag: SvgsFlags.bitshares, symbol: 'BTS', title: 'BitShares', country: 'BitShares'),
+    "BTS": Currency(code: "BTS",flag: SvgsFlags.bitshares, symbol: 'BS', title: 'BitShares', country: 'BitShares'),
     "BWP": Currency(code: "BWP",flag: SvgsFlags.botswana, symbol: 'P', title: 'Пула', country: 'Ботсвана'),
     "BYN": Currency(code: "BYN",flag: SvgsFlags.belarus, symbol: 'Br', title: 'Белорусский рубль', country: 'Белоруссия'),
     "BZD": Currency(code: "BZD",flag: SvgsFlags.belize, symbol: 'Bz', title: 'Белизский доллар', country: 'Белиз'),
@@ -107,7 +107,7 @@ class AllCurrenciesList {
     "MOP": Currency(code: "MOP",flag: SvgsFlags.macao, symbol: '\$', title: 'Патака', country: 'Макао'),
     // "MRO": Currency(code: "MRO",flag: Svgs , symbol: '',  title: '', country: ''), //TODO Search cur
     "MRU": Currency(code: "MRU",flag: SvgsFlags.mauritania, symbol: 'Um', title: 'Угия', country: 'Мавритания'),
-    "MUR": Currency(code: "MUR",flag: SvgsFlags.mauritius, symbol: '	₨', title: 'Маврикийская рупия', country: 'Маврикий'),
+    "MUR": Currency(code: "MUR",flag: SvgsFlags.mauritius, symbol: '₨', title: 'Маврикийская рупия', country: 'Маврикий'),
     "MVR": Currency(code: "MVR",flag: SvgsFlags.maldives, symbol: 'Rf', title: 'Руфия', country: 'Мальдивы'),
     "MWK": Currency(code: "MWK",flag: SvgsFlags.malawi, symbol: 'Mk', title: 'Квача', country: 'Малави'),
     "MXN": Currency(code: "MXN",flag: SvgsFlags.mexico, symbol: '\$', title: 'Мексиканское песо', country: 'Мексика'),

@@ -3,6 +3,7 @@ import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
 import 'package:easy_converter/widgets/component/addition_description.dart';
 import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
+import 'package:easy_converter/widgets/component/reorderable_list_view_separated.dart';
 import 'package:easy_converter/widgets/component/slidable.dart';
 import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
@@ -108,67 +109,62 @@ class _CurrencyListState extends State<_CurrencyList> {
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 0,
         onRefresh: () => model.updateRateCurrencies(),
-        child: ListView.separated(
+        child: CustomReorderableListView.separated(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: EdgeInsets.all(16),
           itemCount: SelectedCurrencies.selectedCurrencies.length,
           itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              //TODO обновлять экране не через setState(() {})
-              onLongPress: () =>
-                  Navigator.of(context).pushNamed(AppRoutes.reorderableCurrency).then((value) => setState(() {})),
-              child: Dismissible(
-                background: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: AppColors.red1,
-                  ),
-                  child: Align(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Icon(
-                          Icons.delete,
-                          color: AppColors.gray5,
-                        ),
-                        Text(
-                          "Delete",
-                          style: TextStyle(
-                            color: AppColors.gray5,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          textAlign: TextAlign.right,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    ),
-                    alignment: Alignment.centerRight,
-                  ),
+            return Dismissible(
+              background: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: AppColors.red1,
                 ),
-                //FIXME избавиться от опционала
-                key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
-                onDismissed: (direction) {
-                  model.deleteCurrency(index: index);
-                  setState(() {});
-                },
-                child: CurrencyCard(
-                  //FIXME избавиться от опционала
-                  currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                  key: ValueKey(index),
-                  index: index,
-                  trailing: CurrencyTextField(
-                    model: model,
-                    index: index,
+                child: Align(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Icon(
+                        Icons.delete,
+                        color: AppColors.gray5,
+                      ),
+                      Text(
+                        "Delete",
+                        style: TextStyle(
+                          color: AppColors.gray5,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.right,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                    ],
                   ),
+                  alignment: Alignment.centerRight,
+                ),
+              ),
+              //FIXME избавиться от опционала
+              key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
+              onDismissed: (direction) {
+                model.deleteCurrency(index: index);
+                setState(() {});
+              },
+              child: CurrencyCard(
+                //FIXME избавиться от опционала
+                currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
+                key: ValueKey(index),
+                index: index,
+                trailing: CurrencyTextField(
+                  model: model,
+                  index: index,
                 ),
               ),
             );
           },
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(height: 8);
-          },
+          }, onReorder: model.reorder ,
         ));
   }
 }
