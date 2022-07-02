@@ -13,6 +13,7 @@ class CurrencyReorderableModel with ChangeNotifier {
     return SelectedCurrencies.selectedCurrencies;
   }
 
+  //TODO перенести листы в переменную
   deleteCurrency({required int index}) {
     Box<List<String>> selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
 

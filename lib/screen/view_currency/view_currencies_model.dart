@@ -56,6 +56,7 @@ class ViewCurrenciesModel with ChangeNotifier {
     return SelectedCurrencies.selectedCurrencies;
   }
 
+  //TODO перенести листы в переменную
   deleteCurrency({required int index}) {
     Box<List<String>> selectedCurrenciesBox = Hive.box<List<String>>('selected_currency');
 
@@ -67,6 +68,7 @@ class ViewCurrenciesModel with ChangeNotifier {
     notifyListeners();
   }
 
+  //TODO перенести листы в переменную
   Future<void> _setup() async {
     await BoxManager.instance.openSelectCurBox();
     List<String>? list = Hive.box<List<String>>('selected_currency').get("selectedList");
