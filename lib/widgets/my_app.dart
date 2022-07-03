@@ -1,4 +1,3 @@
-import 'package:easy_converter/screen/reorderable_currency/reorderable_currency.dart';
 import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/settings/settings.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies.dart';
@@ -24,7 +23,6 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.viewCurrencies: (context) => const ViewCurrenciesListWidget(),
         AppRoutes.selectCurrency: (context) => const SelectCurrenciesListWidget(),
-        AppRoutes.reorderableCurrency: (context) => const ReorderableCurrencyWidget(),
         AppRoutes.settings: (context) => const SettingsScreenWidget(),
       },
       initialRoute: AppRoutes.viewCurrencies,

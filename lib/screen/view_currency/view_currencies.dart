@@ -1,10 +1,8 @@
 import 'package:easy_converter/resources/resources.dart';
-import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
 import 'package:easy_converter/widgets/component/addition_description.dart';
 import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
 import 'package:easy_converter/widgets/component/reorderable_list_view_separated.dart';
-import 'package:easy_converter/widgets/component/slidable.dart';
 import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -81,14 +79,8 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           visible: !keyboardIsOpen,
           child: FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: () => showModalBottomSheet(
-              backgroundColor: Colors.transparent,
-              isScrollControlled: true,
-              isDismissible: true,
-              context: context,
-              builder: (context) => SelectCurrenciesListWidget(),
-            ).then((value) => setState(() {})),
             backgroundColor: AppColors.blue1,
+            onPressed: () => Navigator.of(context).pushNamed(AppRoutes.selectCurrency).then((value) => setState(() {})),
           ),
         ));
   }
@@ -164,7 +156,8 @@ class _CurrencyListState extends State<_CurrencyList> {
           },
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(height: 8);
-          }, onReorder: model.reorder ,
+          },
+          onReorder: model.reorder,
         ));
   }
 }
