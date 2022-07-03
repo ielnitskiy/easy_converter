@@ -31,7 +31,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.gray5,
         elevation: 0.0,
-        title: _SearchInBar(),
+        title: _SearchInAppBar(),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
@@ -51,35 +51,32 @@ class _CurrenciesWidgetBody extends StatelessWidget {
   }
 }
 
-class _SearchInBar extends StatelessWidget {
-  const _SearchInBar({
+class _SearchInAppBar extends StatelessWidget {
+  const _SearchInAppBar({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SelectCurrenciesModel>(context);
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextFormField(
-        decoration: const InputDecoration(
-          fillColor: AppColors.gray3,
-          filled: true,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            borderSide: BorderSide.none,
-          ),
-          prefixIcon: Icon(Icons.search, color: AppColors.gray2),
-          contentPadding: EdgeInsets.symmetric(
-            vertical: 8.0,
-          ),
-          hintText: 'Search',
-          hintStyle: TextStyle(fontSize: 16),
+    return TextFormField(
+      decoration: const InputDecoration(
+        fillColor: AppColors.gray3,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderSide: BorderSide.none,
         ),
-        onChanged: (value) {
-          model.searchRequest = value;
-        },
+        prefixIcon: Icon(Icons.search, color: AppColors.gray2),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 8.0,
+        ),
+        hintText: 'Search',
+        hintStyle: TextStyle(fontSize: 16),
       ),
+      onChanged: (value) {
+        model.searchRequest = value;
+      },
     );
   }
 }
