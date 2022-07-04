@@ -3,6 +3,7 @@ import 'package:easy_converter/domain/rate_currencies.dart';
 import 'package:easy_converter/library/hive/box_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/selected_currencies.dart';
 
@@ -31,10 +32,17 @@ class ViewCurrenciesModel with ChangeNotifier {
   String get type => _type;
 
 //FIXME избавиться от опционала
-  String calculateCurrencies({required int index}) => ((currencies[SelectedCurrencies.selectedCurrencies[index]]!
-              .currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
-          (type == "" ? 0 : double.parse(type))))
-      .toStringAsFixed(2);
+  String calculateCurrencies({required int index}) {
+
+
+    var num = ((currencies[SelectedCurrencies.selectedCurrencies[index]]!
+            .currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
+        (type == "" ? 0 : double.parse(type))));
+
+
+
+    return NumberFormat("#,##0.00").format(num).replaceAll(',', ' ').toString();
+  }
 
   updateRateCurrencies() async {
     Map<dynamic, dynamic> rates = {};
