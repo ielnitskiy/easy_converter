@@ -33,13 +33,10 @@ class ViewCurrenciesModel with ChangeNotifier {
 
 //FIXME избавиться от опционала
   String calculateCurrencies({required int index}) {
+    var currentCurrency = currencies[SelectedCurrencies.selectedCurrencies[index]];
+    var currencyRate = currentCurrency!.currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate);
 
-
-    var num = ((currencies[SelectedCurrencies.selectedCurrencies[index]]!
-            .currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate) *
-        (type == "" ? 0 : double.parse(type))));
-
-
+    var num = currencyRate * (type == "" ? 0 : double.parse(type));
 
     return NumberFormat("#,##0.00").format(num).replaceAll(',', ' ').toString();
   }
@@ -89,9 +86,6 @@ class ViewCurrenciesModel with ChangeNotifier {
   }
 
   reorder(int oldIndex, int newIndex) {
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
     final String item = SelectedCurrencies.selectedCurrencies.removeAt(oldIndex);
     SelectedCurrencies.selectedCurrencies.insert(newIndex, item);
     BoxManager.instance.putSelectedCurList(SelectedCurrencies.selectedCurrencies);

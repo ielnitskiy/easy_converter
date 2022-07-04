@@ -53,24 +53,14 @@ class CustomReorderableListView extends ReorderableListView {
             }
 
             if (oldIndex % 2 == 1) {
-              //separator - should never happen
               return;
             }
 
             if ((oldIndex - newIndex).abs() == 1) {
-              //moved behind the top/bottom separator
               return;
             }
 
-            if (oldIndex > newIndex && newIndex % 2 == 1) {
-              newIndex = (newIndex + 1) ~/ 2;
-            } else if (oldIndex > newIndex && newIndex % 2 != 1) {
-              newIndex = (newIndex) ~/ 2;
-            } else if (newIndex == 0) {
-              newIndex = (newIndex ~/ 2);
-            } else {
-              newIndex = (newIndex ~/ 2) + 1;
-            }
+            newIndex = oldIndex > newIndex && newIndex % 2 == 1 ? (newIndex + 1) ~/ 2 : newIndex ~/ 2;
             oldIndex = oldIndex ~/ 2;
             onReorder.call(oldIndex, newIndex);
           },

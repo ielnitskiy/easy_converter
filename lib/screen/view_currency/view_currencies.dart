@@ -142,7 +142,6 @@ class _CurrencyListState extends State<_CurrencyList> {
             key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
             onDismissed: (direction) {
               model.deleteCurrency(index: index);
-              setState(() {});
             },
             child: CurrencyCard(
               //FIXME избавиться от опционала
@@ -174,7 +173,6 @@ Widget _proxyDecorator(Widget child, int index, Animation<double> animation) {
       final double elevation = lerpDouble(0, 8, animValue)!;
       return Material(
         elevation: elevation,
-        // color: Colors.blue,
         shadowColor: AppColors.bgWhite,
         child: child,
         borderRadius: BorderRadius.all(
