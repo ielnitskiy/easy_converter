@@ -62,6 +62,9 @@ class _CurrencyTextField extends State<CurrencyTextField> {
               widget.model.currentCurrencyCode = widget.model.getSelectedCurrencies()[widget.index];
             },
             onChanged: (value) {
+              if (value.contains(',')) {
+             value =   value.replaceAll(',', '.');
+              }
               if (value.length == 1 && value == '.') {
                 value = "0.";
               }
@@ -74,7 +77,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
               widget.model.type = value;
             },
             keyboardType: TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[.]?[0-9]*'))],
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[.,]?[0-9]*'))],
           ),
         ),
       ],
