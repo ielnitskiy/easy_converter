@@ -63,7 +63,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
             },
             onChanged: (value) {
               if (value.contains(',')) {
-             value =   value.replaceAll(',', '.');
+                value = value.replaceAll(',', '.');
               }
               if (value.length == 1 && value == '.') {
                 value = "0.";

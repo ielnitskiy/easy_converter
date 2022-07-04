@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
 import 'package:easy_converter/widgets/component/addition_description.dart';
@@ -98,66 +100,88 @@ class _CurrencyListState extends State<_CurrencyList> {
   Widget build(BuildContext context) {
     final model = Provider.of<ViewCurrenciesModel>(context);
     return RefreshIndicator(
-        triggerMode: RefreshIndicatorTriggerMode.anywhere,
-        edgeOffset: 0,
-        onRefresh: () => model.updateRateCurrencies(),
-        child: CustomReorderableListView.separated(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: EdgeInsets.all(16),
-          itemCount: SelectedCurrencies.selectedCurrencies.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Dismissible(
-              background: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: AppColors.red1,
-                ),
-                child: Align(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Icon(
-                        Icons.delete,
+      triggerMode: RefreshIndicatorTriggerMode.anywhere,
+      edgeOffset: 0,
+      onRefresh: () => model.updateRateCurrencies(),
+      child: CustomReorderableListView.separated(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: EdgeInsets.all(16),
+        itemCount: SelectedCurrencies.selectedCurrencies.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Dismissible(
+            background: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: AppColors.red1,
+              ),
+              child: Align(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Icon(
+                      Icons.delete,
+                      color: AppColors.gray5,
+                    ),
+                    Text(
+                      "Delete",
+                      style: TextStyle(
                         color: AppColors.gray5,
+                        fontWeight: FontWeight.w700,
                       ),
-                      Text(
-                        "Delete",
-                        style: TextStyle(
-                          color: AppColors.gray5,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        textAlign: TextAlign.right,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),
-                  alignment: Alignment.centerRight,
+                      textAlign: TextAlign.right,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
                 ),
+                alignment: Alignment.centerRight,
               ),
+            ),
+            //FIXME избавиться от опционала
+            key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
+            onDismissed: (direction) {
+              model.deleteCurrency(index: index);
+              setState(() {});
+            },
+            child: CurrencyCard(
               //FIXME избавиться от опционала
-              key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
-              onDismissed: (direction) {
-                model.deleteCurrency(index: index);
-                setState(() {});
-              },
-              child: CurrencyCard(
-                //FIXME избавиться от опционала
-                currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
-                key: ValueKey(index),
+              currency: model.currencies[SelectedCurrencies.selectedCurrencies[index]]!,
+              key: ValueKey(index),
+              index: index,
+              trailing: CurrencyTextField(
+                model: model,
                 index: index,
-                trailing: CurrencyTextField(
-                  model: model,
-                  index: index,
-                ),
               ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: 8);
-          },
-          onReorder: model.reorder,
-        ));
+            ),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(height: 8);
+        },
+        onReorder: model.reorder,
+        proxyDecorator: _proxyDecorator,
+      ),
+    );
   }
+}
+
+Widget _proxyDecorator(Widget child, int index, Animation<double> animation) {
+  return AnimatedBuilder(
+    animation: animation,
+    builder: (BuildContext context, Widget? child) {
+      final double animValue = Curves.easeInOut.transform(animation.value);
+      final double elevation = lerpDouble(0, 8, animValue)!;
+      return Material(
+        elevation: elevation,
+        // color: Colors.blue,
+        shadowColor: AppColors.bgWhite,
+        child: child,
+        borderRadius: BorderRadius.all(
+          Radius.circular(20.0),
+        ),
+      );
+    },
+    child: child,
+  );
 }

@@ -35,7 +35,7 @@ class SettingsScreenWidget extends StatelessWidget {
               leading: SvgPicture.asset(SvgsIcons.languageIcon),
               title: Text('Language'),
               trailing: Text(
-                'Coming soo…',
+                'Coming soon…',
                 style: TextStyle(color: AppColors.gray7),
               ),
             ),
@@ -44,7 +44,7 @@ class SettingsScreenWidget extends StatelessWidget {
               leading: SvgPicture.asset(SvgsIcons.themeMode),
               title: Text('Dark Theme'),
               trailing: Text(
-                'Coming soo…',
+                'Coming soon…',
                 style: TextStyle(color: AppColors.gray7),
               ),
             ),

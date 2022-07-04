@@ -31,7 +31,10 @@ class _CurrenciesWidgetBody extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.gray5,
         elevation: 0.0,
-        title: _SearchInAppBar(),
+        title: Text(
+          'Add Currency',
+          style: AppFontStyle.regularTextStyle,
+        ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
@@ -41,12 +44,27 @@ class _CurrenciesWidgetBody extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: _CurrencyList(),
+      body: Column(
+        children: [
+          Container(
+              color: AppColors.gray5,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 16.0,
+                  right: 16.0,
+                  left: 16.0,
+                ),
+                child: _SearchInAppBar(),
+              )),
+          Expanded(child: _CurrencyList()),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).pop(),
         child: const Icon(Icons.done),
         backgroundColor: AppColors.blue1,
       ),
+      backgroundColor: AppColors.gray3,
     );
   }
 }
@@ -67,6 +85,11 @@ class _SearchInAppBar extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           borderSide: BorderSide.none,
         ),
+        focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.blue1, width: 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            )),
         prefixIcon: Icon(Icons.search, color: AppColors.gray2),
         contentPadding: EdgeInsets.symmetric(
           vertical: 8.0,
