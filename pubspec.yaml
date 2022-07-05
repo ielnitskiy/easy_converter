@@ -3,7 +3,7 @@ description: Application for easy currency conversion.
 
 
 publish_to:
-version: 1.0.0+4
+version: 1.0.0+5
 
 environment:
   sdk: ">=2.16.1 <4.0.0"

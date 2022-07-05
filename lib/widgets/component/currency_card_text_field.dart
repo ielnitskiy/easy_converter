@@ -23,6 +23,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
   @override
   Widget build(BuildContext context) {
     bool hasFocus = _focusNode.hasFocus;
+    var suffixText = ' ${widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]?.symbol}';
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -35,9 +36,9 @@ class _CurrencyTextField extends State<CurrencyTextField> {
             decoration: InputDecoration(
               // isCollapsed: true,
               filled: true,
-              suffixStyle: TextStyle(fontSize: AppFontStyle.size16,color: AppColors.gray7),
+              suffixStyle: TextStyle(fontSize: AppFontStyle.size16, color: AppColors.gray7),
               //FIXME избавиться от опционала
-              suffixText: ' ${widget.model.currencies[widget.model.getSelectedCurrencies()[widget.index]]!.symbol}',
+              suffixText: suffixText,
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
@@ -61,6 +62,9 @@ class _CurrencyTextField extends State<CurrencyTextField> {
               widget.model.currentCurrencyCode = widget.model.getSelectedCurrencies()[widget.index];
             },
             onChanged: (value) {
+              if (value.contains(',')) {
+                value = value.replaceAll(',', '.');
+              }
               if (value.length == 1 && value == '.') {
                 value = "0.";
               }
@@ -73,7 +77,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
               widget.model.type = value;
             },
             keyboardType: TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[.]?[0-9]*'))],
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('^[0-9]*[.,]?[0-9]*'))],
           ),
         ),
       ],
