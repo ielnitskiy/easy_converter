@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+// вроде принято стили текста задавать в Theme у MaterialApp
 abstract class AppFontStyle {
   static const double size12 = 12;
   static const double size14 = 14;

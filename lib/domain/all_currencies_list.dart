@@ -1,4 +1,9 @@
-
+// назначение папки domain немного сложно понять.
+// тут лежат 2 источника данных all_currencies_list и selected_currencies (что-то типа in-memory cache)
+// моделька - currency
+// и rate_currencies, который делает часть функций репозитория.
+//
+// я бы разделил первые два в отдельные папки, а код из третьего бы отправил в CurrenciesRepository вместе с кодом из updateRateCurrencies и других подобных методов.
 
 import 'package:easy_converter/resources/resources.dart';
 
