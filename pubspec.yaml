@@ -60,4 +60,10 @@ flutter:
     - family: Roboto-Light
       fonts:
         - asset: font/Roboto-Light.ttf
+    - family: Ubuntu-Regular
+      fonts:
+        - asset: font/Ubuntu-Regular.ttf
+    - family: Ubuntu-Bold
+      fonts:
+        - asset: font/Ubuntu-Bold.ttf
 

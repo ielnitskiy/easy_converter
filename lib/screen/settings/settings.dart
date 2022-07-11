@@ -41,7 +41,7 @@ class SettingsScreenWidget extends StatelessWidget {
             ),
             ListTile(
               tileColor: AppColors.gray5,
-              leading: SvgPicture.asset(SvgsIcons.themeMode),
+              leading: SvgPicture.asset(SvgsIcons.themeModeIcon),
               title: Text('Dark Theme'),
               trailing: Text(
                 'Coming soon…',

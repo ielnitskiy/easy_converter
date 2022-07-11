@@ -5,6 +5,7 @@ import 'package:easy_converter/screen/view_currency/view_currencies_model.dart';
 import 'package:easy_converter/widgets/component/addition_description.dart';
 import 'package:easy_converter/widgets/component/currency_card_text_field.dart';
 import 'package:easy_converter/widgets/component/reorderable_list_view_separated.dart';
+import 'package:easy_converter/widgets/component/snack_bar.dart';
 import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,13 +44,19 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(SvgsIcons.curIcon),
+              SvgPicture.asset(SvgsIcons.logo),
               SizedBox(
                 width: 8,
               ),
-              Text(
-                'Easy.Сonverter',
-                style: AppFontStyle.regularTextStyle,
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Easy ",
+                      style: AppFontStyle.ubuntuRegularTextStyle),
+                  TextSpan(
+                      text: "Сonverter",
+                      style: AppFontStyle.ubuntuBoldTextStyle),
+                ]),
               ),
             ],
           ),
@@ -141,6 +148,14 @@ class _CurrencyListState extends State<_CurrencyList> {
             //FIXME избавиться от опционала
             key: ValueKey(model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.code),
             onDismissed: (direction) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                CustomSnackBar(
+                  params: CustomSnackBarParams(
+                    icon: SvgsIcons.trashIcon,
+                    text: 'You deleted "${model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.title}"',
+                  ),
+                ),
+              );
               model.deleteCurrency(index: index);
             },
             child: CurrencyCard(
