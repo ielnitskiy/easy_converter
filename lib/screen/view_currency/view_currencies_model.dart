@@ -34,8 +34,7 @@ class ViewCurrenciesModel with ChangeNotifier {
 //FIXME избавиться от опционала
   String calculateCurrencies({required int index}) {
     var currentCurrency = currencies[SelectedCurrencies.selectedCurrencies[index]];
-    var currencyRate = currentCurrency!.currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]?.rate);
-
+    var currencyRate = currentCurrency!.currencyRatio(AllCurrenciesList.allCurrenciesList[currentCurrencyCode]!.rate);
     var num = currencyRate * (type == "" ? 0 : double.parse(type));
 
     return NumberFormat("#,##0.00").format(num).replaceAll(',', ' ').toString();

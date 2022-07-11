@@ -6,7 +6,7 @@ class Currency {
   final String country;
   final String title;
   final String? symbol;
-  num? rate;
+  num rate;
 
   Currency({
     this.flag = SvgsFlags.none,
@@ -14,19 +14,13 @@ class Currency {
     required this.country,
     required this.title,
     this.symbol,
-    this.rate,
+    this.rate =0,
   });
 
-  num currencyRatio(num? currency) {
-    // можно было бы в самом начале проверять if (rate == 0 || currency == 0) => return 0;
-    //TODO remove division by zero
-    num a = (rate ?? 0) / (currency ?? 0);
-    if (a.isNaN) {
+  num currencyRatio(num currency) {
+    if (rate == 0 || currency == 0) {
       return 0;
-    } else if (a == a.toInt()) {
-      // зачем возвращать либо инт, либо дабл? почему не всегда дабл?
-      return a.toInt();
     }
-    return a;
+    return rate / currency;
   }
 }
