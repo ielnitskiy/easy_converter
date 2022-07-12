@@ -44,8 +44,8 @@ class _CurrencyTextField extends State<CurrencyTextField> {
                   borderRadius: BorderRadius.all(
                     Radius.circular(8.0),
                   )),
-              focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.blue1, width: 1),
+              focusedBorder:  OutlineInputBorder(
+                  borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
                   borderRadius: BorderRadius.all(
                     Radius.circular(8.0),
                   )),

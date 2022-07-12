@@ -2,6 +2,7 @@ import 'package:easy_converter/screen/select_currency/select_curriencies.dart';
 import 'package:easy_converter/screen/settings/settings.dart';
 import 'package:easy_converter/screen/view_currency/view_currencies.dart';
 import 'package:easy_converter/widgets/util/const.dart';
+import 'package:easy_converter/widgets/util/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,15 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: Theme.of(context).copyWith(
-        canvasColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.light,
-          ),
-        ),
-      ),
+      theme: LightTheme.lightTheme(),
+
+      // Theme.of(context).copyWith(
+      //   canvasColor: Colors.transparent,
+      //   shadowColor: Colors.transparent,
+      //   appBarTheme: const AppBarTheme(
+      //     systemOverlayStyle: SystemUiOverlayStyle(
+      //       statusBarBrightness: Brightness.light,
+      //     ),
+      //   ),
+      // ),
       routes: {
         AppRoutes.viewCurrencies: (context) => const ViewCurrenciesListWidget(),
         AppRoutes.selectCurrency: (context) => const SelectCurrenciesListWidget(),
@@ -29,3 +32,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

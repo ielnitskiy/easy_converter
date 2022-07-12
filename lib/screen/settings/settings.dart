@@ -16,7 +16,7 @@ class SettingsScreenWidget extends StatelessWidget {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColors.blue1,
+              color: Theme.of(context).primaryColor,
               size: 24,
             ),
             onPressed: () => Navigator.of(context).pop(),

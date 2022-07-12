@@ -1,4 +1,3 @@
-import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 
 class ArrowPainter extends CustomPainter {
@@ -9,7 +8,7 @@ class ArrowPainter extends CustomPainter {
     var path = Path();
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 1.5;
-    paint.color = AppColors.blue1;
+    paint.color = Color(0xFF445EDC) ;
 
     path.moveTo(size.width * 0.2, 10);
     path.quadraticBezierTo(size.width * 0.2, size.height * 0.40, size.width * 0.5, size.height * 0.4);

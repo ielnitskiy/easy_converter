@@ -39,7 +39,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
     final bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     final model = Provider.of<ViewCurrenciesModel>(context);
     return Scaffold(
-        backgroundColor: AppColors.gray3,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +88,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           visible: !keyboardIsOpen,
           child: FloatingActionButton(
             child: const Icon(Icons.add),
-            backgroundColor: AppColors.blue1,
+            backgroundColor: Theme.of(context).primaryColor,
             onPressed: () => Navigator.of(context).pushNamed(AppRoutes.selectCurrency).then((value) => setState(() {})),
           ),
         ));

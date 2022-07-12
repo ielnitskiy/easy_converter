@@ -41,13 +41,13 @@ abstract class AppFontStyle {
 abstract class AppColors {
   static const Color gray1 = Color(0xFF08081F);
   static const Color gray2 = Color(0xFF6E6E86);
-  static const Color gray3 = Color(0xFFF5F8FE);
+  // static const Color gray3 = Color(0xFFF5F8FE);
   static const Color gray4 = Color(0xFFF9F9FC);
   static const Color gray5 = Color(0xFFFFFFFF);
   static const Color gray6 = Color(0xFFF3F4F9);
   static const Color gray7 = Color(0xFFB6B7E2);
 
-  static const Color blue1 = Color(0xFF445EDC);
+  // static const Color blue1 = Color(0xFF445EDC);
 
   static const Color red1 = Color(0xFFE03655);
 

@@ -38,7 +38,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: AppColors.blue1,
+            color: Theme.of(context).primaryColor,
             size: 24,
           ),
           onPressed: () => Navigator.of(context).pop(),
@@ -62,9 +62,9 @@ class _CurrenciesWidgetBody extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).pop(),
         child: const Icon(Icons.done),
-        backgroundColor: AppColors.blue1,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
-      backgroundColor: AppColors.gray3,
+      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }
@@ -78,15 +78,18 @@ class _SearchInAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = Provider.of<SelectCurrenciesModel>(context);
     return TextFormField(
-      decoration: const InputDecoration(
-        fillColor: AppColors.gray3,
+      decoration: InputDecoration(
+        fillColor: Theme.of(context).backgroundColor,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           borderSide: BorderSide.none,
         ),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.blue1, width: 1),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Theme.of(context).primaryColor,
+              width: 1,
+            ),
             borderRadius: BorderRadius.all(
               Radius.circular(8.0),
             )),
@@ -131,7 +134,7 @@ class _CurrencyList extends StatelessWidget {
                 Radius.circular(16),
               ),
               border: Border.all(
-                color: AppColors.blue1,
+                color: Theme.of(context).primaryColor,
                 style: selected ? BorderStyle.solid : BorderStyle.none,
               ),
             ),

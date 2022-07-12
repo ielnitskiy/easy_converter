@@ -42,6 +42,9 @@ SnackBar CustomSnackBar({required CustomSnackBarParams params}) {
         ),
       ],
     ),
-    action: SnackBarAction(label: 'Undo', onPressed: () {  },),
+    action: SnackBarAction(
+      label: 'Undo',
+      onPressed: () {},
+    ),
   );
 }
