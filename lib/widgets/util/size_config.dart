@@ -15,6 +15,12 @@ class SizeConfig {
   }
 }
 
+// такой класс было бы прикольно сделать InheritedWidget'ом, чтобы из любого места значения получать
+// и вот эти пропорциональные ширину и высоту просто к нему в переменные засунуть.
+// еще у тебя init() вызывается где-то в экране, довольно поздно.
+// Теоретически, можно вызвать любой из методов ниже до вызова init() и тогда будет эксепшен.
+// С inherited widget это будет не так опасно.
+
 // Get the proportionate height as per screen size
 double getProportionateScreenHeight(double inputHeight) {
   double screenHeight = SizeConfig.screenHeight;

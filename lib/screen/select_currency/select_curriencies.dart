@@ -118,6 +118,10 @@ class _CurrencyList extends StatelessWidget {
       shrinkWrap: true,
       itemCount: model.resultSearch().length,
       itemBuilder: (BuildContext context, int index) {
+        // model.resultSearch() в этом билдере вычисляется 3 раза. Можно было бы сохранить в переменную, но...
+        // юи тут взаимодействует напрямую с источником данных, что нехорошо. Всю бизнес логику должен делать слой модели.
+        // Можно было бы сделать так, чтобы модель содержала сущности SelectableCurrency(Currency currency, bool isSelected) вместо просто Currency.
+        // либо можно в модели сделать метод isCurrencySelected и тут к нему обращаться.
         bool selected = (SelectedCurrencies.selectedCurrencies.contains(model.resultSearch()[index].code));
         //FIXME избавиться от опционала
         Currency currencies = model.currencies[model.resultSearch()[index].code]!;

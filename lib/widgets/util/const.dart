@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+// вроде принято стили текста задавать в Theme у MaterialApp
 abstract class AppFontStyle {
   static const double size12 = 12;
   static const double size14 = 14;
@@ -25,7 +26,6 @@ abstract class AppFontStyle {
 }
 
 abstract class AppColors {
-
   static const Color gray1 = Color(0xFF08081F);
   static const Color gray2 = Color(0xFF6E6E86);
   static const Color gray3 = Color(0xFFF5F8FE);
@@ -40,18 +40,16 @@ abstract class AppColors {
 
   static const Color bgWhite = Color(0x611D1C26);
 
-
-  //For dark theme
-  // static const Color dark1 = Color(0xFFFFFFFF);
-  // static const Color dark2 = Color(0xFF737499);
-  // static const Color dark3 = Color(0xFF0E141F);
-  // static const Color dark4 = Color(0xFF252837);
-  // static const Color dark5 = Color(0xFF1E2330);
-  // static const Color dark6 = Color(0xFF253045);
-  // static const Color dark7 = Color(0xFF4A4B67);
+//For dark theme
+// static const Color dark1 = Color(0xFFFFFFFF);
+// static const Color dark2 = Color(0xFF737499);
+// static const Color dark3 = Color(0xFF0E141F);
+// static const Color dark4 = Color(0xFF252837);
+// static const Color dark5 = Color(0xFF1E2330);
+// static const Color dark6 = Color(0xFF253045);
+// static const Color dark7 = Color(0xFF4A4B67);
 
 }
-
 
 abstract class AppRoutes {
   static const String viewCurrencies = '/';
