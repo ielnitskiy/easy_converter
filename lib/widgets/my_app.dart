@@ -12,17 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: LightTheme.lightTheme(),
-
-      // Theme.of(context).copyWith(
-      //   canvasColor: Colors.transparent,
-      //   shadowColor: Colors.transparent,
-      //   appBarTheme: const AppBarTheme(
-      //     systemOverlayStyle: SystemUiOverlayStyle(
-      //       statusBarBrightness: Brightness.light,
-      //     ),
-      //   ),
-      // ),
+      theme: AppTheme.lightTheme(),
+      darkTheme: AppTheme.darkTheme(),
       routes: {
         AppRoutes.viewCurrencies: (context) => const ViewCurrenciesListWidget(),
         AppRoutes.selectCurrency: (context) => const SelectCurrenciesListWidget(),

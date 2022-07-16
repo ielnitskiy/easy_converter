@@ -9,15 +9,13 @@ class SettingsScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.gray6,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: AppColors.gray5,
+          backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0.0,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).primaryColor,
-              size: 24,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
@@ -31,7 +29,7 @@ class SettingsScreenWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8),
           children: [
             ListTile(
-              tileColor: AppColors.gray5,
+              tileColor: Theme.of(context).backgroundColor,
               leading: SvgPicture.asset(SvgsIcons.languageIcon),
               title: Text('Language'),
               trailing: Text(
@@ -40,7 +38,7 @@ class SettingsScreenWidget extends StatelessWidget {
               ),
             ),
             ListTile(
-              tileColor: AppColors.gray5,
+              tileColor: Theme.of(context).backgroundColor,
               leading: SvgPicture.asset(SvgsIcons.themeModeIcon),
               title: Text('Dark Theme'),
               trailing: Text(

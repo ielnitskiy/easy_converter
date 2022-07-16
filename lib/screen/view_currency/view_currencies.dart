@@ -39,7 +39,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
     final bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     final model = Provider.of<ViewCurrenciesModel>(context);
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,29 +50,21 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
               ),
               RichText(
                 text: TextSpan(children: [
-                  TextSpan(
-                      text: "Easy ",
-                      style: AppFontStyle.ubuntuRegularTextStyle),
-                  TextSpan(
-                      text: "Сonverter",
-                      style: AppFontStyle.ubuntuBoldTextStyle),
+                  TextSpan(text: "Easy ", style: AppFontStyle.ubuntuRegularTextStyle),
+                  TextSpan(text: "Сonverter", style: AppFontStyle.ubuntuBoldTextStyle),
                 ]),
               ),
             ],
           ),
-          centerTitle: true,
-          backgroundColor: AppColors.gray5,
-          elevation: 0.0,
           actions: [
-            TextButton(
+            IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutes.settings).then((value) => setState(() {}));
               },
-              child: SvgPicture.asset(
+              icon: SvgPicture.asset(
                 SvgsIcons.settingsIcon,
                 width: 24,
                 height: 24,
-                color: AppColors.gray2,
               ),
             ),
           ],
@@ -127,12 +119,12 @@ class _CurrencyListState extends State<_CurrencyList> {
                   children: <Widget>[
                     Icon(
                       Icons.delete,
-                      color: AppColors.gray5,
+                      color: Theme.of(context).backgroundColor,
                     ),
                     Text(
                       "Delete",
                       style: TextStyle(
-                        color: AppColors.gray5,
+                        color: Theme.of(context).backgroundColor,
                         fontWeight: FontWeight.w700,
                       ),
                       textAlign: TextAlign.right,
@@ -151,6 +143,7 @@ class _CurrencyListState extends State<_CurrencyList> {
               ScaffoldMessenger.of(context).showSnackBar(
                 CustomSnackBar(
                   params: CustomSnackBarParams(
+                    context: context,
                     icon: SvgsIcons.trashIcon,
                     text: 'You deleted "${model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.title}"',
                   ),

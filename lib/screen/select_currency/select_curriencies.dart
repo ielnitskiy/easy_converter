@@ -27,19 +27,14 @@ class _CurrenciesWidgetBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: AppColors.gray5,
-        elevation: 0.0,
         title: Text(
-          'Add Currency',
-          style: AppFontStyle.regularTextStyle,
+          'Add Currency'
         ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: Theme.of(context).primaryColor,
-            size: 24,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
@@ -47,7 +42,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
       body: Column(
         children: [
           Container(
-              color: AppColors.gray5,
+              color: Theme.of(context).backgroundColor,
               child: Padding(
                 padding: const EdgeInsets.only(
                   bottom: 16.0,
@@ -64,7 +59,6 @@ class _CurrenciesWidgetBody extends StatelessWidget {
         child: const Icon(Icons.done),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }
@@ -79,20 +73,6 @@ class _SearchInAppBar extends StatelessWidget {
     final model = Provider.of<SelectCurrenciesModel>(context);
     return TextFormField(
       decoration: InputDecoration(
-        fillColor: Theme.of(context).backgroundColor,
-        filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-              width: 1,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8.0),
-            )),
         prefixIcon: Icon(Icons.search, color: AppColors.gray2),
         contentPadding: EdgeInsets.symmetric(
           vertical: 8.0,

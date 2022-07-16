@@ -34,23 +34,7 @@ class _CurrencyTextField extends State<CurrencyTextField> {
           child: TextFormField(
             style: AppFontStyle.regularTextStyle.copyWith(fontSize: AppFontStyle.size16),
             decoration: InputDecoration(
-              // isCollapsed: true,
-              filled: true,
-              suffixStyle: TextStyle(fontSize: AppFontStyle.size16, color: AppColors.gray7),
-              //FIXME избавиться от опционала
               suffixText: suffixText,
-              border: const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8.0),
-                  )),
-              focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8.0),
-                  )),
-              contentPadding: const EdgeInsets.all(6),
-              fillColor: AppColors.gray4,
             ),
             textAlign: TextAlign.end,
             focusNode: _focusNode,

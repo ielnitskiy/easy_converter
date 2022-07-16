@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomSnackBarParams {
   final String icon;
   final String text;
+  final BuildContext context;
 
   CustomSnackBarParams({
+    required this.context,
     required this.icon,
     required this.text,
   });
@@ -14,7 +16,7 @@ class CustomSnackBarParams {
 
 SnackBar CustomSnackBar({required CustomSnackBarParams params}) {
   return SnackBar(
-    backgroundColor: AppColors.gray5,
+    backgroundColor: Theme.of(params.context).backgroundColor,
     content: Row(
       children: [
         Container(
