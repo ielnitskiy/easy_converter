@@ -52,6 +52,8 @@ abstract class AppTheme {
               Radius.circular(8.0),
             )),
         contentPadding: const EdgeInsets.all(8),
+          prefixIconColor: _gray2 ,
+        hintStyle: TextStyle(fontSize: 16),
       ),
       appBarTheme: AppBarTheme(
           backgroundColor: _gray5,
@@ -73,6 +75,9 @@ abstract class AppTheme {
             color: _gray2,
           )),
       textTheme: TextTheme(),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: _blue1,
+      ),
     );
   }
 

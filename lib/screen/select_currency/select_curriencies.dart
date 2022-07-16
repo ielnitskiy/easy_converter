@@ -2,7 +2,6 @@ import 'package:easy_converter/domain/currency.dart';
 import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/select_currency/select_curriencies_model.dart';
 import 'package:easy_converter/widgets/component/currency_card.dart';
-import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +56,6 @@ class _CurrenciesWidgetBody extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).pop(),
         child: const Icon(Icons.done),
-        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
@@ -73,12 +71,8 @@ class _SearchInAppBar extends StatelessWidget {
     final model = Provider.of<SelectCurrenciesModel>(context);
     return TextFormField(
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search, color: AppColors.gray2),
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 8.0,
-        ),
+        prefixIcon: Icon(Icons.search,),
         hintText: 'Search',
-        hintStyle: TextStyle(fontSize: 16),
       ),
       onChanged: (value) {
         model.searchRequest = value;

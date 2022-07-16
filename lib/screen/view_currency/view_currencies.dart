@@ -80,7 +80,6 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           visible: !keyboardIsOpen,
           child: FloatingActionButton(
             child: const Icon(Icons.add),
-            backgroundColor: Theme.of(context).primaryColor,
             onPressed: () => Navigator.of(context).pushNamed(AppRoutes.selectCurrency).then((value) => setState(() {})),
           ),
         ));
