@@ -2,7 +2,6 @@ import 'package:easy_converter/domain/currency.dart';
 import 'package:easy_converter/resources/resources.dart';
 import 'package:easy_converter/screen/select_currency/select_curriencies_model.dart';
 import 'package:easy_converter/widgets/component/currency_card.dart';
-import 'package:easy_converter/widgets/util/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -27,19 +26,14 @@ class _CurrenciesWidgetBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: AppColors.gray5,
-        elevation: 0.0,
         title: Text(
-          'Add Currency',
-          style: AppFontStyle.regularTextStyle,
+          'Add Currency'
         ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: AppColors.blue1,
-            size: 24,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
@@ -47,7 +41,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
       body: Column(
         children: [
           Container(
-              color: AppColors.gray5,
+              color: Theme.of(context).backgroundColor,
               child: Padding(
                 padding: const EdgeInsets.only(
                   bottom: 16.0,
@@ -62,9 +56,7 @@ class _CurrenciesWidgetBody extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).pop(),
         child: const Icon(Icons.done),
-        backgroundColor: AppColors.blue1,
       ),
-      backgroundColor: AppColors.gray3,
     );
   }
 }
@@ -78,24 +70,9 @@ class _SearchInAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = Provider.of<SelectCurrenciesModel>(context);
     return TextFormField(
-      decoration: const InputDecoration(
-        fillColor: AppColors.gray3,
-        filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.blue1, width: 1),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8.0),
-            )),
-        prefixIcon: Icon(Icons.search, color: AppColors.gray2),
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 8.0,
-        ),
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.search,),
         hintText: 'Search',
-        hintStyle: TextStyle(fontSize: 16),
       ),
       onChanged: (value) {
         model.searchRequest = value;
@@ -131,7 +108,7 @@ class _CurrencyList extends StatelessWidget {
                 Radius.circular(16),
               ),
               border: Border.all(
-                color: AppColors.blue1,
+                color: Theme.of(context).primaryColor,
                 style: selected ? BorderStyle.solid : BorderStyle.none,
               ),
             ),
@@ -148,6 +125,7 @@ class _CurrencyList extends StatelessWidget {
                     currencies.title,
                     maxLines: 2,
                     textAlign: TextAlign.end,
+                            style: Theme.of(context).textTheme.titleMedium,
                   ))),
                   selected ? SvgPicture.asset(SvgsIcons.selectedIcon) : SizedBox.shrink(),
                 ],

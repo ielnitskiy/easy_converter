@@ -9,21 +9,18 @@ class SettingsScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.gray6,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: AppColors.gray5,
+          backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0.0,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColors.blue1,
-              size: 24,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
             'Settings',
-            style: AppFontStyle.boldTextStyle.copyWith(fontSize: AppFontStyle.size18),
           ),
           centerTitle: true,
         ),
@@ -31,21 +28,21 @@ class SettingsScreenWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8),
           children: [
             ListTile(
-              tileColor: AppColors.gray5,
+              tileColor: Theme.of(context).backgroundColor,
               leading: SvgPicture.asset(SvgsIcons.languageIcon),
               title: Text('Language'),
               trailing: Text(
                 'Coming soon…',
-                style: TextStyle(color: AppColors.gray7),
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
             ListTile(
-              tileColor: AppColors.gray5,
+              tileColor: Theme.of(context).backgroundColor,
               leading: SvgPicture.asset(SvgsIcons.themeModeIcon),
               title: Text('Dark Theme'),
               trailing: Text(
                 'Coming soon…',
-                style: TextStyle(color: AppColors.gray7),
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
           ],

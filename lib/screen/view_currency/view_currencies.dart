@@ -39,7 +39,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
     final bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     final model = Provider.of<ViewCurrenciesModel>(context);
     return Scaffold(
-        backgroundColor: AppColors.gray3,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -52,27 +52,30 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
                 text: TextSpan(children: [
                   TextSpan(
                       text: "Easy ",
-                      style: AppFontStyle.ubuntuRegularTextStyle),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Ubuntu-Regular",
+                          )),
                   TextSpan(
                       text: "Сonverter",
-                      style: AppFontStyle.ubuntuBoldTextStyle),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Ubuntu-Bold",
+                          )),
                 ]),
               ),
             ],
           ),
-          centerTitle: true,
-          backgroundColor: AppColors.gray5,
-          elevation: 0.0,
           actions: [
-            TextButton(
+            IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutes.settings).then((value) => setState(() {}));
               },
-              child: SvgPicture.asset(
+              icon: SvgPicture.asset(
                 SvgsIcons.settingsIcon,
                 width: 24,
                 height: 24,
-                color: AppColors.gray2,
+                alignment: Alignment.centerLeft,
               ),
             ),
           ],
@@ -88,7 +91,6 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
           visible: !keyboardIsOpen,
           child: FloatingActionButton(
             child: const Icon(Icons.add),
-            backgroundColor: AppColors.blue1,
             onPressed: () => Navigator.of(context).pushNamed(AppRoutes.selectCurrency).then((value) => setState(() {})),
           ),
         ));
@@ -119,23 +121,52 @@ class _CurrencyListState extends State<_CurrencyList> {
             background: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: AppColors.red1,
+                color: Theme.of(context).errorColor,
+              ),
+              child: Align(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 20,
+                    ),
+                    SvgPicture.asset(
+                      SvgsIcons.trashIcon,
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      "Delete",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ],
+                ),
+                alignment: Alignment.centerLeft,
+              ),
+            ),
+            secondaryBackground: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).errorColor,
               ),
               child: Align(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Icon(
-                      Icons.delete,
-                      color: AppColors.gray5,
+                    SvgPicture.asset(
+                      SvgsIcons.trashIcon,
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(
+                      width: 8,
                     ),
                     Text(
                       "Delete",
-                      style: TextStyle(
-                        color: AppColors.gray5,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.right,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SizedBox(
                       width: 20,
@@ -151,6 +182,7 @@ class _CurrencyListState extends State<_CurrencyList> {
               ScaffoldMessenger.of(context).showSnackBar(
                 CustomSnackBar(
                   params: CustomSnackBarParams(
+                    context: context,
                     icon: SvgsIcons.trashIcon,
                     text: 'You deleted "${model.currencies[SelectedCurrencies.selectedCurrencies[index]]!.title}"',
                   ),
@@ -188,7 +220,6 @@ Widget _proxyDecorator(Widget child, int index, Animation<double> animation) {
       final double elevation = lerpDouble(0, 8, animValue)!;
       return Material(
         elevation: elevation,
-        shadowColor: AppColors.bgWhite,
         child: child,
         borderRadius: BorderRadius.all(
           Radius.circular(20.0),

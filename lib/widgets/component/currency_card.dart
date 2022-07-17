@@ -25,7 +25,7 @@ class CurrencyCard<T> extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: AppColors.gray5,
+        color: Theme.of(context).backgroundColor,
       ),
       height: 72,
       child: Padding(
@@ -51,17 +51,13 @@ class CurrencyCard<T> extends StatelessWidget {
                       children: [
                         Text(
                           currency.code,
-                          style: AppFontStyle.boldTextStyle.copyWith(
-                            fontSize: AppFontStyle.size16,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
                           maxLines: 1,
                         ),
                         isSelecteble
                             ? Text(
                                 currency.country,
-                                style: AppFontStyle.lightTextStyle.copyWith(
-                                  fontSize: AppFontStyle.size14,
-                                ),
+                                style: Theme.of(context).textTheme.labelMedium,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: true,

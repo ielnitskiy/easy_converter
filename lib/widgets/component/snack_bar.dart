@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomSnackBarParams {
   final String icon;
   final String text;
+  final BuildContext context;
 
   CustomSnackBarParams({
+    required this.context,
     required this.icon,
     required this.text,
   });
@@ -14,7 +16,7 @@ class CustomSnackBarParams {
 
 SnackBar CustomSnackBar({required CustomSnackBarParams params}) {
   return SnackBar(
-    backgroundColor: AppColors.gray5,
+    backgroundColor: Theme.of(params.context).backgroundColor,
     content: Row(
       children: [
         Container(
@@ -22,7 +24,7 @@ SnackBar CustomSnackBar({required CustomSnackBarParams params}) {
           height: 24,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: AppColors.red1,
+            color: Theme.of(params.context).errorColor,
           ),
           child: SvgPicture.asset(
             params.icon,
@@ -36,12 +38,15 @@ SnackBar CustomSnackBar({required CustomSnackBarParams params}) {
         Expanded(
           child: Text(
             params.text,
-            style: AppFontStyle.regularTextStyle,
+            style: Theme.of(params.context).textTheme.titleMedium,
             maxLines: 2,
           ),
         ),
       ],
     ),
-    action: SnackBarAction(label: 'Undo', onPressed: () {  },),
+    action: SnackBarAction(
+      label: 'Undo',
+      onPressed: () {},
+    ),
   );
 }
