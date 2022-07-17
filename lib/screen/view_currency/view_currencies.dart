@@ -50,8 +50,18 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
               ),
               RichText(
                 text: TextSpan(children: [
-                  TextSpan(text: "Easy ", style: AppFontStyle.ubuntuRegularTextStyle),
-                  TextSpan(text: "Сonverter", style: AppFontStyle.ubuntuBoldTextStyle),
+                  TextSpan(
+                      text: "Easy ",
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Ubuntu-Regular",
+                          )),
+                  TextSpan(
+                      text: "Сonverter",
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Ubuntu-Bold",
+                          )),
                 ]),
               ),
             ],
@@ -65,6 +75,7 @@ class _CurrenciesWidgetBodyState extends State<_CurrenciesWidgetBody> {
                 SvgsIcons.settingsIcon,
                 width: 24,
                 height: 24,
+                alignment: Alignment.centerLeft,
               ),
             ),
           ],
@@ -110,7 +121,7 @@ class _CurrencyListState extends State<_CurrencyList> {
             background: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: AppColors.red1,
+                color: Theme.of(context).errorColor,
               ),
               child: Align(
                 child: Row(
@@ -180,7 +191,6 @@ Widget _proxyDecorator(Widget child, int index, Animation<double> animation) {
       final double elevation = lerpDouble(0, 8, animValue)!;
       return Material(
         elevation: elevation,
-        shadowColor: AppColors.bgWhite,
         child: child,
         borderRadius: BorderRadius.all(
           Radius.circular(20.0),

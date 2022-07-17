@@ -24,7 +24,7 @@ SnackBar CustomSnackBar({required CustomSnackBarParams params}) {
           height: 24,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: AppColors.red1,
+            color: Theme.of(params.context).errorColor,
           ),
           child: SvgPicture.asset(
             params.icon,
@@ -38,7 +38,7 @@ SnackBar CustomSnackBar({required CustomSnackBarParams params}) {
         Expanded(
           child: Text(
             params.text,
-            style: AppFontStyle.regularTextStyle,
+            style: Theme.of(params.context).textTheme.titleMedium,
             maxLines: 2,
           ),
         ),

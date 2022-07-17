@@ -21,7 +21,6 @@ class SettingsScreenWidget extends StatelessWidget {
           ),
           title: Text(
             'Settings',
-            style: AppFontStyle.boldTextStyle.copyWith(fontSize: AppFontStyle.size18),
           ),
           centerTitle: true,
         ),
@@ -34,7 +33,7 @@ class SettingsScreenWidget extends StatelessWidget {
               title: Text('Language'),
               trailing: Text(
                 'Coming soon…',
-                style: TextStyle(color: AppColors.gray7),
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
             ListTile(
@@ -43,7 +42,7 @@ class SettingsScreenWidget extends StatelessWidget {
               title: Text('Dark Theme'),
               trailing: Text(
                 'Coming soon…',
-                style: TextStyle(color: AppColors.gray7),
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
           ],

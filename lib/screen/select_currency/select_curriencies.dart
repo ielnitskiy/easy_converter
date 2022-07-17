@@ -125,6 +125,7 @@ class _CurrencyList extends StatelessWidget {
                     currencies.title,
                     maxLines: 2,
                     textAlign: TextAlign.end,
+                            style: Theme.of(context).textTheme.titleMedium,
                   ))),
                   selected ? SvgPicture.asset(SvgsIcons.selectedIcon) : SizedBox.shrink(),
                 ],

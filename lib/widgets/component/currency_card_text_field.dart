@@ -32,7 +32,6 @@ class _CurrencyTextField extends State<CurrencyTextField> {
         SizedBox(
           width: MediaQuery.of(context).size.width / 2,
           child: TextFormField(
-            style: AppFontStyle.regularTextStyle.copyWith(fontSize: AppFontStyle.size16),
             decoration: InputDecoration(
               suffixText: suffixText,
             ),

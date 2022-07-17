@@ -17,14 +17,14 @@ class AdditionDescription extends StatelessWidget {
             children: [
               Text(
                 "Add your currency",
-                style: AppFontStyle.boldTextStyle.copyWith(fontSize: AppFontStyle.size32),
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 8,
               ),
               Text(
                 "Compare unlimited currencies in one place",
-                style: AppFontStyle.regularTextStyle.copyWith(fontSize: AppFontStyle.size16),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Container(
                 height: MediaQuery.of(context).size.height / 3.2,

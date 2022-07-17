@@ -32,8 +32,9 @@ abstract class AppTheme {
       scaffoldBackgroundColor: _gray3,
       backgroundColor: _gray5,
       primaryColor: _blue1,
+      errorColor: _red1,
       canvasColor: Colors.transparent,
-      shadowColor: Colors.transparent,
+      shadowColor: _bgWhite,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: _gray4,
@@ -52,8 +53,8 @@ abstract class AppTheme {
               Radius.circular(8.0),
             )),
         contentPadding: const EdgeInsets.all(8),
-          prefixIconColor: _gray2 ,
-        hintStyle: TextStyle(fontSize: 16),
+        prefixIconColor: _gray2,
+        hintStyle: TextStyle(fontSize: 16,color: _gray2),
       ),
       appBarTheme: AppBarTheme(
           backgroundColor: _gray5,
@@ -72,9 +73,13 @@ abstract class AppTheme {
           ),
           actionsIconTheme: IconThemeData(
             size: 24,
-            color: _gray2,
+            color: _blue1,
           )),
-      textTheme: TextTheme(),
+      textTheme: TextTheme(
+        headlineMedium: TextStyle(color: _gray1),
+        titleMedium: TextStyle(color: _gray1),
+        labelMedium: TextStyle(color: _gray2),
+      ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: _blue1,
       ),
@@ -83,9 +88,61 @@ abstract class AppTheme {
 
   static ThemeData darkTheme() {
     return ThemeData(
-      backgroundColor: _dark3,
+      scaffoldBackgroundColor: _dark3,
+      backgroundColor: _dark5,
       primaryColor: _darkBlue1,
-      textTheme: TextTheme(),
+      errorColor: _darkRed1,
+      canvasColor: Colors.transparent,
+      shadowColor: _bgDark,
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: _dark4,
+        suffixStyle: TextStyle(
+          fontSize: 16,
+          color: _dark7,
+        ),
+        border: const OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            )),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: _darkBlue1, width: 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            )),
+        contentPadding: const EdgeInsets.all(8),
+        prefixIconColor: _dark2,
+        hintStyle: TextStyle(fontSize: 16,color:_dark2 ),
+      ),
+      appBarTheme: AppBarTheme(
+          backgroundColor: _dark5,
+          centerTitle: true,
+          elevation: 0.0,
+          titleTextStyle: TextStyle(
+            color: _dark1,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarBrightness: Brightness.light,
+          ),
+          iconTheme: IconThemeData(
+            color: _darkBlue1,
+          ),
+          actionsIconTheme: IconThemeData(
+            size: 24,
+            color: _dark2,
+          )),
+      textTheme: TextTheme(
+        headlineMedium: TextStyle(color: _dark1),
+        titleLarge: TextStyle(color: _dark1),
+        titleMedium: TextStyle(color: _dark1),
+        labelMedium: TextStyle(color: _dark2),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: _darkBlue1,
+      ),
     );
   }
 }

@@ -51,17 +51,13 @@ class CurrencyCard<T> extends StatelessWidget {
                       children: [
                         Text(
                           currency.code,
-                          style: AppFontStyle.boldTextStyle.copyWith(
-                            fontSize: AppFontStyle.size16,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
                           maxLines: 1,
                         ),
                         isSelecteble
                             ? Text(
                                 currency.country,
-                                style: AppFontStyle.regularTextStyle.copyWith(
-                                  fontSize: AppFontStyle.size12,
-                                ),
+                                style: Theme.of(context).textTheme.labelMedium,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: true,
