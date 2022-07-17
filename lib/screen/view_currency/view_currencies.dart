@@ -125,19 +125,48 @@ class _CurrencyListState extends State<_CurrencyList> {
               ),
               child: Align(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Icon(
-                      Icons.delete,
-                      color: Theme.of(context).backgroundColor,
+                    SizedBox(
+                      width: 20,
+                    ),
+                    SvgPicture.asset(
+                      SvgsIcons.trashIcon,
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(
+                      width: 8,
                     ),
                     Text(
                       "Delete",
-                      style: TextStyle(
-                        color: Theme.of(context).backgroundColor,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.right,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ],
+                ),
+                alignment: Alignment.centerLeft,
+              ),
+            ),
+            secondaryBackground: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).errorColor,
+              ),
+              child: Align(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      SvgsIcons.trashIcon,
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      "Delete",
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SizedBox(
                       width: 20,
